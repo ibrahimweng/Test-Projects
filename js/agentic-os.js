@@ -312,7 +312,8 @@
       gsap.from(
         layers.slice().reverse(),
         {
-          y: '+=' + unitsToPx(46),
+          // deliberately small, and matched to the channels section below
+          y: '+=' + unitsToPx(24),
           duration: 0.95,
           stagger: 0.09,
           ease: 'power3.out',

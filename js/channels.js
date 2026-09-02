@@ -75,9 +75,9 @@
       accent: '#1da851',
       shadow: 'rgba(8,74,38,.5)',
       api: 'API · Apple Messages for Business',
-      // drafted — not specified in the Figma file
-      body: 'Rewards arrive as rich Apple Messages, so balances, offers and receipts sit in the thread your customer already uses.',
-      points: ['Rich cards, tap to redeem', 'Verified business sender', 'Apple Pay checkout inline'],
+      // from the Figma mobile design 12453:10620
+      body: 'Pagrin delivers reward drops and digital receipts through Apple Messages for Business — rich cards, tap-to-redeem and Apple Pay, all inline.',
+      points: ['Verified business sender', 'Tap-to-redeem rich cards', 'Apple Pay checkout inline'],
       href: '#',
       art: 'imessage',
       img:    { w: 507.4, h: 574.8, dx: 0, dy: 33.7, rot: 0 },
@@ -90,10 +90,10 @@
       name: 'Microsoft Teams',
       accent: '#4b53bc',
       shadow: 'rgba(28,32,96,.5)',
-      api: 'API · Microsoft Graph',
-      // drafted — not specified in the Figma file
-      body: 'A Pagrin app inside Teams lets agents read a customer balance and issue rewards without leaving the conversation.',
-      points: ['Agent-side reward issuing', 'Balances in the chat', 'Single sign-on with your tenant'],
+      api: 'App · Microsoft Teams',
+      // from the Figma mobile design 12453:10620
+      body: 'A Pagrin app sits inside Teams so agents see a customer’s points, tier and offers beside the chat — and issue rewards without leaving the thread.',
+      points: ['Agent-side reward issuing', 'Balances beside the chat', 'SSO with your workspace'],
       href: '#',
       art: 'photo',
       label: 'Teams badge',
@@ -107,10 +107,10 @@
       name: 'Slack',
       accent: '#611f69',
       shadow: 'rgba(48,12,54,.5)',
-      api: 'API · Slack Apps',
-      // drafted — not specified in the Figma file
-      body: 'Reward workflows run as a Slack app, so approvals, balances and issuing all happen in the channel your team lives in.',
-      points: ['Approvals in-channel', 'Slash command issuing', 'Audit trail on every action'],
+      api: 'App · Slack',
+      // from the Figma mobile design 12453:10620
+      body: 'Reward workflows run inside Slack — trigger offers, alert teams and log redemptions with slash commands and Workflow Builder, no context-switch.',
+      points: ['Slash-command rewards', 'Real-time redemption alerts', 'Fits existing workflows'],
       href: '#',
       art: 'slack',
       img:    { w: 383.8, h: 386.2, dx: 0, dy: 0,    rot: 0 },
