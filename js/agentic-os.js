@@ -431,8 +431,12 @@
       });
     });
 
-    // reading anywhere in the interactive area holds the timer
-    [tabsEl, panel].forEach(function (el) {
+    /* Resting on the tabs holds the timer, because that is where someone
+       reading the labels puts the cursor. The illustration deliberately does
+       not pause: hovering a slab tilts it, so pausing there would freeze the
+       rule for as long as anyone played with the tilt, and it would look as
+       though the timer had stopped working. */
+    [tabsEl].forEach(function (el) {
       if (!el) return;
       el.addEventListener('mouseenter', function () { hovers++; syncPaused(); });
       el.addEventListener('mouseleave', function () { hovers = Math.max(0, hovers - 1); syncPaused(); });
