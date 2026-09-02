@@ -70,30 +70,16 @@
   margin-top: clamp(48px, 10.4vw, 200px);
 }
 
-/* The stage clips its assets along the bottom, exactly as the Figma frame
-   does. A selected asset has to rise above that edge, so it is moved into
-   .ch__raised, which sits over the stage and does not clip. Both boxes are
-   the same size and position, so the swap is invisible. */
-.ch-stage,
-.ch__raised {
+/* The stage sets the coordinate space but does not clip, so assets that hang
+   below its box stay whole. Reference frame 13387:2698 has clipsContent off
+   for exactly this reason. */
+.ch-stage {
   position: relative;
   width: 100%;
   aspect-ratio: var(--ch-stage-w) / var(--ch-stage-h);
-}
-
-.ch-stage { overflow: hidden; }
-
-.ch__raised {
-  position: absolute;
-  inset: 0;
   overflow: visible;
-  pointer-events: none;
-  /* .ch-stage does not create a stacking context, so its assets carry their
-     z-index into this one. Without a z-index here a raised asset would still
-     paint underneath the assets it was lifted out of. */
-  z-index: 50;
 }
-.ch__raised .ch-asset { pointer-events: auto; }
+
 
 /* -- an asset -- */
 
@@ -114,15 +100,22 @@
   border-radius: 4px;
 }
 
+.ch-asset__space,
 .ch-asset__inner {
   display: block;
   width: 100%;
   transform-origin: 50% 50%;
 }
 
+/* the tilt layer needs depth for the lean to read as a lean */
+.ch-asset__inner { will-change: transform; }
+
 /* everything that is not the selected asset steps back */
 .ch-asset[data-dim='true'] .ch-asset__inner { filter: brightness(0.42) saturate(0.8); }
 .ch-asset__inner { transition: filter .5s ease; }
+
+/* the pointer is over something it can act on */
+.ch-asset:not([data-layer='4']) { cursor: pointer; }
 
 .ch-asset img {
   display: block;
@@ -265,7 +258,8 @@
 /* ---------- caption --------------------------------------------------- */
 
 .ch__caption {
-  margin: 48px auto 0;
+  /* 96px clears the assets that hang below the stage box */
+  margin: 96px auto 0;
   max-width: 703px;
   text-align: center;
   font-size: clamp(16px, 1.04vw, 20px);

@@ -99,6 +99,12 @@
 
   var EASE_MOVE = 'power3.inOut';
 
+  /* Pointer tilt, gentler here than in the channels section because the
+     slabs are drawn in isometric projection and lean less convincingly. */
+  var TILT_POS = 3.2;
+  var TILT_VEL = 2.2;
+  var TILT_MAX = 5;
+
   /* ------------------------------------------------------------------ */
 
   function init(root) {
@@ -193,6 +199,29 @@
       floatTws.forEach(function (t) { t.kill(); });
       floatTws = [];
       if (hasGsap) floats.forEach(function (el) { gsap.set(el, { y: 0 }); });
+    }
+
+    /* -- pointer tilt -------------------------------------------------- *
+     * Position sets where the slab leans, movement adds a little on top.
+     * ------------------------------------------------------------------ */
+
+    var hovered = null;
+    var tilt = { px: 0, py: 0, vx: 0, vy: 0, cx: 0, cy: 0, last: null };
+    function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+
+    function onTilt() {
+      if (hovered === null) return;
+      tilt.vx *= 0.86;
+      tilt.vy *= 0.86;
+      var tx = clamp(tilt.px * TILT_POS + clamp(tilt.vx, -TILT_VEL, TILT_VEL), -TILT_MAX, TILT_MAX);
+      var ty = clamp(tilt.py * TILT_POS + clamp(tilt.vy, -TILT_VEL, TILT_VEL), -TILT_MAX, TILT_MAX);
+      tilt.cx += (tx - tilt.cx) * 0.18;
+      tilt.cy += (ty - tilt.cy) * 0.18;
+      gsap.set(floats[hovered], {
+        transformPerspective: 1100,
+        rotationY: tilt.cx,
+        rotationX: -tilt.cy
+      });
     }
 
     /* -- dwell timer -------------------------------------------------- *
@@ -364,6 +393,30 @@
         if (i !== active) el.setAttribute('data-preview', 'true');
       });
       el.addEventListener('mouseleave', function () { el.removeAttribute('data-preview'); });
+
+      if (!hasGsap || reduced) return;
+      el.addEventListener('pointerenter', function () {
+        hovered = i;
+        tilt.px = tilt.py = tilt.vx = tilt.vy = 0;
+        tilt.last = null;
+      });
+      el.addEventListener('pointermove', function (e) {
+        if (hovered !== i) return;
+        var r = el.getBoundingClientRect();
+        tilt.px = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        tilt.py = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        if (tilt.last) {
+          tilt.vx += (e.clientX - tilt.last.x) * 0.30;
+          tilt.vy += (e.clientY - tilt.last.y) * 0.30;
+        }
+        tilt.last = { x: e.clientX, y: e.clientY };
+      });
+      el.addEventListener('pointerleave', function () {
+        if (hovered !== i) return;
+        hovered = null;
+        tilt.cx = tilt.cy = 0;
+        gsap.to(floats[i], { rotationX: 0, rotationY: 0, duration: 0.55, ease: 'power3.out' });
+      });
     });
 
     /* -- autoplay ----------------------------------------------------- */
@@ -431,6 +484,8 @@
     }
 
     /* -- boot -------------------------------------------------------- */
+
+    if (hasGsap && !reduced) gsap.ticker.add(onTilt);
 
     measure();
     syncPaused();
