@@ -1,0 +1,376 @@
+/* ==========================================================================
+   Pagrin — Agentic OS section
+   Design: Figma "Pagrin – Designs from Weng", frame 11651:2397 ("Products")
+   Tokens below are lifted from the file's published variables:
+     Heading/H1 56/68/-0.5 · Heading/H4 32/38/-0.2
+     Body-1 18/28 · Body-2 16/24 · Purple/500 #6F45F3
+   ========================================================================== */
+
+/* Registered so the slab palette can tween instead of snapping when a
+   different layer becomes active. Unsupported browsers just cut. */
+@property --sl-line   { syntax: '<color>'; inherits: true; initial-value: #ebe6fc; }
+@property --sl-face   { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+@property --sl-under  { syntax: '<color>'; inherits: true; initial-value: #f1eefb; }
+@property --sl-accent { syntax: '<color>'; inherits: true; initial-value: #f5f2fa; }
+
+.agentic-os {
+  /* palette */
+  --ao-bg:        #ffffff;
+  --ao-ink:       #0e0e0e;
+  --ao-ink-soft:  #1e1e1e;
+  --ao-body:      #484848;
+  --ao-muted:     #9d9d9d;
+  --ao-tab-ink:   #2c1c53;
+  --ao-purple:    #6f45f3;
+  --ao-purple-300:#a78de8;
+  --ao-surface:   #f5f2fa;
+  --ao-hairline:  #d9d9d9;
+  --ao-dot:       #ff5715;
+
+  /* type */
+  --ao-font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI',
+             Roboto, Helvetica, Arial, sans-serif;
+  --ao-h1: clamp(34px, 2.92vw, 56px);
+  --ao-h4: clamp(24px, 1.67vw, 32px);
+  --ao-b1: clamp(16px, 0.94vw, 18px);
+  --ao-b2: 16px;
+
+  /* rhythm */
+  --ao-gutter: clamp(20px, 5.2vw, 100px);
+  --ao-rail:   188px;
+
+  /* how long each layer holds before the next one takes over */
+  --ao-dwell:  8s;
+
+  background: var(--ao-bg);
+  color: var(--ao-ink);
+  font-family: var(--ao-font);
+  padding: clamp(64px, 6.25vw, 120px) var(--ao-gutter);
+  -webkit-font-smoothing: antialiased;
+}
+
+.agentic-os *,
+.agentic-os *::before,
+.agentic-os *::after { box-sizing: border-box; }
+
+.ao__inner {
+  max-width: 1720px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: var(--ao-rail) minmax(0, 1fr);
+}
+
+/* ---------- eyebrow -------------------------------------------------- */
+
+.ao__eyebrow {
+  align-self: start;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--ao-b2);
+  line-height: 24px;
+  color: var(--ao-ink);
+}
+
+.ao__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 100px;
+  background: var(--ao-dot);
+  flex: none;
+}
+
+/* ---------- header --------------------------------------------------- */
+
+.ao__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 532px);
+  gap: clamp(32px, 10.4vw, 200px);
+  align-items: start;
+}
+
+.ao__title {
+  margin: 0;
+  font-size: var(--ao-h1);
+  line-height: 1.2143;      /* 68 / 56 */
+  letter-spacing: -0.5px;
+  font-weight: 500;
+  color: var(--ao-ink);
+}
+
+.ao__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ao__lede {
+  margin: 0;
+  font-size: var(--ao-b1);
+  line-height: 1.5556;      /* 28 / 18 */
+  color: var(--ao-body);
+}
+
+.ao__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 0;
+  padding: 10px 26px;
+  border-radius: 56px;
+  align-self: flex-start;
+  font-size: var(--ao-b2);
+  line-height: 24px;
+  color: var(--ao-purple);
+  text-decoration: none;
+  transition: background-color .25s ease;
+}
+.ao__more:hover,
+.ao__more:focus-visible { background: var(--ao-surface); }
+.ao__more svg { flex: none; transition: transform .25s ease; }
+.ao__more:hover svg,
+.ao__more:focus-visible svg { transform: translate(2px, -2px); }
+
+/* ---------- tabs ----------------------------------------------------- */
+
+.ao__tabs {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 48px;
+}
+
+.ao-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 20px;
+  min-height: 72px;
+  border: 0;
+  border-bottom: 1px solid var(--ao-hairline);
+  background: rgba(245, 242, 250, .44);
+  font: inherit;
+  font-size: var(--ao-b2);
+  line-height: 24px;
+  color: var(--ao-muted);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color .4s ease, color .4s ease;
+}
+
+.ao-tab__icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  /* the exported glyphs are stroked, so the stroke follows the label colour */
+  color: var(--ao-muted);
+  transition: color .4s ease;
+}
+.ao-tab__icon svg { display: block; width: 100%; height: 100%; }
+.ao-tab__icon path { stroke: currentColor; }
+
+.ao-tab[aria-selected='true'] {
+  background: rgba(255, 255, 255, .44);
+  color: var(--ao-tab-ink);
+}
+.ao-tab[aria-selected='true'] .ao-tab__icon { color: var(--ao-tab-ink); }
+
+.ao-tab:hover:not([aria-selected='true']) { color: var(--ao-tab-ink); }
+.ao-tab:hover:not([aria-selected='true']) .ao-tab__icon { color: var(--ao-tab-ink); }
+
+.ao-tab:focus-visible {
+  outline: 2px solid var(--ao-purple);
+  outline-offset: -2px;
+}
+
+/* The selected tab's rule doubles as the dwell timer: it fills left to right
+   over --ao-dwell, and when it lands the next tab takes over. The 1px grey
+   border under every tab is the track it fills along. */
+.ao-tab__progress {
+  position: absolute;
+  left: 0;
+  bottom: -1px;          /* sits exactly on the tab's own bottom border */
+  height: 1px;
+  width: 0;
+  background: var(--ao-purple-300);
+  pointer-events: none;
+  animation: ao-tab-fill var(--ao-dwell) linear forwards;
+  animation-play-state: paused;
+  animation-name: none;
+}
+
+.ao-tab[aria-selected='true'] .ao-tab__progress {
+  animation-name: ao-tab-fill;
+  animation-play-state: running;
+}
+
+/* Paused while the visitor is reading: pointer over the tabs or the
+   illustration, keyboard focus inside the section, the section scrolled out of
+   view, or the browser tab in the background. */
+.agentic-os[data-paused='true'] .ao-tab__progress { animation-play-state: paused; }
+
+@keyframes ao-tab-fill {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* ---------- panel: stack + copy -------------------------------------- */
+
+.ao__panel {
+  display: grid;
+  grid-template-columns: minmax(0, 763.4fr) minmax(0, 472.6fr);
+  gap: clamp(40px, 10.42vw, 200px);
+  align-items: center;
+  padding: 48px;
+}
+
+/* -- the isometric stack -- */
+
+.ao-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 765.191 / 855.374;   /* exact render bounds of the Figma group */
+}
+
+.ao-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  --sl-line:   #ebe6fc;
+  --sl-face:   #ffffff;
+  --sl-under:  #f1eefb;
+  --sl-accent: #f5f2fa;
+}
+
+.ao-layer[data-active='true'] {
+  --sl-line:   #a78de8;
+  --sl-face:   #f5f2fa;
+  --sl-under:  #ffffff;
+  --sl-accent: #f1eefb;
+}
+
+/* Without GSAP the stack still moves and fades — just on a CSS transition.
+   With GSAP driving transform/opacity directly, a transition on those two
+   would fight it every frame, so only the palette keeps one. */
+.ao-layer {
+  transition-property: --sl-line, --sl-face, --sl-under, --sl-accent, transform, opacity;
+  transition-duration: .55s;
+  transition-timing-function: cubic-bezier(.22, 1, .36, 1);
+}
+.agentic-os[data-gsap='true'] .ao-layer {
+  transition-property: --sl-line, --sl-face, --sl-under, --sl-accent;
+}
+
+/* Slabs stacked above the selected one are the only things that can hide it,
+   so they soften out of the way. With layer 1 selected nothing is above it and
+   the section renders exactly as the Figma frame does. */
+.ao-layer[data-above='true'] { opacity: .4; }
+
+/* Painted back-to-front: the slab highest in the stack occludes the ones
+   beneath it, exactly as in the Figma render. */
+.ao-layer[data-layer='4'] { z-index: 1; }
+.ao-layer[data-layer='3'] { z-index: 2; }
+.ao-layer[data-layer='2'] { z-index: 3; }
+.ao-layer[data-layer='1'] { z-index: 4; }
+.ao-layer[data-layer='0'] { z-index: 5; }
+
+.ao-layer__float { display: block; }
+.ao-layer svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+/* a clickable slab is as good an affordance as the tab above it */
+.ao-layer[data-layer='4'] { cursor: default; }
+.ao-layer:not([data-layer='4']) { cursor: pointer; }
+
+/* hovering a tab (or a slab) tints the matching slab without moving it, so
+   the preview never fights the position tween */
+.ao-layer[data-preview='true']:not([data-active='true']) { --sl-line: #cdbdf3; }
+
+/* -- copy cards -- */
+
+.ao__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ao-card {
+  background: var(--ao-surface);
+  padding: 24px 48px;
+  min-height: 144px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ao-card__title {
+  margin: 0;
+  font-size: var(--ao-h4);
+  line-height: 1.1875;      /* 38 / 32 */
+  letter-spacing: -0.2px;
+  font-weight: 700;
+  color: var(--ao-ink);
+}
+
+.ao-card__body {
+  margin: 0;
+  font-size: var(--ao-b2);
+  line-height: 1.5;
+  color: var(--ao-ink-soft);
+}
+
+/* ---------- reveal --------------------------------------------------- */
+
+.agentic-os[data-gsap='true'] .ao-stage .ao-layer,
+.agentic-os[data-gsap='true'] .ao-card { will-change: transform, opacity; }
+
+/* ---------- responsive ----------------------------------------------- */
+
+@media (max-width: 1400px) {
+  .ao__inner { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .ao__panel { padding: 48px 0; }
+  .ao-card { padding: 24px 32px; }
+}
+
+@media (max-width: 1120px) {
+  .ao__head { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+}
+
+@media (max-width: 1080px) {
+  .ao__panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+    justify-items: center;
+  }
+  .ao-stage { max-width: 640px; }
+  .ao__cards { width: 100%; max-width: 640px; }
+}
+
+@media (max-width: 860px) {
+  .ao__tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .ao__tabs { grid-template-columns: minmax(0, 1fr); }
+  .ao-tab { min-height: 60px; padding: 16px; justify-content: flex-start; }
+  .ao-card { padding: 20px 24px; }
+}
+
+/* ---------- reduced motion ------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .agentic-os * {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  /* No autoplay at all here. The rule is simply drawn full width under the
+     selected tab, which is how the Figma frame shows it. */
+  .ao-tab__progress { animation: none !important; }
+  .ao-tab[aria-selected='true'] .ao-tab__progress { width: 100%; }
+}
