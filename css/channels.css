@@ -129,20 +129,6 @@
 
 /* Until the two photographs are added the section still composes correctly:
    the slot keeps its exact aspect ratio and shows a neutral placeholder. */
-.ch-photo {
-  width: 100%;
-  aspect-ratio: var(--ph-w, 1) / var(--ph-h, 1);
-  background: rgba(255, 255, 255, .03);
-  border: 1px dashed rgba(255, 255, 255, .16);
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  font-size: 11px;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, .34);
-}
-.ch-photo img { border-radius: 10px; }
 
 /* ---------- the detail card ------------------------------------------ */
 
@@ -562,13 +548,35 @@
   filter: drop-shadow(0 10px 26px rgba(0, 0, 0, .45));
 }
 
-/* -- photo slot fallback -- */
+/* -- artwork slot --
+   Holds the exported PNG when it is present, and the built artwork when it is
+   not. The slot keeps the design's aspect ratio either way, so the collage
+   composes correctly with any mix of the two. */
 
-.ch-photo { position: relative; }
-.ch-photo img {
+.ch-art {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--ph-w, 1) / var(--ph-h, 1);
+}
+.ch-art__img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: contain;
+  z-index: 1;
 }
-.ch-photo__fallback { pointer-events: none; }
-.ch-photo:has(img) .ch-photo__fallback { display: none; }
+.ch-art__fallback { display: block; }
+/* once the real export loads it covers the fallback entirely */
+.ch-art:has(.ch-art__img) .ch-art__fallback { visibility: hidden; }
+
+.ch-photo__fallback {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  border: 1px dashed rgba(255, 255, 255, .16);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .03);
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .34);
+}

@@ -62,7 +62,7 @@
       points: ['99% email deliverability', 'One-click redeem from inbox', 'No new app, login or install'],
       href: '#',
       art: 'photo',
-      photo: { src: 'assets/channels/envelope.png', w: 766, h: 628, label: 'Envelope' },
+      label: 'Envelope',
       rest:   { cx: 289.1, cy: 310.8, w: 766.1, h: 628.5, rot: 0,     z: 2 },
       active: { cx: 581.9, cy: 171.5, rot: -8 },
       cardX: 933
@@ -93,7 +93,7 @@
       points: ['Agent-side reward issuing', 'Balances in the chat', 'Single sign-on with your tenant'],
       href: '#',
       art: 'photo',
-      photo: { src: 'assets/channels/teams-badge.png', w: 387, h: 408, label: 'Teams badge' },
+      label: 'Teams badge',
       rest:   { cx: 981.9, cy: 200.6, w: 386.6, h: 408.2, rot: 0,     z: 5 },
       active: { cx: 620.0, cy: 150.0, rot: 0 },
       cardX: 880
@@ -175,18 +175,28 @@
       '</svg></div>';
   }
 
-  function photoArt(p) {
-    return '<div class="ch-photo" style="--ph-w:' + p.w + ';--ph-h:' + p.h + '">' +
-             '<img src="' + p.src + '" alt="" loading="lazy">' +
-             '<span class="ch-photo__fallback">' + p.label + '</span>' +
-           '</div>';
+  function outlineArt(label) {
+    return '<span class="ch-photo__fallback">' + label + '</span>';
   }
 
+  /* Artwork resolution.
+     Each asset first tries its exported PNG at assets/channels/<key>.png.
+     If that file is not there the image is dropped and the fallback below it
+     shows instead: the built chat mockup for WhatsApp and iMessage, the Slack
+     vector, or a plain outline that holds the correct aspect ratio.
+     Dropping the five exports into assets/channels/ therefore needs no code
+     change at all. */
   function artFor(ch) {
-    if (ch.art === 'whatsapp') return whatsappArt();
-    if (ch.art === 'imessage') return imessageArt();
-    if (ch.art === 'slack')    return slackArt();
-    return photoArt(ch.photo);
+    var fallback =
+      ch.art === 'whatsapp' ? whatsappArt() :
+      ch.art === 'imessage' ? imessageArt() :
+      ch.art === 'slack'    ? slackArt()    :
+      outlineArt(ch.label || ch.name);
+
+    return '<span class="ch-art" style="--ph-w:' + ch.rest.w + ';--ph-h:' + ch.rest.h + '">' +
+             '<img class="ch-art__img" src="assets/channels/' + ch.key + '.png" alt="" loading="lazy">' +
+             '<span class="ch-art__fallback">' + fallback + '</span>' +
+           '</span>';
   }
 
   /* ------------------------------------------------------------------ */
@@ -294,7 +304,7 @@
     // A photo that has not been added yet leaves its slot showing the outline
     // placeholder rather than a broken-image icon.
     function dropMissingImages(scope) {
-      Array.prototype.slice.call(scope.querySelectorAll('.ch-photo img')).forEach(function (img) {
+      Array.prototype.slice.call(scope.querySelectorAll('.ch-art__img')).forEach(function (img) {
         img.addEventListener('error', function () { img.remove(); });
       });
     }
