@@ -16,6 +16,14 @@
 (function () {
   'use strict';
 
+  /* Micro-animation. Deliberately small: a few degrees and a few pixels. */
+  var TILT_POS    = 5;      // degrees of lean from where the cursor sits
+  var TILT_VEL    = 3.5;    // extra degrees from how fast it is moving
+  var TILT_MAX    = 8;      // never lean further than this
+  var HOVER_LIFT  = 6;      // pixels an asset rises under the cursor
+  var SPACE_SHIFT = 14;     // pixels neighbours give or take
+  var SPACE_SCALE = 0.97;   // how much they shrink to open a gap
+
   var STAGE_W = 1344;
   var STAGE_H = 464;
   var CARD_W  = 304;
@@ -64,8 +72,8 @@
       href: '#',
       art: 'photo',
       label: 'Envelope',
-      img:    { w: 840.9, h: 722.3, dx: 0, dy: 0,    rot: -7.4 },
-      rest:   { cx: 289.1, cy: 310.8, w: 766.1, h: 628.5, rot: 0,     z: 2 },
+      img:    { w: 685.9, h: 589.2, dx: 0, dy: 0,    rot: -7.4 },
+      rest:   { cx: 372.7, cy: 270.3, w: 624.9, h: 512.7, rot: 0,     z: 2 },
       active: { cx: 581.9, cy: 171.5, rot: -8 },
       cardX: 933
     },
@@ -260,15 +268,16 @@
     var hasGsap = !!gsap;
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    var stage  = root.querySelector('.ch-stage');
-    var raised = root.querySelector('.ch__raised');
-    var card   = root.querySelector('.ch-card');
-    var rail   = root.querySelector('.ch__rail');
-    if (!stage || !raised || !card) return;
+    var stage = root.querySelector('.ch-stage');
+    var card  = root.querySelector('.ch-card');
+    var rail  = root.querySelector('.ch__rail');
+    if (!stage || !card) return;
 
     var active = null;          // key of the raised channel, or null
     var scale  = 1;             // px per stage unit
     var assets = {};
+    var spaces = {};            // the spacing layer of each asset
+    var inners = {};            // the tilt layer of each asset
 
     /* -- build the collage ------------------------------------------ */
 
@@ -282,14 +291,29 @@
       el.style.top     = pct(ch.rest.cy - ch.rest.h / 2, STAGE_H);
       el.style.width   = pct(ch.rest.w, STAGE_W);
       el.style.zIndex  = String(ch.z || ch.rest.z || 1);
-      el.innerHTML = '<span class="ch-asset__inner">' + artFor(ch) + '</span>';
+      /* Three nested boxes, one transform each, so they never fight:
+           .ch-asset        position, set by open / close
+           .ch-asset__space spacing, set when a neighbour comes or goes
+           .ch-asset__inner tilt, set by the pointer */
+      el.innerHTML =
+        '<span class="ch-asset__space"><span class="ch-asset__inner">' +
+          artFor(ch) +
+        '</span></span>';
       dropMissingImages(el);
       stage.appendChild(el);
       assets[ch.key] = el;
+      spaces[ch.key] = el.querySelector('.ch-asset__space');
+      inners[ch.key] = el.querySelector('.ch-asset__inner');
 
       el.addEventListener('click', function () {
         if (active === ch.key) close(); else open(ch.key);
       });
+
+      if (hasGsap && !reduced) {
+        el.addEventListener('pointerenter', function () { tiltEnter(ch.key); });
+        el.addEventListener('pointermove', function (e) { tiltMove(ch.key, e); });
+        el.addEventListener('pointerleave', function () { tiltLeave(ch.key); });
+      }
     });
 
     card.innerHTML = cardMarkup(CHANNELS[0], 0, CHANNELS.length);
@@ -399,35 +423,107 @@
       card.style.top  = (CARD_Y * scale) + 'px';
     }
 
+    /* -- pointer tilt -------------------------------------------------- *
+     * Position sets where the asset leans, movement adds a little extra on
+     * top, and the whole thing eases back to level when the pointer leaves.
+     * ------------------------------------------------------------------ */
+
+    var hovered = null;
+    var tilt = { px: 0, py: 0, vx: 0, vy: 0, cx: 0, cy: 0, last: null };
+
+    function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+
+    function onTilt() {
+      if (!hovered) return;
+      tilt.vx *= 0.86;                       // the lean from movement decays
+      tilt.vy *= 0.86;
+      var tx = clamp(tilt.px * TILT_POS + clamp(tilt.vx, -TILT_VEL, TILT_VEL), -TILT_MAX, TILT_MAX);
+      var ty = clamp(tilt.py * TILT_POS + clamp(tilt.vy, -TILT_VEL, TILT_VEL), -TILT_MAX, TILT_MAX);
+      tilt.cx += (tx - tilt.cx) * 0.18;      // and the whole thing is eased
+      tilt.cy += (ty - tilt.cy) * 0.18;
+      gsap.set(inners[hovered], {
+        transformPerspective: 900,
+        rotationY: tilt.cx,
+        rotationX: -tilt.cy
+      });
+    }
+
+    function tiltEnter(key) {
+      hovered = key;
+      tilt.px = tilt.py = tilt.vx = tilt.vy = 0;
+      tilt.last = null;
+      gsap.to(inners[key], { y: -HOVER_LIFT, duration: 0.35, ease: 'power2.out' });
+    }
+
+    function tiltMove(key, e) {
+      if (hovered !== key) return;
+      var r = assets[key].getBoundingClientRect();
+      tilt.px = ((e.clientX - r.left) / r.width - 0.5) * 2;
+      tilt.py = ((e.clientY - r.top) / r.height - 0.5) * 2;
+      if (tilt.last) {
+        tilt.vx += (e.clientX - tilt.last.x) * 0.30;
+        tilt.vy += (e.clientY - tilt.last.y) * 0.30;
+      }
+      tilt.last = { x: e.clientX, y: e.clientY };
+    }
+
+    function tiltLeave(key) {
+      if (hovered !== key) return;
+      hovered = null;
+      tilt.cx = tilt.cy = 0;
+      gsap.to(inners[key], {
+        rotationX: 0, rotationY: 0, y: 0,
+        duration: 0.55, ease: 'power3.out'
+      });
+    }
+
+    /* -- making and closing space --------------------------------------- *
+     * When an asset lifts out the others close ranks into the gap it left.
+     * When it comes back they move apart and shrink a little to open the gap
+     * again, then settle.
+     * ------------------------------------------------------------------ */
+
+    function space(mode, key) {
+      CHANNELS.forEach(function (c) {
+        var target = { x: 0, y: 0, scale: 1, duration: 0.55, ease: 'power3.out' };
+
+        if (mode !== 'rest' && c.key !== key) {
+          var k = byKey(key).rest;
+          var ux = k.cx - c.rest.cx;
+          var uy = k.cy - c.rest.cy;
+          var len = Math.sqrt(ux * ux + uy * uy) || 1;
+          var dir = mode === 'closed' ? 1 : -1;   // toward the gap, or away
+          target.x = ux / len * SPACE_SHIFT * scale * dir;
+          target.y = uy / len * SPACE_SHIFT * scale * dir;
+          if (mode === 'room') target.scale = SPACE_SCALE;
+        }
+
+        // Under reduced motion the neighbours simply stay where they are.
+        // Applying this instantly would be a jump, which is the thing that
+        // setting is meant to avoid.
+        if (hasGsap && !reduced) gsap.to(spaces[c.key], target);
+      });
+    }
+
     /* -- open / close ------------------------------------------------ */
 
-    /* Send an asset back to its resting place, restore its resting depth, and
-       drop it under the clip once it has landed. The guard means a re-select
-       during the return leaves it where it is. */
+    /* Send an asset back to its resting place and restore its resting depth.
+       The stage does not clip, so nothing has to move in the DOM. */
     function settle(ch) {
       var el = assets[ch.key];
       place(el, restTransform(ch), true);
       el.style.zIndex = String(ch.rest.z || 1);
-
-      var back = function () {
-        if (active !== ch.key && el.parentNode !== stage) stage.appendChild(el);
-      };
-      if (hasGsap && !reduced) gsap.delayedCall(0.85, back); else back();
     }
 
     function open(key) {
       var ch = byKey(key);
       if (!ch || active === key) return;
 
-      // Release whatever is currently raised first. Without this, switching
-      // straight from one asset to another leaves the old one in the raised
-      // layer, where its depth would cover the new selection.
       var prev = active ? byKey(active) : null;
       active = key;
       if (prev) settle(prev);
 
       var el = assets[key];
-      if (el.parentNode !== raised) raised.appendChild(el);
       el.style.zIndex = '40';        // outranks every other asset while raised
 
       CHANNELS.forEach(function (c) {
@@ -435,6 +531,7 @@
         assets[c.key].setAttribute('aria-expanded', String(c.key === key));
       });
 
+      space('closed', key);      // the others close ranks into the gap
       place(el, activeTransform(ch), true);
       showCard(ch);
     }
@@ -450,7 +547,13 @@
       });
 
       hideCard();
+      space('room', ch.key);     // the others open a gap for it to land in
       settle(ch);
+      if (hasGsap && !reduced) {
+        gsap.delayedCall(0.5, function () { if (!active) space('rest'); });
+      } else {
+        space('rest');
+      }
     }
 
     function showCard(ch) {
@@ -509,6 +612,8 @@
     function onResize() { clearTimeout(t); t = setTimeout(layout, 80); }
     if (window.ResizeObserver) new ResizeObserver(onResize).observe(stage);
     else window.addEventListener('resize', onResize);
+
+    if (hasGsap && !reduced) gsap.ticker.add(onTilt);
 
     measure();
     layout();

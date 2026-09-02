@@ -102,12 +102,11 @@
       <p class="ch__sub">Meet customers where they are, by deploying across iMessage, WhatsApp, Email, and professional collaboration platforms.</p>
     </div>
 
-    <!-- Desktop collage. .ch-stage clips along its bottom edge as the Figma
-         frame does; a chosen asset is moved into .ch__raised so it can rise
-         above the top edge. Both are filled from CHANNELS. -->
+    <!-- Desktop collage. The stage sets the coordinate space but does not
+         clip, so assets hanging below its box stay whole. Filled from
+         CHANNELS in js/channels.js. -->
     <div class="ch__collage">
       <div class="ch-stage"></div>
-      <div class="ch__raised"></div>
       <div class="ch-card" hidden></div>
     </div>
 

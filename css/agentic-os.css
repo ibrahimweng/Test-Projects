@@ -179,6 +179,10 @@
 }
 .ao-tab[aria-selected='true'] .ao-tab__icon { color: var(--ao-tab-ink); }
 
+/* a small lift so the tabs answer the pointer like the slabs do */
+.ao-tab { transform: translateY(0); transition: background-color .4s ease, color .4s ease, transform .25s ease; }
+.ao-tab:hover { transform: translateY(-2px); }
+
 .ao-tab:hover:not([aria-selected='true']) { color: var(--ao-tab-ink); }
 .ao-tab:hover:not([aria-selected='true']) .ao-tab__icon { color: var(--ao-tab-ink); }
 
@@ -279,7 +283,7 @@
 .ao-layer[data-layer='1'] { z-index: 4; }
 .ao-layer[data-layer='0'] { z-index: 5; }
 
-.ao-layer__float { display: block; }
+.ao-layer__float { display: block; transform-origin: 50% 50%; }
 .ao-layer svg { display: block; width: 100%; height: auto; overflow: visible; }
 
 /* a clickable slab is as good an affordance as the tab above it */
