@@ -39,6 +39,9 @@
   --ao-gutter: clamp(20px, 5.2vw, 100px);
   --ao-rail:   188px;
 
+  /* how long each layer holds before the next one takes over */
+  --ao-dwell:  8s;
+
   background: var(--ao-bg);
   color: var(--ao-ink);
   font-family: var(--ao-font);
@@ -184,15 +187,35 @@
   outline-offset: -2px;
 }
 
-/* the purple rule that slides between tabs */
-.ao__tab-line {
+/* The selected tab's rule doubles as the dwell timer: it fills left to right
+   over --ao-dwell, and when it lands the next tab takes over. The 1px grey
+   border under every tab is the track it fills along. */
+.ao-tab__progress {
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -1px;          /* sits exactly on the tab's own bottom border */
   height: 1px;
   width: 0;
   background: var(--ao-purple-300);
   pointer-events: none;
+  animation: ao-tab-fill var(--ao-dwell) linear forwards;
+  animation-play-state: paused;
+  animation-name: none;
+}
+
+.ao-tab[aria-selected='true'] .ao-tab__progress {
+  animation-name: ao-tab-fill;
+  animation-play-state: running;
+}
+
+/* Paused while the visitor is reading: pointer over the tabs or the
+   illustration, keyboard focus inside the section, the section scrolled out of
+   view, or the browser tab in the background. */
+.agentic-os[data-paused='true'] .ao-tab__progress { animation-play-state: paused; }
+
+@keyframes ao-tab-fill {
+  from { width: 0; }
+  to   { width: 100%; }
 }
 
 /* ---------- panel: stack + copy -------------------------------------- */
@@ -330,10 +353,6 @@
 
 @media (max-width: 860px) {
   .ao__tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  /* a rule that slides across two rows reads as a glitch — hide it and
-     let the per-tab border carry the state */
-  .ao__tab-line { display: none; }
-  .ao-tab[aria-selected='true'] { border-bottom-color: var(--ao-purple-300); }
 }
 
 @media (max-width: 560px) {
@@ -350,4 +369,8 @@
     animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
   }
+  /* No autoplay at all here. The rule is simply drawn full width under the
+     selected tab, which is how the Figma frame shows it. */
+  .ao-tab__progress { animation: none !important; }
+  .ao-tab[aria-selected='true'] .ao-tab__progress { width: 100%; }
 }

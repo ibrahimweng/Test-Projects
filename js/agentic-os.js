@@ -110,7 +110,7 @@
     var layers  = Array.prototype.slice.call(root.querySelectorAll('.ao-layer'));
     var floats  = layers.map(function (l) { return l.querySelector('.ao-layer__float'); });
     var tabs    = Array.prototype.slice.call(root.querySelectorAll('.ao-tab'));
-    var line    = root.querySelector('.ao__tab-line');
+    var tabsEl  = root.querySelector('.ao__tabs');
     var cardsEl = root.querySelector('.ao__cards');
     var panel   = root.querySelector('.ao__panel');
 
@@ -122,6 +122,11 @@
     var scale    = 1;
     var floatTws = [];
     var revealed = false;
+
+    /* autoplay pause state — any one of these holds the dwell timer */
+    var hovers   = 0;
+    var onScreen = true;
+    var hasFocus = false;
 
     /* -- helpers ---------------------------------------------------- */
 
@@ -190,20 +195,22 @@
       if (hasGsap) floats.forEach(function (el) { gsap.set(el, { y: 0 }); });
     }
 
-    /* -- tab rule ---------------------------------------------------- */
+    /* -- dwell timer -------------------------------------------------- *
+     * The fill is a CSS animation, so its length lives in --ao-dwell and    *
+     * nothing here needs to know it. Restarting means clearing the          *
+     * animation, forcing one reflow, then handing it back to the sheet.     *
+     * ------------------------------------------------------------------ */
 
-    function moveLine(animate) {
-      if (!line) return;
-      var tab = tabs[active];
-      var to  = { width: tab.offsetWidth, left: tab.offsetLeft };
-      if (hasGsap && animate && !reduced) {
-        gsap.to(line, { width: to.width, x: to.left, duration: 0.5, ease: 'power3.out', overwrite: 'auto' });
-      } else if (hasGsap) {
-        gsap.set(line, { width: to.width, x: to.left });
-      } else {
-        line.style.width = to.width + 'px';
-        line.style.transform = 'translateX(' + to.left + 'px)';
-      }
+    function restartProgress() {
+      var bars = tabs.map(function (t) { return t.querySelector('.ao-tab__progress'); });
+      bars.forEach(function (b) { if (b) b.style.animation = 'none'; });
+      void root.offsetWidth;
+      bars.forEach(function (b) { if (b) b.style.animation = ''; });
+    }
+
+    function syncPaused() {
+      var paused = hovers > 0 || hasFocus || !onScreen || document.hidden;
+      root.setAttribute('data-paused', String(paused));
     }
 
     /* -- cards ------------------------------------------------------- */
@@ -270,7 +277,7 @@
       if (panel && tabs[idx].id) panel.setAttribute('aria-labelledby', tabs[idx].id);
 
       place(idx, animate);
-      moveLine(animate);
+      restartProgress();
       swapCards(idx, animate);
       if (animate) startFloat();   // refresh the active slab's amplitude
     }
@@ -358,13 +365,55 @@
       el.addEventListener('mouseleave', function () { el.removeAttribute('data-preview'); });
     });
 
+    /* -- autoplay ----------------------------------------------------- */
+
+    // when the selected tab's rule finishes filling, the next layer takes over
+    tabs.forEach(function (tab, i) {
+      var bar = tab.querySelector('.ao-tab__progress');
+      if (!bar) return;
+      bar.addEventListener('animationend', function (e) {
+        if (reduced || e.animationName !== 'ao-tab-fill' || i !== active) return;
+        select((i + 1) % tabs.length, true);
+      });
+    });
+
+    // reading anywhere in the interactive area holds the timer
+    [tabsEl, panel].forEach(function (el) {
+      if (!el) return;
+      el.addEventListener('mouseenter', function () { hovers++; syncPaused(); });
+      el.addEventListener('mouseleave', function () { hovers = Math.max(0, hovers - 1); syncPaused(); });
+    });
+
+    /* Keyboard focus holds the timer too, which is what WCAG 2.2.2 asks for.
+       It has to be keyboard focus specifically: clicking a tab also focuses it,
+       and pausing on that would stop the cycle the moment anyone picked a tab
+       with the mouse. */
+    function keyboardFocusInside() {
+      var el = document.activeElement;
+      if (!el || !root.contains(el)) return false;
+      try { return el.matches(':focus-visible'); } catch (err) { return true; }
+    }
+
+    function readFocus() { hasFocus = keyboardFocusInside(); syncPaused(); }
+
+    root.addEventListener('focusin', readFocus);
+    root.addEventListener('focusout', function () { setTimeout(readFocus, 0); });
+
+    document.addEventListener('visibilitychange', syncPaused);
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { onScreen = en.isIntersecting; });
+        syncPaused();
+      }, { threshold: 0.1 }).observe(panel || stage);
+    }
+
     /* -- resize ------------------------------------------------------ */
 
     var resizeTimer;
     function onResize() {
       measure();
       place(active, false);
-      moveLine(false);
       if (revealed) startFloat();
     }
 
@@ -383,6 +432,7 @@
     /* -- boot -------------------------------------------------------- */
 
     measure();
+    syncPaused();
 
     if (hasGsap && !reduced) gsap.set(layers, { opacity: 0 });
     select(0, false);
