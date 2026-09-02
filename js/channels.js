@@ -47,6 +47,7 @@
       points: ['98% message open rate', 'Redeem in two taps, in-thread', 'No new app, login or install'],
       href: '#',
       art: 'whatsapp',
+      img:    { w: 338.9, h: 406.3, dx: 0, dy: 0,    rot: 0 },
       rest:   { cx: 169.5, cy: 297.7, w: 338.9, h: 406.3, rot: 0,     z: 3 },
       active: { cx: 620.1, cy: 124.0, rot: 0 },
       cardX: 812
@@ -63,6 +64,7 @@
       href: '#',
       art: 'photo',
       label: 'Envelope',
+      img:    { w: 840.9, h: 722.3, dx: 0, dy: 0,    rot: -7.4 },
       rest:   { cx: 289.1, cy: 310.8, w: 766.1, h: 628.5, rot: 0,     z: 2 },
       active: { cx: 581.9, cy: 171.5, rot: -8 },
       cardX: 933
@@ -78,6 +80,7 @@
       points: ['Rich cards, tap to redeem', 'Verified business sender', 'Apple Pay checkout inline'],
       href: '#',
       art: 'imessage',
+      img:    { w: 507.4, h: 574.8, dx: 0, dy: 33.7, rot: 0 },
       rest:   { cx: 748.8, cy: 279.9, w: 338.9, h: 406.3, rot: 0,     z: 1 },
       active: { cx: 620.1, cy: 124.0, rot: 0 },
       cardX: 812
@@ -94,6 +97,7 @@
       href: '#',
       art: 'photo',
       label: 'Teams badge',
+      img:    { w: 386.6, h: 408.2, dx: 0, dy: 0,    rot: 0 },
       rest:   { cx: 981.9, cy: 200.6, w: 386.6, h: 408.2, rot: 0,     z: 5 },
       active: { cx: 620.0, cy: 150.0, rot: 0 },
       cardX: 880
@@ -109,6 +113,7 @@
       points: ['Approvals in-channel', 'Slash command issuing', 'Audit trail on every action'],
       href: '#',
       art: 'slack',
+      img:    { w: 383.8, h: 386.2, dx: 0, dy: 0,    rot: 0 },
       rest:   { cx: 1143.6, cy: 358.6, w: 383.8, h: 386.2, rot: 100.7, z: 4 },
       active: { cx: 620.0, cy: 190.0, rot: 0 },
       cardX: 880
@@ -181,6 +186,13 @@
 
   /* Artwork resolution.
      Each asset first tries its exported PNG at assets/channels/<key>.png.
+     `img` describes that export relative to the asset's node box, because a
+     Figma export is not always the same as the node:
+       - iMessage carries its drop shadow, so the file is 507x575 around a
+         339x406 card, sitting 33.7 units lower than the box centre.
+       - the envelope was exported with a -7.4 degree rotation baked in, which
+         the section does not want, so it is cancelled here.
+     Everything else maps one to one.
      If that file is not there the image is dropped and the fallback below it
      shows instead: the built chat mockup for WhatsApp and iMessage, the Slack
      vector, or a plain outline that holds the correct aspect ratio.
@@ -193,8 +205,16 @@
       ch.art === 'slack'    ? slackArt()    :
       outlineArt(ch.label || ch.name);
 
+    var m = ch.img || { w: ch.rest.w, h: ch.rest.h, dx: 0, dy: 0, rot: 0 };
+    var style =
+      'width:'  + (m.w / ch.rest.w * 100) + '%;' +
+      'left:'   + (50 + m.dx / ch.rest.w * 100) + '%;' +
+      'top:'    + (50 + m.dy / ch.rest.h * 100) + '%;' +
+      '--img-rot:' + (m.rot || 0) + 'deg';
+
     return '<span class="ch-art" style="--ph-w:' + ch.rest.w + ';--ph-h:' + ch.rest.h + '">' +
-             '<img class="ch-art__img" src="assets/channels/' + ch.key + '.png" alt="" loading="lazy">' +
+             '<img class="ch-art__img" style="' + style + '" ' +
+                  'src="assets/channels/' + ch.key + '.png" alt="" loading="lazy">' +
              '<span class="ch-art__fallback">' + fallback + '</span>' +
            '</span>';
   }
@@ -381,14 +401,34 @@
 
     /* -- open / close ------------------------------------------------ */
 
+    /* Send an asset back to its resting place, restore its resting depth, and
+       drop it under the clip once it has landed. The guard means a re-select
+       during the return leaves it where it is. */
+    function settle(ch) {
+      var el = assets[ch.key];
+      place(el, restTransform(ch), true);
+      el.style.zIndex = String(ch.rest.z || 1);
+
+      var back = function () {
+        if (active !== ch.key && el.parentNode !== stage) stage.appendChild(el);
+      };
+      if (hasGsap && !reduced) gsap.delayedCall(0.85, back); else back();
+    }
+
     function open(key) {
       var ch = byKey(key);
-      if (!ch) return;
-      var el = assets[key];
+      if (!ch || active === key) return;
 
-      // move it out of the clipping stage so it can rise above the top edge
-      if (el.parentNode !== raised) raised.appendChild(el);
+      // Release whatever is currently raised first. Without this, switching
+      // straight from one asset to another leaves the old one in the raised
+      // layer, where its depth would cover the new selection.
+      var prev = active ? byKey(active) : null;
       active = key;
+      if (prev) settle(prev);
+
+      var el = assets[key];
+      if (el.parentNode !== raised) raised.appendChild(el);
+      el.style.zIndex = '40';        // outranks every other asset while raised
 
       CHANNELS.forEach(function (c) {
         assets[c.key].setAttribute('data-dim', String(c.key !== key));
@@ -402,8 +442,6 @@
     function close() {
       if (!active) return;
       var ch = byKey(active);
-      var el = assets[active];
-      var prev = active;
       active = null;
 
       CHANNELS.forEach(function (c) {
@@ -412,11 +450,7 @@
       });
 
       hideCard();
-      place(el, restTransform(ch), true);
-
-      // put it back under the clip once it has landed
-      var back = function () { if (active !== prev && el.parentNode !== stage) stage.appendChild(el); };
-      if (hasGsap && !reduced) gsap.delayedCall(0.85, back); else back();
+      settle(ch);
     }
 
     function showCard(ch) {

@@ -88,6 +88,10 @@
   inset: 0;
   overflow: visible;
   pointer-events: none;
+  /* .ch-stage does not create a stacking context, so its assets carry their
+     z-index into this one. Without a z-index here a raised asset would still
+     paint underneath the assets it was lifted out of. */
+  z-index: 50;
 }
 .ch__raised .ch-asset { pointer-events: auto; }
 
@@ -560,9 +564,11 @@
   aspect-ratio: var(--ph-w, 1) / var(--ph-h, 1);
 }
 .ch-art__img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: contain;
+  position: absolute;
+  height: auto;
+  /* width / left / top come from the img metadata; the rotation cancels any
+     rotation that was baked into the export */
+  transform: translate(-50%, -50%) rotate(var(--img-rot, 0deg));
   z-index: 1;
 }
 .ch-art__fallback { display: block; }
