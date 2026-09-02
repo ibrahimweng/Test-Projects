@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pagrin — Agentic OS</title>
 <link rel="stylesheet" href="css/agentic-os.css">
+<link rel="stylesheet" href="css/channels.css">
 <style>
   /* Demo page chrome only — not part of the section. */
   html, body { margin: 0; padding: 0; background: #fff; }
@@ -87,7 +88,40 @@
   </div>
 </section>
 
+<!-- ==========================================================================
+     Customer channels — drop-in section
+     Requires: css/channels.css, js/channels.js, GSAP 3 (optional).
+     The five assets and all card copy live in CHANNELS in js/channels.js.
+     ========================================================================== -->
+
+<section class="channels" aria-labelledby="ch-title">
+  <div class="ch__inner">
+
+    <div class="ch__head">
+      <h2 class="ch__title" id="ch-title">Deploy your rewards programme on every customer channel</h2>
+      <p class="ch__sub">Meet customers where they are, by deploying across iMessage, WhatsApp, Email, and professional collaboration platforms.</p>
+    </div>
+
+    <!-- Desktop collage. .ch-stage clips along its bottom edge as the Figma
+         frame does; a chosen asset is moved into .ch__raised so it can rise
+         above the top edge. Both are filled from CHANNELS. -->
+    <div class="ch__collage">
+      <div class="ch-stage"></div>
+      <div class="ch__raised"></div>
+      <div class="ch-card" hidden></div>
+    </div>
+
+    <!-- Below 900px the collage is replaced by this rail, per the mobile
+         design: one card per channel, already open, scrolled sideways. -->
+    <div class="ch__rail"></div>
+
+    <p class="ch__caption">Meet customers where they are, by deploying across iMessage, WhatsApp, Email, and professional collaboration platforms.</p>
+
+  </div>
+</section>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="js/agentic-os.js"></script>
+<script src="js/channels.js"></script>
 </body>
 </html>

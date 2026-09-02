@@ -1,0 +1,574 @@
+/* ==========================================================================
+   Pagrin — Customer channels section
+   Design: Figma frame 11968:3355, component set 12360:9721
+           (variants: Default / whatsapp / gmail), mobile 12453:10620
+
+   Geometry below is in the Figma stage's own units: a 1344 x 464 box.
+   Every asset is placed as a percentage of that box, so the whole collage
+   scales with the viewport and keeps the design's exact composition.
+   ========================================================================== */
+
+.channels {
+  --ch-bg:        #0a0a0a;
+  --ch-ink:       #ffffff;
+  --ch-yellow:    #ffcc0d;
+  --ch-yellow-ink:#0e0e12;
+  --ch-red:       #e5362b;
+
+  --ch-font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI',
+             Roboto, Helvetica, Arial, sans-serif;
+
+  --ch-gutter: clamp(20px, 5.2vw, 100px);
+
+  /* the collage's design width, used to scale everything inside it */
+  --ch-stage-w: 1344;
+  --ch-stage-h: 464;
+
+  background: var(--ch-bg);
+  color: var(--ch-ink);
+  font-family: var(--ch-font);
+  padding: clamp(64px, 6.25vw, 120px) var(--ch-gutter);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+.channels *,
+.channels *::before,
+.channels *::after { box-sizing: border-box; }
+
+.ch__inner { max-width: 1344px; margin-inline: auto; }
+
+/* ---------- heading -------------------------------------------------- */
+
+.ch__head {
+  display: grid;
+  grid-template-columns: minmax(0, 800px) minmax(0, 344px);
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+}
+
+.ch__title {
+  margin: 0;
+  font-size: clamp(32px, 2.92vw, 56px);
+  line-height: 1.2143;          /* 68 / 56 */
+  letter-spacing: -0.5px;
+  font-weight: 500;
+}
+
+.ch__sub {
+  margin: 0;
+  font-size: clamp(16px, 1.04vw, 20px);
+  line-height: 1.2;             /* 24 / 20 */
+  font-weight: 500;
+}
+
+/* ---------- collage -------------------------------------------------- */
+
+.ch__collage {
+  position: relative;
+  margin-top: clamp(48px, 10.4vw, 200px);
+}
+
+/* The stage clips its assets along the bottom, exactly as the Figma frame
+   does. A selected asset has to rise above that edge, so it is moved into
+   .ch__raised, which sits over the stage and does not clip. Both boxes are
+   the same size and position, so the swap is invisible. */
+.ch-stage,
+.ch__raised {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--ch-stage-w) / var(--ch-stage-h);
+}
+
+.ch-stage { overflow: hidden; }
+
+.ch__raised {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.ch__raised .ch-asset { pointer-events: auto; }
+
+/* -- an asset -- */
+
+.ch-asset {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transform-origin: 50% 50%;
+  /* left / top / width / z-index and the resting rotation are set inline
+     from the CHANNELS config, so the collage stays data-driven */
+}
+
+.ch-asset:focus-visible {
+  outline: 2px solid var(--ch-yellow);
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+.ch-asset__inner {
+  display: block;
+  width: 100%;
+  transform-origin: 50% 50%;
+}
+
+/* everything that is not the selected asset steps back */
+.ch-asset[data-dim='true'] .ch-asset__inner { filter: brightness(0.42) saturate(0.8); }
+.ch-asset__inner { transition: filter .5s ease; }
+
+.ch-asset img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+
+/* Until the two photographs are added the section still composes correctly:
+   the slot keeps its exact aspect ratio and shows a neutral placeholder. */
+.ch-photo {
+  width: 100%;
+  aspect-ratio: var(--ph-w, 1) / var(--ph-h, 1);
+  background: rgba(255, 255, 255, .03);
+  border: 1px dashed rgba(255, 255, 255, .16);
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .34);
+}
+.ch-photo img { border-radius: 10px; }
+
+/* ---------- the detail card ------------------------------------------ */
+
+.ch-card {
+  position: absolute;
+  width: 304px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 60;
+}
+
+.ch-card[hidden] { display: none; }
+
+.ch-card__body {
+  background: var(--accent, #2b50e8);
+  border-radius: 18px;
+  padding: 15px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 18px 44px -10px var(--accent-shadow, rgba(18, 36, 128, .5));
+}
+
+.ch-card__row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  line-height: 16px;
+}
+.ch-card__row .sp { flex: 1 0 0; min-width: 1px; }
+
+.ch-card__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #6ef08a;
+  flex: none;
+}
+.ch-card__dot--sm { width: 6px; height: 6px; }
+
+.ch-card__label   { color: rgba(255, 255, 255, .72); }
+.ch-card__count   { color: rgba(255, 255, 255, .42); }
+.ch-card__api     { color: rgba(255, 255, 255, .6); }
+.ch-card__live    { color: rgba(255, 255, 255, .85); }
+
+.ch-card__title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.ch-card__body-text {
+  margin: 0;
+  font-size: 12px;
+  line-height: 20px;
+  color: rgba(255, 255, 255, .9);
+}
+
+.ch-card__rule { height: 1px; background: rgba(255, 255, 255, .16); }
+
+.ch-card__kicker {
+  font-size: 9px;
+  line-height: 12px;
+  color: rgba(255, 255, 255, .5);
+}
+
+.ch-card__points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ch-card__points li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  line-height: 16px;
+  color: rgba(255, 255, 255, .92);
+}
+.ch-card__points svg { flex: none; width: 13px; height: 13px; }
+
+.ch-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ch-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 14px 11px 16px;
+  border-radius: 12px;
+  background: var(--ch-yellow);
+  color: var(--ch-yellow-ink);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.ch-more svg { width: 15px; height: 15px; }
+.ch-more:hover { filter: brightness(1.06); }
+
+.ch-close {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  margin-left: auto;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ch-red);
+  color: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 16px -4px rgba(128, 15, 10, .45);
+}
+.ch-close svg { width: 18px; height: 18px; }
+.ch-close:hover { filter: brightness(1.08); }
+.ch-close:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+/* ---------- caption --------------------------------------------------- */
+
+.ch__caption {
+  margin: 48px auto 0;
+  max-width: 703px;
+  text-align: center;
+  font-size: clamp(16px, 1.04vw, 20px);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+/* ---------- mobile rail ---------------------------------------------- */
+
+.ch__rail { display: none; }
+
+@media (max-width: 900px) {
+  .ch__head { grid-template-columns: minmax(0, 1fr); }
+  .ch__collage { display: none; }
+
+  /* The mobile design is a horizontal rail of cards, each carrying its own
+     asset above the copy, so nothing overlaps and nothing needs selecting. */
+  .ch__rail {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 78%;
+    gap: 16px;
+    margin-top: 40px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--ch-gutter);
+    padding-bottom: 8px;
+    /* bleed to the screen edges so the next card peeks in */
+    margin-inline: calc(var(--ch-gutter) * -1);
+    padding-inline: var(--ch-gutter);
+    scrollbar-width: none;
+  }
+  .ch__rail::-webkit-scrollbar { display: none; }
+
+  .ch-railcard {
+    scroll-snap-align: start;
+    background: #141416;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ch-railcard__art {
+    height: 132px;
+    overflow: hidden;
+    display: grid;
+    /* top-aligned so the chat header shows, as in the mobile design */
+    place-items: start center;
+    background: #1b1b1f;
+  }
+  .ch-railcard__art > * { width: 100%; }
+
+  .ch-railcard__inner { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+
+  .ch-railcard__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ch-railcard__head h3 {
+    margin: 0;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+  }
+  .ch-railcard__head .sp { flex: 1 0 0; }
+
+  .ch-railcard__body {
+    margin: 0;
+    font-size: 13px;
+    line-height: 20px;
+    color: rgba(255, 255, 255, .78);
+  }
+
+  .ch-railcard .ch-card__points li { font-size: 11px; }
+  .ch-railcard .ch-card__points svg { color: var(--accent); }
+
+  .ch__caption { margin-top: 32px; text-align: left; }
+}
+
+@media (max-width: 560px) {
+  .ch__rail { grid-auto-columns: 86%; }
+}
+
+/* ---------- reduced motion ------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .channels * {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ==========================================================================
+   Chat mockups
+   Rebuilt from the Figma text layers rather than exported as images, so they
+   stay sharp and the copy stays editable. Everything is sized from --u, one
+   Figma unit, so a mock scales with whatever box it is dropped into.
+   ========================================================================== */
+
+.ch-asset,
+.ch-railcard__art { container-type: inline-size; }
+
+.wa, .im { --u: calc(100cqw / 339); }
+.ch-railcard__art .wa,
+.ch-railcard__art .im { --u: calc(100cqw / 420); }
+
+.wa, .im {
+  width: 100%;
+  aspect-ratio: 339 / 406;
+  border-radius: calc(16 * var(--u));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(12 * var(--u));
+  line-height: 1.35;
+  text-align: left;
+  box-shadow: 0 calc(18 * var(--u)) calc(40 * var(--u)) rgba(0, 0, 0, .38);
+}
+
+/* -- WhatsApp -- */
+
+.wa { background: #ece5dd; color: #111; }
+
+.wa__head {
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--u));
+  padding: calc(10 * var(--u)) calc(12 * var(--u));
+  background: #0f7a66;
+  color: #fff;
+}
+.wa__back { font-size: calc(15 * var(--u)); opacity: .9; }
+.wa__avatar {
+  width: calc(30 * var(--u)); height: calc(30 * var(--u));
+  border-radius: 999px; flex: none;
+  background: radial-gradient(circle at 50% 34%, #f0b98d 38%, transparent 39%), #6c4a32;
+}
+.wa__who { display: flex; flex-direction: column; line-height: 1.15; }
+.wa__who b { font-size: calc(13 * var(--u)); font-weight: 600; }
+.wa__who i { font-size: calc(10 * var(--u)); font-style: normal; opacity: .75; }
+.wa__icons { margin-left: auto; font-size: calc(13 * var(--u)); opacity: .9; letter-spacing: calc(2 * var(--u)); }
+
+.wa__body {
+  flex: 1 0 0;
+  padding: calc(10 * var(--u)) calc(12 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 * var(--u));
+  background:
+    radial-gradient(circle at 18% 22%, rgba(0,0,0,.035) 0 calc(3 * var(--u)), transparent calc(3 * var(--u))),
+    radial-gradient(circle at 72% 58%, rgba(0,0,0,.035) 0 calc(3 * var(--u)), transparent calc(3 * var(--u))),
+    #efe7f3;
+  background-size: calc(58 * var(--u)) calc(58 * var(--u)), calc(74 * var(--u)) calc(74 * var(--u)), auto;
+  overflow: hidden;
+}
+
+.wa__day {
+  align-self: center;
+  background: #d7e7f5;
+  color: #4a6b84;
+  font-size: calc(9 * var(--u));
+  padding: calc(2 * var(--u)) calc(9 * var(--u));
+  border-radius: 999px;
+}
+
+.wa__b {
+  max-width: 78%;
+  padding: calc(7 * var(--u)) calc(10 * var(--u));
+  border-radius: calc(9 * var(--u));
+  font-size: calc(11.5 * var(--u));
+  box-shadow: 0 calc(1 * var(--u)) calc(2 * var(--u)) rgba(0, 0, 0, .1);
+}
+.wa__b--out { align-self: flex-end; background: #d9fdd3; }
+.wa__b--in  { align-self: flex-start; background: #fff; }
+
+.wa__input {
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--u));
+  padding: calc(8 * var(--u)) calc(10 * var(--u));
+  background: #efe7f3;
+}
+.wa__input span {
+  flex: 1 0 0;
+  background: #fff;
+  border-radius: 999px;
+  padding: calc(8 * var(--u)) calc(12 * var(--u));
+  font-size: calc(11 * var(--u));
+  color: #8d8d92;
+}
+.wa__mic {
+  width: calc(34 * var(--u)); height: calc(34 * var(--u));
+  border-radius: 999px; flex: none; background: #00a884;
+  position: relative;
+}
+.wa__mic::after {
+  content: ''; position: absolute; inset: 0; margin: auto;
+  width: calc(8 * var(--u)); height: calc(14 * var(--u));
+  border-radius: 999px; background: #fff;
+}
+
+/* -- iMessage -- */
+
+.im { background: #fff; color: #111; }
+
+.im__head {
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--u));
+  padding: calc(10 * var(--u)) calc(12 * var(--u));
+  background: #f6f4f7;
+  border-bottom: 1px solid rgba(0, 0, 0, .07);
+}
+.im__back { color: #ff6b35; font-size: calc(17 * var(--u)); line-height: 1; }
+.im__avatar {
+  width: calc(22 * var(--u)); height: calc(22 * var(--u));
+  border-radius: 999px; flex: none;
+  background: radial-gradient(circle at 50% 34%, #f0b98d 38%, transparent 39%), #6c4a32;
+}
+.im__who { font-size: calc(12.5 * var(--u)); font-weight: 600; }
+
+.im__body {
+  flex: 1 0 0;
+  padding: calc(10 * var(--u)) calc(12 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(7 * var(--u));
+  overflow: hidden;
+}
+
+.im__day {
+  align-self: center;
+  background: #efeff1;
+  color: #8a8a8e;
+  font-size: calc(9 * var(--u));
+  padding: calc(2 * var(--u)) calc(9 * var(--u));
+  border-radius: 999px;
+}
+
+.im__b {
+  max-width: 80%;
+  padding: calc(7 * var(--u)) calc(11 * var(--u));
+  border-radius: calc(15 * var(--u));
+  font-size: calc(11.5 * var(--u));
+}
+.im__b--in  { align-self: flex-start; background: #e9e9eb; color: #111; }
+.im__b--out { align-self: flex-end; background: #ff6b35; color: #fff; }
+
+.im__input {
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--u));
+  padding: calc(8 * var(--u)) calc(10 * var(--u));
+  border-top: 1px solid rgba(0, 0, 0, .07);
+}
+.im__input span {
+  flex: 1 0 0;
+  border: 1px solid #dededf;
+  border-radius: 999px;
+  padding: calc(7 * var(--u)) calc(12 * var(--u));
+  font-size: calc(11 * var(--u));
+  color: #9a9a9e;
+}
+.im__send {
+  width: calc(28 * var(--u)); height: calc(28 * var(--u));
+  border-radius: 999px; flex: none; background: #ff6b35;
+  position: relative;
+}
+.im__send::after {
+  content: ''; position: absolute; inset: 0; margin: auto;
+  width: calc(9 * var(--u)); height: calc(9 * var(--u));
+  border-left: calc(2 * var(--u)) solid #fff;
+  border-top: calc(2 * var(--u)) solid #fff;
+  transform: rotate(45deg) translate(calc(1 * var(--u)), calc(1 * var(--u)));
+}
+
+/* -- Slack mark -- */
+
+.sl { width: 100%; }
+.sl svg {
+  width: 100%; height: auto; display: block;
+  filter: drop-shadow(0 10px 26px rgba(0, 0, 0, .45));
+}
+
+/* -- photo slot fallback -- */
+
+.ch-photo { position: relative; }
+.ch-photo img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+}
+.ch-photo__fallback { pointer-events: none; }
+.ch-photo:has(img) .ch-photo__fallback { display: none; }
