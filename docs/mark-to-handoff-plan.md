@@ -308,18 +308,32 @@ add later.
 
 A worked specimen of the output is published as a separate artifact. It is a
 complete brand manual for a fictional tidal energy company, covering the mark,
-colour, typography, the graphic language, applications and the asset package,
-with every section marked as drawn by the system, set once by you, or yours.
+colour, typography, the graphic language, motion, applications and the asset
+package, with every section marked as drawn by the system, set once by you, or
+yours.
 
-The count on that specimen is 19 sections, of which 15 are drawn by the system,
-1 is a rule set once, and 3 are written or placed by hand. Treat those numbers
-as the target for phase 3.
+The count on that specimen is 24 sections, of which 17 are drawn by the system,
+3 are rules set once, and 4 are written or placed by hand. The package it
+describes holds 163 files. Treat those numbers as the target for phase 3.
 
-Building it also settled what is missing from the tool list. Iconography, motion
-and brand architecture are all rule blocks. Co-branding lockups, data
-visualisation styling and templates are all fully derived, since co-branding is
-arithmetic on the clear space rule and the rest falls out of the tokens. Three
-things stay with the designer no matter how good the tool gets, and they are
+Building it settled three things that were not obvious from the plan alone.
+
+First, the identity has one geometric rule that carries everywhere. In the
+specimen every arc in the system is struck at 1.25 times the width of its own
+box, which produces the tide line in the mark, the repeat in the pattern and the
+curve in every icon. A system that stores that one ratio can draw all three. A
+system that stores three separate numbers will let them drift apart.
+
+Second, the icon and motion sections are worth more for what they refuse than
+for what they draw. The useful feature is not exporting an icon at eight sizes,
+it is rejecting the ninth icon whose stroke is wrong. An icon set falls apart at
+the twentieth icon, not the eighth, and only a machine is still checking by
+then.
+
+Third, co-branding lockups, data visualisation styling and templates are all
+fully derived, since co-branding is arithmetic on the clear space rule and the
+rest falls out of the tokens. Brand architecture is a rule block. Three things
+stay with the designer no matter how good the tool gets, and they are
 photography direction, illustration style and tone of voice.
 
 ---
