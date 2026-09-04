@@ -256,6 +256,19 @@ a live link, the PDF, and the machine readable brand file that goes beside them.
 fill from your own mockups, and the export. Cheaper than the guidelines because
 the editor already exists.
 
+One thing this phase must not do is reflow the guidelines into slides. Building
+both documents from the same specimen showed they are different documents rather
+than two shapes of one. The manual is looked things up in, so it carries every
+value and every edge case and nobody reads it start to finish. The deck is
+presented, so it holds one idea a slide, keeps the argument and drops the
+reference detail. A guidelines page has about four times the text of the slide
+covering the same section.
+
+So the presentation builder needs its own layouts and its own shorter content
+fields, both reading the same project. It also needs slide types the manual has
+no use for, which are the chapter divider, the full bleed mark, and the closing
+statement. Budget about a week inside phase 4 for those layouts alone.
+
 **Phase 5.** Change the mark and watch all three documents update. This is where
 the first run flow and the derivation screen get built, and it is the phase that
 turns a set of features into a product.
