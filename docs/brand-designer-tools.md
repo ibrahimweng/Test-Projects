@@ -60,7 +60,7 @@ your reason to argue against a good revision.
 
 ## 3.0 The five with the most leverage
 
-Ranked by how much time they give back. The build order in section 6.0 accounts
+Ranked by how much time they give back. The build order in section 7.0 accounts
 for effort as well.
 
 ### 1. Mockup engine
@@ -224,7 +224,106 @@ the new client sees.
   template for each platform at the current sizes. The platforms change those
   sizes often enough that a kit made by hand is out of date within a year.
 
-## 5.0 What not to build
+## 5.0 What actually needs AI
+
+None of it. Every one of the seventeen tools above can be built with ordinary
+code that does the same thing every time. That is the useful finding here, and
+it is not an accident. Brand production is mechanical file work, and mechanical
+file work is what plain code has always been good at.
+
+Several of them are better without a model. Reading the colours off a website is
+exact when you read the computed styles, and a guess when you ask a model to
+look at a screenshot. A calculation you can check once and then trust is worth
+more than an answer you have to check every time.
+
+| Tool | What does the work instead | Free library |
+|---|---|---|
+| Mockup engine | A displacement map for the surface, a perspective transform, and a multiply blend for the shadow | ImageMagick, or a WebGL shader |
+| Lockup and variation generator | Transforms and fill swaps on the master SVG. Clear space is the bounding box times a factor. Minimum size is the thinnest stroke measured against 0.5pt | resvg, svgo |
+| Guidelines generator | Computed geometry for the diagrams, then HTML laid out and printed to PDF | Headless Chrome, or Typst |
+| Presentation builder | Placing images and text into your template | Headless Chrome |
+| Delivery packager | Format conversion, resizing and zipping | resvg, ImageMagick |
+| Brand audit scraper | Reading the computed styles off every element in the page. This is exact, not a guess, so a model would make it worse | Playwright |
+| Competitor landscape board | The scraper again, run once per competitor | Playwright |
+| Moodboard with licensing | Recording where an image came from at the moment you save it | Any database |
+| Naming checker | Lookups against public registries | RDAP, the USPTO and EUIPO APIs |
+| Colour system tool | Colour science. Conversion and out of gamut checks are ICC soft proofing, and contrast is the WCAG formula | littleCMS with the free ECI profiles |
+| Type licence calculator | A dataset you build and maintain by hand. There is no clever part | None. The work is the data |
+| Version diff | Rasterise both rounds and compare pixels, or compare the SVG path data directly | resvg, pixelmatch |
+| Route comparison sheet | The mockup engine, run three times into a fixed layout | Same as the engine |
+| Consistency checker | Pulling the colour values and embedded font names straight out of the PDF, plus a perceptual hash to spot an old logo file | pdfplumber, imagehash |
+| Asset portal | A lookup table from context to file | Any database |
+| Motion identity generator | Keyframe maths written straight into Lottie JSON, then rendered out | ffmpeg |
+| Social kit generator | Fixed dimensions per platform held in a data file you edit | ImageMagick |
+
+### Where a model does help
+
+There is one place on the list, and it is optional. Adding a mockup by hand
+means drawing a displacement map and a lighting map in Photoshop, and that is
+where the hour per mockup goes. A depth estimation model produces the
+displacement map from any photograph in about a second, and a segmentation model
+picks out the surface you want the mark to sit on. An hour becomes a few
+minutes, and you can then add a mockup from any photo you shoot on your phone.
+
+The model runs on your own machine and costs nothing per use. Check the licence
+on the exact model you pick, because they differ inside the same project. Depth
+Anything V2 releases its smallest model under a permissive licence and its
+larger ones under a non commercial licence, so the larger ones are fine in your
+studio and not fine in a product you sell. MiDaS is MIT and safe either way.
+
+Two smaller uses, neither of them part of the product. A model can read type
+licence PDFs into a spreadsheet as a one time helper, though you should check
+every row by hand afterwards because a wrong answer costs your client money. A
+local embedding model can power free text search in the asset portal, so
+somebody can type "the one for a dark background on Instagram". Keyword matching
+also works.
+
+### The real blockers are licences, not AI
+
+This is where the actual cost sits, and it is the part people miss.
+
+- **Pantone.** The colour library is proprietary and Pantone enforces it. You
+  cannot ship a table that turns a hex value into a Pantone number. Let the
+  designer enter the Pantone they picked and store it. Do not generate it.
+- **The mockup photographs.** This is the true cost of the mockup engine, not the
+  code. Stock licences allow commercial use but not resale of the photograph
+  itself, and a mockup product sits close to that line. Shoot your own. It is
+  slower to start and it is also what makes the library impossible to copy.
+- **Ghostscript is AGPL.** Fine inside your studio, a problem the day you sell
+  the tool. Use resvg for SVG to PNG and PDF, and write EPS straight from the
+  path data, which is simple PostScript.
+- **PyMuPDF is AGPL as well.** Read PDFs with pdfplumber instead, which is MIT.
+- **Fonts inside a generated PDF.** Embedding the client's typeface in a document
+  your tool produces needs the right licence. It is usually covered. Check it
+  once per project rather than never.
+- **Automated social handle checking** is against the terms of most platforms.
+  Domains through RDAP and trademarks through the USPTO and EUIPO are free and
+  allowed.
+
+Verify every licence yourself before you sell anything built on this. Licence
+terms change, and the ones above are what I understand them to be today rather
+than legal advice.
+
+### The whole stack, free
+
+- Image maths: ImageMagick or a WebGL shader.
+- SVG in and out: resvg and svgo.
+- Colour and print: littleCMS with the free ECI profiles.
+- PDF out: headless Chrome or Typst.
+- PDF in: pdfplumber.
+- Video and GIF: ffmpeg.
+- Page scraping: Playwright.
+- Image hashing: imagehash.
+- Pixel diffing: pixelmatch.
+- Depth maps, optional: MiDaS.
+- Cutouts, optional: Segment Anything.
+- Registries: RDAP, the USPTO and EUIPO.
+
+Nothing on this list needs a service you pay for by the call. The two optional
+models run on your own machine. Your recurring cost for all seventeen tools is
+the electricity.
+
+## 6.0 What not to build
 
 **Do not build a logo generator.** That market is crowded, the output is poor,
 and it competes with the one part of the job clients actually pay a designer
@@ -243,7 +342,7 @@ The tools worth your time need something only a working studio has:
 - **Your client relationships**, which is what makes the consistency checker and
   the asset portal sellable as a retainer rather than a one off.
 
-## 6.0 What to build first
+## 7.0 What to build first
 
 - **Weeks 1 to 2. Delivery packager.** Small and self contained. It fixes the job
   you are most likely to get wrong, because it happens when you are tired at the
