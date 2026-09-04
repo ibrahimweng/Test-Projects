@@ -312,9 +312,9 @@ colour, typography, the graphic language, motion, applications and the asset
 package, with every section marked as drawn by the system, set once by you, or
 yours.
 
-The count on that specimen is 24 sections, of which 17 are drawn by the system,
-3 are rules set once, and 4 are written or placed by hand. The package it
-describes holds 163 files. Treat those numbers as the target for phase 3.
+The count on that specimen is 30 sections, of which 19 are drawn by the system,
+5 are rules set once, and 6 are written or placed by hand. The package it
+describes holds 172 files. Treat those numbers as the target for phase 3.
 
 Building it settled three things that were not obvious from the plan alone.
 
@@ -330,11 +330,28 @@ it is rejecting the ninth icon whose stroke is wrong. An icon set falls apart at
 the twentieth icon, not the eighth, and only a machine is still checking by
 then.
 
-Third, co-branding lockups, data visualisation styling and templates are all
-fully derived, since co-branding is arithmetic on the clear space rule and the
-rest falls out of the tokens. Brand architecture is a rule block. Three things
-stay with the designer no matter how good the tool gets, and they are
-photography direction, illustration style and tone of voice.
+Third, an earlier version of this plan said that photography and tone of voice
+stay with the designer entirely. That was wrong, and writing those two chapters
+proved it. Each of them splits three ways rather than belonging to one side.
+
+The direction and the voice principles are the designer's forever. The treatment
+and the mechanical rules are decided once, which means the duotone recipe, the
+crop ratios, the date format, the unit style and the banned word list. The
+measuring and the checking belong to the machine, and those are the parts people
+actually get wrong. Nobody misreads a photographic brief. They put the mark on a
+bright sky at 1.1 to 1, and that is arithmetic on the pixels underneath it.
+
+The copy checker is worth building for the same reason, and it needs one honest
+feature. Every flag it raises carries a certainty. String matching on the brand
+name, the unit style, the date format and the lexicon is exact. Flagging a claim
+with no figure behind it is a judgement, and the interface has to say so rather
+than presenting both with the same confidence.
+
+Co-branding lockups, data visualisation styling and templates are all fully
+derived, since co-branding is arithmetic on the clear space rule and the rest
+falls out of the tokens. Brand architecture is a rule block. What stays with the
+designer is not a list of chapters. It is the judgement inside every chapter,
+and there is some of it in all nine.
 
 ---
 
