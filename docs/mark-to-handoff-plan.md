@@ -150,15 +150,27 @@ and scale.
 
 ### The blocks are the actual product
 
-There are two kinds of block, and only one of them is interesting. Plain blocks
-are text, an image, a rule and a colour field, and they behave the way you
-expect.
+There are three kinds of block. Plain blocks are text, an image, a rule and a
+colour field, and they behave the way you expect.
 
 Derived blocks draw themselves from the project. The colour chip row, the clear
 space diagram, the minimum size diagram, the type specimen, the logo variant
-grid, and the do and do not pair. You place one and set its options. You never
-maintain it, and it is never wrong, because it is asking the project rather than
-remembering an answer.
+grid, the contrast table, and the do and do not pair. You place one and set its
+options. You never maintain it, and it is never wrong, because it is asking the
+project rather than remembering an answer.
+
+Rule blocks are the third kind, and they came out of building the specimen. You
+make one creative decision, the system stores it as a rule, and from then on it
+generates every instance without asking again. The brand pattern is the clearest
+case. You decide that the pattern is the mark's own curve repeated in offset
+rows. After that the system cuts every tile, every density and every colourway
+from that one decision, and it checks each colourway against the contrast
+results it already has.
+
+The same shape applies to iconography, to motion and to brand architecture. In
+each one you set the rule once and the system holds it. That is a third state in
+the interface, not a second, so the editor needs to show three things about any
+block: drawn by the system, set once by you, or yours.
 
 A colour chip row in Figma is six rectangles somebody has to update by hand every
 time the palette moves. Here it is one block that is always current. That
@@ -291,6 +303,24 @@ One open question that does not change the build. Should the client be able to
 comment on the presentation inside the tool, or does the deck stay a PDF you
 present and discuss live? It changes phase 4 by about a week and it is easy to
 add later.
+
+## 9.0 The quality target
+
+A worked specimen of the output is published as a separate artifact. It is a
+complete brand manual for a fictional tidal energy company, covering the mark,
+colour, typography, the graphic language, applications and the asset package,
+with every section marked as drawn by the system, set once by you, or yours.
+
+The count on that specimen is 19 sections, of which 15 are drawn by the system,
+1 is a rule set once, and 3 are written or placed by hand. Treat those numbers
+as the target for phase 3.
+
+Building it also settled what is missing from the tool list. Iconography, motion
+and brand architecture are all rule blocks. Co-branding lockups, data
+visualisation styling and templates are all fully derived, since co-branding is
+arithmetic on the clear space rule and the rest falls out of the tokens. Three
+things stay with the designer no matter how good the tool gets, and they are
+photography direction, illustration style and tone of voice.
 
 ---
 
