@@ -234,6 +234,7 @@ body.pg {
   gap: 12px;
 }
 .pg-btnrow--center { justify-content: center; }
+.pg-btnrow--split { justify-content: space-between; align-items: center; }
 
 /* text link with the design's arrow */
 .pg .pg-textlink {

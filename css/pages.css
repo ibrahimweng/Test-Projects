@@ -359,34 +359,104 @@
 
 /* --------------------------------------------------------------- forms */
 
-.pg-form { display: grid; gap: 18px; }
-.pg-field { display: grid; gap: 7px; }
-.pg-field label { color: var(--pg-ink); font-size: var(--pg-b3); font-weight: 500; }
+/* Minimal fields: one rule under each control, and a label that starts on the
+   baseline like a placeholder and rises out of the way once there is a value.
+   The markup puts the control before the label so the sibling selectors work. */
+
+.pg-form {
+  --pg-fs: clamp(18px, 1.6vw, 22px);   /* the size of what you type */
+  display: grid;
+  gap: 18px;
+}
+
+.pg-field { position: relative; padding-top: 24px; }
+
 .pg-field input,
 .pg-field select,
 .pg-field textarea {
+  display: block;
   width: 100%;
-  padding: 12px 14px;
-  border: 1px solid var(--pg-hairline);
-  border-radius: 10px;
-  background: var(--pg-white);
+  padding: 0 0 16px;
+  border: 0;
+  border-bottom: 1px solid var(--pg-hairline);
+  border-radius: 0;
+  background: transparent;
   color: var(--pg-ink);
   font-family: inherit;
-  font-size: var(--pg-b2);
-  line-height: 24px;
-  transition: border-color .18s var(--pg-ease), box-shadow .18s var(--pg-ease);
+  font-size: var(--pg-fs);
+  line-height: 32px;
+  transition: border-color .2s var(--pg-ease);
 }
-.pg-field textarea { min-height: 120px; resize: vertical; }
+.pg-field textarea { min-height: 128px; resize: vertical; }
+
+.pg-field input:hover,
+.pg-field select:hover,
+.pg-field textarea:hover { border-bottom-color: rgba(0, 0, 0, .22); }
+
 .pg-field input:focus,
 .pg-field select:focus,
 .pg-field textarea:focus {
   outline: none;
-  border-color: var(--pg-purple);
-  box-shadow: 0 0 0 3px rgba(111, 69, 243, .14);
+  border-bottom-color: var(--pg-purple);
 }
-.pg-field small { color: var(--pg-muted); font-size: var(--pg-b4); }
-.pg-form__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-@media (max-width: 620px) { .pg-form__row { grid-template-columns: minmax(0, 1fr); } }
+
+/* the chevron the select lost when its chrome came off */
+.pg-field select {
+  appearance: none;
+  padding-right: 28px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none' stroke='%2399999e' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5L7 7.5L13 1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 2px top 12px;
+}
+
+.pg-field label {
+  position: absolute;
+  left: 0;
+  top: 24px;
+  color: var(--pg-muted);
+  font-size: var(--pg-fs);
+  font-weight: 400;
+  line-height: 32px;
+  pointer-events: none;
+  transition: top .2s var(--pg-ease), font-size .2s var(--pg-ease),
+              line-height .2s var(--pg-ease), color .2s var(--pg-ease);
+}
+
+/* a select always has a value, so its label is never at rest */
+.pg-field select ~ label,
+.pg-field input:focus ~ label,
+.pg-field textarea:focus ~ label,
+.pg-field input:not(:placeholder-shown) ~ label,
+.pg-field textarea:not(:placeholder-shown) ~ label {
+  top: 0;
+  font-size: var(--pg-b3);
+  line-height: 20px;
+}
+.pg-field input:focus ~ label,
+.pg-field select:focus ~ label,
+.pg-field textarea:focus ~ label { color: var(--pg-purple); }
+
+/* keep the browser's autofill wash off a field that has no box */
+.pg-field input:-webkit-autofill,
+.pg-field input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--pg-ink);
+  box-shadow: 0 0 0 60px var(--pg-white) inset;
+}
+
+.pg-field small {
+  display: block;
+  margin-top: 10px;
+  color: var(--pg-muted);
+  font-size: var(--pg-b3);
+  line-height: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-field label,
+  .pg-field input,
+  .pg-field select,
+  .pg-field textarea { transition: none; }
+}
 
 .pg-note {
   padding: 14px 16px;

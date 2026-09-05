@@ -40,30 +40,27 @@
             built it. No slideware.</p>
 
           <form class="pg-form" data-pg-form novalidate>
-            <div class="pg-form__row">
-              <div class="pg-field">
-                <label for="c-name">Full name</label>
-                <input id="c-name" name="name" type="text" autocomplete="name" required>
-              </div>
-              <div class="pg-field">
-                <label for="c-email">Work email</label>
-                <input id="c-email" name="email" type="email" autocomplete="email" required>
-              </div>
-            </div>
-
-            <div class="pg-form__row">
-              <div class="pg-field">
-                <label for="c-org">Institution</label>
-                <input id="c-org" name="organisation" type="text" autocomplete="organization" required>
-              </div>
-              <div class="pg-field">
-                <label for="c-role">Role</label>
-                <input id="c-role" name="role" type="text" autocomplete="organization-title">
-              </div>
+            <div class="pg-field">
+              <input id="c-name" name="name" type="text" autocomplete="name" placeholder=" " required>
+              <label for="c-name">Full name</label>
             </div>
 
             <div class="pg-field">
-              <label for="c-interest">What are you looking at first?</label>
+              <input id="c-email" name="email" type="email" autocomplete="email" placeholder=" " required>
+              <label for="c-email">Work email</label>
+            </div>
+
+            <div class="pg-field">
+              <input id="c-org" name="organisation" type="text" autocomplete="organization" placeholder=" " required>
+              <label for="c-org">Institution</label>
+            </div>
+
+            <div class="pg-field">
+              <input id="c-role" name="role" type="text" autocomplete="organization-title" placeholder=" ">
+              <label for="c-role">Role</label>
+            </div>
+
+            <div class="pg-field">
               <select id="c-interest" name="interest">
                 <option>The whole platform</option>
                 <option>Agentic OS</option>
@@ -71,15 +68,18 @@
                 <option>Infinite Campaigns</option>
                 <option>Secure Layer</option>
               </select>
+              <label for="c-interest">What are you looking at first?</label>
             </div>
 
             <div class="pg-field">
+              <textarea id="c-msg" name="message" placeholder=" "></textarea>
               <label for="c-msg">Anything we should know?</label>
-              <textarea id="c-msg" name="message" placeholder="Your current stack, timelines, or the question you actually want answered."></textarea>
+              <small>Your current stack, timelines, or the question you actually want answered.</small>
             </div>
 
-            <div class="pg-btnrow">
+            <div class="pg-btnrow pg-btnrow--split" style="margin-top:14px">
               <button class="pg-btn pg-btn--primary pg-btn--lg" type="submit">Request a demo</button>
+              <span class="pg-small">Or email <a href="mailto:Hello@pagrin.com" style="color:var(--pg-purple)">Hello@pagrin.com</a></span>
             </div>
 
             <p class="pg-caption">By sending this you agree to our

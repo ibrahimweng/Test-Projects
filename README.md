@@ -174,6 +174,28 @@ contents card listing all 10 sections and puts an icon beside every heading.
 The Trust page has a four cell strip under the posture figures, icons on the
 six control cards, and the four checks drawn as a row of gates.
 
+## The contact form
+
+The fields on `contact.html` have no boxes. Each one is a single rule with a
+label that starts on the baseline, where a placeholder would be, and rises to a
+small line above the rule once the field has a value or the cursor is in it.
+
+That float is done in CSS with `:placeholder-shown`, which means two things
+about the markup. Every input and the textarea carry `placeholder=" "` — a
+single space, so the browser treats them as having a placeholder — and the
+control is written **before** its label, because the rule uses a sibling
+selector:
+
+```html
+<div class="pg-field">
+  <input id="c-name" name="name" type="text" placeholder=" " required>
+  <label for="c-name">Full name</label>
+</div>
+```
+
+A select always has a value, so its label is floated from the start. The select
+also draws its own chevron, since removing the border removed the native one.
+
 ## The media pages
 
 `blog.html` and `case-studies.html` share one layout language. The blog opens
