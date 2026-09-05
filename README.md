@@ -170,7 +170,7 @@ of them: the contents card at the head of a long document, the marker beside
 each section heading, and the four gates diagram.
 
 Long pages use these to break up the text. The Terms page opens with a
-contents card listing all 21 sections and puts an icon beside every heading.
+contents card listing all 10 sections and puts an icon beside every heading.
 The Trust page has a four cell strip under the posture figures, icons on the
 six control cards, and the four checks drawn as a row of gates.
 
