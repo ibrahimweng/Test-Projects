@@ -10,7 +10,8 @@ page and the Agentic OS page.
 ## The pages
 
 The starting point was the footer in the Figma file. It links to nine places,
-and every one of them is now a page.
+and every one of them is reachable. Case studies is the exception: it is a
+section of the Media page rather than a page of its own.
 
 | Page | File | Figma frame |
 | --- | --- | --- |
@@ -19,8 +20,7 @@ and every one of them is now a page.
 | Infinite Campaigns | `infinite-campaigns.html` | `11998:42096` |
 | Secure Layer | `secure-layer.html` | `11998:42258` |
 | About | `about.html` | `12331:3347` |
-| Blogs | `blog.html` | not in the file |
-| Case studies | `case-studies.html` | not in the file |
+| Media (blog and case studies) | `blog.html` | `13653:9` |
 | Trust and Security | `trust-security.html` | not in the file |
 | Terms and Conditions | `terms.html` | not in the file |
 | Contact | `contact.html` | not in the file |
@@ -28,11 +28,12 @@ and every one of them is now a page.
 Five of the nine are drawn in Figma, and those five follow the design closely.
 All of their words come from the Figma text layers.
 
-The other four are not drawn anywhere. They were built in the same design
-language, using the type scale, the colours and the components taken from the
-frames that do exist. Their words are new and need a review before the site
-goes live. The Terms page says so at the top of the page, and the Blog page
-says so under the article list.
+The other four are not drawn in the original design. They were built in the
+same design language, using the type scale, the colours and the components
+taken from the frames that do exist, and then drawn back into Figma on a page
+called "From code — built site". Their words are new and need a review before
+the site goes live. The Terms page says so at the top, and the Media page says
+so under each collection.
 
 There is one extra page, `docs.html`. Nothing in the footer points to it, but
 the nav bar and the closing panel both have a link to the developer docs, and
@@ -86,7 +87,7 @@ local system font is used everywhere else.
 | `css/product.css` | the module cards on the Agentic OS page, and the why panels |
 | `css/pages.css` | dashboards, chat screens, the bento grid, articles, prose, forms |
 | `css/icons.css` | icon sizing, tinted tiles, the contents card, the gates diagram |
-| `css/media.css` | the blog and case study pages: gradient blocks, featured lead, filters |
+| `css/media.css` | the Media page: gradient blocks, the rail, the index, case studies |
 | `css/legal.css` | the long document pages: hero, summary card, sticky contents |
 | `css/agentic-os.css` | the layer explorer section |
 | `css/channels.css` | the customer channels section |
@@ -196,17 +197,30 @@ selector:
 A select always has a value, so its label is floated from the start. The select
 also draws its own chevron, since removing the border removed the native one.
 
-## The media pages
+## The Media page
 
-`blog.html` and `case-studies.html` share one layout language. The blog opens
-with a featured story at full width, then a category filter row, then a grid of
-eight posts. Case studies live on their own page with the same filter row and a
-two column grid, and each card states three result figures before the story.
+`blog.html` holds both collections. It opens with a centred title, then a rail
+of recent work that runs off both edges of the screen, then an index: a sticky
+column on the left naming the two collections, and the collections themselves
+on the right. The layout follows rulebase.co/media, fitted to Pagrin's own type
+scale and colours.
 
-Filtering is in `js/media.js`. It reads a `data-category` attribute from each
-card and a `data-filter` from each button, so adding a category needs no code
-change. With the script switched off every card is visible and the page still
-reads correctly.
+The rail is a horizontally scrolling row. Each item sets three custom
+properties inline, which is what makes the row look hand placed rather than
+generated:
+
+```html
+<div class="pg-rail__item" style="--w:1.34;--h:1;--drop:96">
+```
+
+`--w` and `--h` are multiples of `--rail-h`, the row's base height, and `--drop`
+is how many pixels the item hangs below the top line. `js/media.js` scrolls the
+rail part way in on load so it is cut off at the left edge, and adds drag and
+arrow key scrolling. None of that is required: with the script off the rail is
+still an ordinary scrolling row.
+
+The same script marks whichever collection you are reading in the left column.
+Clicking a link is a plain anchor jump, so it works either way.
 
 There is no photography in the project, so every image slot is a gradient
 block. Six colourways are defined in `css/media.css` and set per card with a
@@ -214,12 +228,13 @@ block. Six colourways are defined in `css/media.css` and set per card with a
 put a real picture in, place an `<img>` inside the `.pg-shot` element and the
 gradient is covered.
 
-The case studies are invented. The institutions and the figures are made up to
-show the shape of the page, and the page says so in a banner at the top. They
+The case studies are invented. The institutions, the quotes and the figures are
+made up to show the shape of the page, and the page says so in a banner. They
 need replacing with real, approved case studies before launch.
 
-Case studies appear in the nav under Company. They are not in the footer,
-because the footer's Company column is fixed at four links by the Figma design.
+Case studies appear in the nav under Company, pointing at `blog.html#case-studies`.
+They are not in the footer, because the footer's Company column is fixed at four
+links by the Figma design.
 
 ## The two hosts that are blocked
 

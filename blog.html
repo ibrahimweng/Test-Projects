@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blog — Pagrin</title>
-<meta name="description" content="Perspectives, product notes and engineering writing on rewards, commerce and agent-native finance.">
+<title>Media — Pagrin</title>
+<meta name="description" content="Writing, research and customer stories about rewards, commerce and agent-native finance, from the people building Pagrin.">
 <link rel="stylesheet" href="css/site.css">
 <link rel="stylesheet" href="css/icons.css">
 <link rel="stylesheet" href="css/pages.css">
@@ -17,152 +17,248 @@
 
 <main id="main">
 
-  <section class="pg-hero pg-hero--left">
+  <section class="pg-mhero">
     <div class="pg-shell">
-      <div class="pg-hero__inner">
-        <p class="pg-eyebrow">Blog</p>
-        <h1 class="pg-t1 pg-hero__title">Notes on an agent-native economy.</h1>
-        <p class="pg-lede pg-hero__lede">
-          What we are learning as institutions put autonomous agents in front of their
-          customers: the product decisions, the engineering, and the parts that are still
-          genuinely unsolved.
-        </p>
-        <div class="pg-btnrow">
-          <a class="pg-btn pg-btn--quiet" href="case-studies.html">Read case studies →</a>
+      <h1>Media</h1>
+      <p>Writing, research and customer stories about rewards, commerce and
+        agent-native finance. Written by the people building it.</p>
+    </div>
+  </section>
+
+  <!-- a shelf of work, running off both edges -->
+  <section aria-label="Recent work">
+    <div class="pg-rail" data-pg-rail tabindex="0" role="region" aria-label="Recent work, scroll sideways">
+
+      <div class="pg-rail__item" style="--w:1.34;--h:1;--drop:96">
+        <span class="pg-shot" data-tone="purple">
+          <span class="pg-play pg-play--sm"><span>Watch</span></span>
+        </span>
+        <span class="pg-rail__cap">How Northwind moved a twenty-year-old points programme in
+          nine weeks.</span>
+      </div>
+
+      <div class="pg-rail__item" style="--w:.74;--h:.9;--drop:22">
+        <span class="pg-shot" data-tone="sand"></span>
+      </div>
+
+      <div class="pg-rail__item" style="--w:1.16;--h:1.16;--drop:0">
+        <span class="pg-shot" data-tone="mint"></span>
+        <span class="pg-rail__cap">“What used to take a quarter now takes a sprint.” — Head of
+          Loyalty, Northwind Bank</span>
+      </div>
+
+      <div class="pg-rail__item" style="--w:.7;--h:.86;--drop:130">
+        <span class="pg-shot" data-tone="rose"></span>
+      </div>
+
+      <div class="pg-rail__item" style="--w:1.24;--h:1.1;--drop:36">
+        <span class="pg-shot" data-tone="sky">
+          <span class="pg-mock">
+            <span class="pg-mock__row"><b>Ava Restrepo</b><span>Redemption, step 2 of 3</span></span>
+            <p>Not enough points for the full fare — can I still book?</p>
+            <p>Yes. 14,200 points plus £38 on your card, inside your limit.</p>
+            <i>Approve and book</i>
+          </span>
+        </span>
+        <span class="pg-rail__cap">A customer stalls mid-redemption. The agent finds a split payment
+          and gets them booked instead of dropping off.</span>
+      </div>
+
+      <div class="pg-rail__item" style="--w:.78;--h:.94;--drop:110">
+        <span class="pg-shot" data-tone="warm"></span>
+      </div>
+
+      <div class="pg-rail__item" style="--w:1.3;--h:1.02;--drop:14">
+        <span class="pg-shot" data-tone="purple">
+          <span class="pg-play pg-play--sm"><span>Watch</span></span>
+        </span>
+        <span class="pg-rail__cap">Meridian on running one checkout across merchants that had never
+          heard of them.</span>
+      </div>
+
+      <div class="pg-rail__item" style="--w:.72;--h:.88;--drop:56">
+        <span class="pg-shot" data-tone="mint"></span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- the index -->
+  <section class="pg-section pg-section--tight" aria-labelledby="explore-title">
+    <div class="pg-shell">
+      <h2 class="pg-explore__head" id="explore-title">Explore the world of Pagrin</h2>
+
+      <div class="pg-explore">
+
+        <nav class="pg-side" data-pg-side aria-label="Collections">
+          <a href="#posts" aria-current="true">Blog</a>
+          <a href="#case-studies" aria-current="false">Customer case studies</a>
+        </nav>
+
+        <div>
+
+          <section class="pg-collection" id="posts" aria-labelledby="posts-title">
+            <h3 class="pg-label" id="posts-title">The latest posts</h3>
+
+            <div class="pg-posts">
+
+              <a class="pg-post" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="purple" aria-hidden="true"></span>
+                <span class="pg-post__title">Why loyalty breaks when agents start paying</span>
+                <span class="pg-post__date">Aug 21, 2026</span>
+              </a>
+
+              <a class="pg-post" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="mint" aria-hidden="true"></span>
+                <span class="pg-post__title">The four checks behind every Pagrin action</span>
+                <span class="pg-post__date">Aug 4, 2026</span>
+              </a>
+
+              <a class="pg-post" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="warm" aria-hidden="true"></span>
+                <span class="pg-post__title">Designing rewards that autonomous agents can actually use</span>
+                <span class="pg-post__date">Jul 22, 2026</span>
+              </a>
+
+              <a class="pg-post" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="sky" aria-hidden="true"></span>
+                <span class="pg-post__title">The bank that becomes plumbing</span>
+                <span class="pg-post__date">Jul 9, 2026</span>
+              </a>
+
+              <a class="pg-post" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="rose" aria-hidden="true"></span>
+                <span class="pg-post__title">Running one campaign for every customer</span>
+                <span class="pg-post__date">Jun 26, 2026</span>
+              </a>
+
+              <a class="pg-post" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="sand" aria-hidden="true"></span>
+                <span class="pg-post__title">What a risk team actually asks about AI agents</span>
+                <span class="pg-post__date">Jun 11, 2026</span>
+              </a>
+
+              <a class="pg-post" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="mint" aria-hidden="true"></span>
+                <span class="pg-post__title">Shipping into a core banking stack without a rebuild</span>
+                <span class="pg-post__date">May 28, 2026</span>
+              </a>
+
+              <a class="pg-post" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="purple" aria-hidden="true"></span>
+                <span class="pg-post__title">Who owns the customer when the agent does the shopping</span>
+                <span class="pg-post__date">May 14, 2026</span>
+              </a>
+
+            </div>
+
+            <div class="pg-note" style="margin-top:36px;max-width:70ch">
+              Article pages are not published yet, so every card links back here for now. The
+              images are gradient blocks standing in for artwork.
+            </div>
+          </section>
+
+          <section class="pg-collection" id="case-studies" aria-labelledby="cases-title">
+            <h3 class="pg-label" id="cases-title">Customer case studies</h3>
+
+            <div class="pg-feature">
+              <a class="pg-shot pg-shot--16x9" data-tone="sky" href="#" aria-label="Watch the Northwind Bank story">
+                <span class="pg-play"><span>Watch the story</span></span>
+              </a>
+
+              <blockquote>“We did not want a tenth vendor. We wanted one governed layer that our
+                risk team could read end to end, and that is what we got.”</blockquote>
+
+              <div class="pg-feature__foot">
+                <div class="pg-byline">
+                  <span class="pg-byline__av" aria-hidden="true"></span>
+                  <span class="pg-byline__who">
+                    <b>Rowan Ellis</b>
+                    <span>Head of Loyalty, Northwind Bank</span>
+                  </span>
+                </div>
+                <span class="pg-feature__client">Northwind</span>
+              </div>
+            </div>
+
+            <div class="pg-cases">
+
+              <a class="pg-case" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="warm" aria-hidden="true"></span>
+                <span class="pg-case__client">Meridian Financial</span>
+                <span class="pg-case__title">One checkout across merchants that had never heard of them</span>
+                <span class="pg-results">
+                  <span><b>1 API</b><span>for every merchant</span></span>
+                  <span><b>68%</b><span>baskets part-paid in points</span></span>
+                  <span><b>−41%</b><span>checkout drop-off</span></span>
+                </span>
+              </a>
+
+              <a class="pg-case" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="mint" aria-hidden="true"></span>
+                <span class="pg-case__client">Kestrel Bank</span>
+                <span class="pg-case__title">From twelve campaigns a year to one per customer</span>
+                <span class="pg-results">
+                  <span><b>48k</b><span>decisions an hour</span></span>
+                  <span><b>+19%</b><span>offer acceptance</span></span>
+                  <span><b>0</b><span>batch windows</span></span>
+                </span>
+              </a>
+
+              <a class="pg-case" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="rose" aria-hidden="true"></span>
+                <span class="pg-case__client">Atlas Federal</span>
+                <span class="pg-case__title">The risk review that took one pass</span>
+                <span class="pg-results">
+                  <span><b>1 pass</b><span>through risk review</span></span>
+                  <span><b>100%</b><span>actions logged</span></span>
+                  <span><b>Own keys</b><span>in their region</span></span>
+                </span>
+              </a>
+
+              <a class="pg-case" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="sand" aria-hidden="true"></span>
+                <span class="pg-case__client">Lumen Credit Union</span>
+                <span class="pg-case__title">Tiers that members could finally see the point of</span>
+                <span class="pg-results">
+                  <span><b>+27%</b><span>tier progression</span></span>
+                  <span><b>−52%</b><span>support tickets</span></span>
+                  <span><b>24/7</b><span>first response</span></span>
+                </span>
+              </a>
+
+              <a class="pg-case" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="sky" aria-hidden="true"></span>
+                <span class="pg-case__client">Harbour &amp; Co</span>
+                <span class="pg-case__title">Booking travel without leaving the banking app</span>
+                <span class="pg-results">
+                  <span><b>3 min</b><span>average booking</span></span>
+                  <span><b>+44%</b><span>points redeemed on travel</span></span>
+                  <span><b>1 settlement</b><span>points plus cash</span></span>
+                </span>
+              </a>
+
+              <a class="pg-case" href="#">
+                <span class="pg-shot pg-shot--16x10" data-tone="purple" aria-hidden="true"></span>
+                <span class="pg-case__client">Northwind Bank</span>
+                <span class="pg-case__title">A twenty-year-old points programme, moved in nine weeks</span>
+                <span class="pg-results">
+                  <span><b>9 weeks</b><span>to first live cohort</span></span>
+                  <span><b>+31%</b><span>redemption rate</span></span>
+                  <span><b>2.4×</b><span>monthly engagement</span></span>
+                </span>
+              </a>
+
+            </div>
+
+            <div class="pg-flag" style="margin-top:36px">
+              <span><strong>Illustrative, not real customers.</strong> The institutions, quotes and
+              figures above are made up to show the shape of the page. Replace them with real,
+              approved case studies before this goes live.</span>
+            </div>
+          </section>
+
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- featured -->
-  <section class="pg-section pg-section--tight" aria-labelledby="lead-title">
-    <div class="pg-shell">
-      <a class="pg-lead" href="#">
-        <span class="pg-shot pg-shot--16x10" data-tone="purple" aria-hidden="true">
-          <span class="pg-shot__mark">Perspective</span>
-        </span>
-        <span class="pg-lead__copy">
-          <span class="pg-kicker">Featured</span>
-          <span class="pg-lead__title" id="lead-title">Why loyalty breaks when agents start paying</span>
-          <span class="pg-lead__excerpt">Every points programme running today assumes a person at
-            the checkout: a screen to show the offer on, a tap to accept it, and a human to read the
-            terms. Take the person out of that loop and most of the programme stops working, not
-            because the maths changes, but because the interface it depended on is gone.</span>
-          <span class="pg-meta"><span>Ada Whitfield</span><span>12 min read</span><span>August 2026</span></span>
-        </span>
-      </a>
-    </div>
-  </section>
-
-  <!-- filter + grid -->
-  <section class="pg-section pg-section--tight" aria-labelledby="all-title">
-    <div class="pg-shell">
-      <h2 class="pg-sr" id="all-title">All posts</h2>
-
-      <div class="pg-filters" data-pg-filters role="group" aria-label="Filter posts by category">
-        <button class="pg-filter" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="pg-filter" type="button" data-filter="Perspective" aria-pressed="false">Perspective</button>
-        <button class="pg-filter" type="button" data-filter="Product" aria-pressed="false">Product</button>
-        <button class="pg-filter" type="button" data-filter="Engineering" aria-pressed="false">Engineering</button>
-        <span class="pg-filters__count" data-pg-count aria-live="polite"></span>
-      </div>
-
-      <div class="pg-mediagrid" data-pg-grid data-noun="post">
-
-        <a class="pg-mcard" href="#" data-category="Engineering">
-          <span class="pg-shot pg-shot--16x9" data-tone="mint" aria-hidden="true"></span>
-          <span class="pg-mcard__body">
-            <span class="pg-kicker pg-kicker--dark">Engineering</span>
-            <span class="pg-mcard__title">The four checks behind every Pagrin action</span>
-            <span class="pg-mcard__excerpt">Scope, consent, guardrail, audit. What each one does,
-              where it runs in the request path, and why none of them is optional.</span>
-            <span class="pg-meta"><span>Marcus Lindqvist</span><span>9 min</span></span>
-          </span>
-        </a>
-
-        <a class="pg-mcard" href="#" data-category="Product">
-          <span class="pg-shot pg-shot--16x9" data-tone="warm" aria-hidden="true"></span>
-          <span class="pg-mcard__body">
-            <span class="pg-kicker pg-kicker--dark">Product</span>
-            <span class="pg-mcard__title">Designing rewards that autonomous agents can actually use</span>
-            <span class="pg-mcard__excerpt">Redemption flows built for humans quietly assume a screen,
-              a tap and someone to read the small print. Agent-native redemption needs none of those.</span>
-            <span class="pg-meta"><span>Priya Nair</span><span>7 min</span></span>
-          </span>
-        </a>
-
-        <a class="pg-mcard" href="#" data-category="Perspective">
-          <span class="pg-shot pg-shot--16x9" data-tone="sky" aria-hidden="true"></span>
-          <span class="pg-mcard__body">
-            <span class="pg-kicker pg-kicker--dark">Perspective</span>
-            <span class="pg-mcard__title">The bank that becomes plumbing</span>
-            <span class="pg-mcard__excerpt">When an agent picks the merchant, the card and the reward,
-              the institution that held the relationship can end up settling the transaction and
-              nothing more.</span>
-            <span class="pg-meta"><span>Ada Whitfield</span><span>6 min</span></span>
-          </span>
-        </a>
-
-        <a class="pg-mcard" href="#" data-category="Engineering">
-          <span class="pg-shot pg-shot--16x9" data-tone="rose" aria-hidden="true"></span>
-          <span class="pg-mcard__body">
-            <span class="pg-kicker pg-kicker--dark">Engineering</span>
-            <span class="pg-mcard__title">Running one campaign for every customer</span>
-            <span class="pg-mcard__excerpt">How Infinite Campaigns evaluates an offer per interaction
-              instead of per batch, and what that costs at 48,000 decisions an hour.</span>
-            <span class="pg-meta"><span>Marcus Lindqvist</span><span>11 min</span></span>
-          </span>
-        </a>
-
-        <a class="pg-mcard" href="#" data-category="Product">
-          <span class="pg-shot pg-shot--16x9" data-tone="sand" aria-hidden="true"></span>
-          <span class="pg-mcard__body">
-            <span class="pg-kicker pg-kicker--dark">Product</span>
-            <span class="pg-mcard__title">What a risk team actually asks about AI agents</span>
-            <span class="pg-mcard__excerpt">Six questions that come up in every institutional review,
-              and the answers we had to build the platform around.</span>
-            <span class="pg-meta"><span>Priya Nair</span><span>8 min</span></span>
-          </span>
-        </a>
-
-        <a class="pg-mcard" href="#" data-category="Product">
-          <span class="pg-shot pg-shot--16x9" data-tone="purple" aria-hidden="true"></span>
-          <span class="pg-mcard__body">
-            <span class="pg-kicker pg-kicker--dark">Product</span>
-            <span class="pg-mcard__title">Points as a currency an agent can actually spend</span>
-            <span class="pg-mcard__excerpt">A balance is easy. Making that balance spendable across
-              merchants that have never heard of your programme is the hard part.</span>
-            <span class="pg-meta"><span>Priya Nair</span><span>10 min</span></span>
-          </span>
-        </a>
-
-        <a class="pg-mcard" href="#" data-category="Engineering">
-          <span class="pg-shot pg-shot--16x9" data-tone="mint" aria-hidden="true"></span>
-          <span class="pg-mcard__body">
-            <span class="pg-kicker pg-kicker--dark">Engineering</span>
-            <span class="pg-mcard__title">Shipping into a core banking stack without a rebuild</span>
-            <span class="pg-mcard__excerpt">What it takes to read a ledger in place, at speed, without
-              asking anyone to migrate a single table.</span>
-            <span class="pg-meta"><span>Marcus Lindqvist</span><span>13 min</span></span>
-          </span>
-        </a>
-
-        <a class="pg-mcard" href="#" data-category="Perspective">
-          <span class="pg-shot pg-shot--16x9" data-tone="warm" aria-hidden="true"></span>
-          <span class="pg-mcard__body">
-            <span class="pg-kicker pg-kicker--dark">Perspective</span>
-            <span class="pg-mcard__title">Who owns the customer when the agent does the shopping</span>
-            <span class="pg-mcard__excerpt">The relationship does not disappear. It moves to whoever
-              the agent asks first, which is a position you can still choose to hold.</span>
-            <span class="pg-meta"><span>Ada Whitfield</span><span>7 min</span></span>
-          </span>
-        </a>
-
-      </div>
-
-      <div class="pg-note" style="margin-top:44px;max-width:70ch">
-        Article pages are not published yet, so every card links back here for now. The images are
-        gradient blocks standing in for artwork.
       </div>
     </div>
   </section>

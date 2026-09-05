@@ -1,58 +1,105 @@
 /* ==========================================================================
-   Pagrin — category filtering for the media pages
+   Pagrin — the Media page
 
-   Used by blog.html and case-studies.html. The markup carries everything:
+   Two small behaviours, both progressive:
 
-     <button class="pg-filter" data-filter="all" aria-pressed="true">All</button>
-     <a class="pg-mcard" data-category="Engineering"> … </a>
+     1. The rail of work scrolls sideways. It starts part way in, so the row
+        is cut off at both edges rather than beginning tidily at the gutter,
+        and it can be dragged with a mouse as well as scrolled or tabbed.
 
-   With the script switched off every card is visible and the buttons simply
-   do nothing, which is the right fallback for an index page.
+     2. The sticky column on the left marks whichever collection you are
+        reading. Clicking a link scrolls to it; scrolling updates the mark.
+
+   Neither is required to read the page. With JavaScript off the rail is
+   still a normal scrolling row and both links are still ordinary anchors.
    ========================================================================== */
 
 (function () {
   'use strict';
 
-  var root = document.querySelector('[data-pg-filters]');
-  if (!root) return;
+  /* ---------------------------------------------------------------- rail */
 
-  var buttons = Array.prototype.slice.call(root.querySelectorAll('.pg-filter'));
-  var grid    = document.querySelector('[data-pg-grid]');
-  var count   = root.querySelector('[data-pg-count]');
-  if (!buttons.length || !grid) return;
+  var rail = document.querySelector('[data-pg-rail]');
 
-  var cards = Array.prototype.slice.call(grid.querySelectorAll('[data-category]'));
+  if (rail) {
+    /* start cut off on the left, but never so far that the end is in view */
+    var start = Math.min(rail.scrollWidth * 0.08, rail.scrollWidth - rail.clientWidth);
+    if (start > 0) rail.scrollLeft = start;
 
-  var empty = document.createElement('p');
-  empty.className = 'pg-empty';
-  empty.hidden = true;
-  empty.textContent = 'Nothing filed under that yet.';
-  grid.appendChild(empty);
+    /* drag to scroll — pointer events cover mouse, pen and touch alike */
+    var dragging = false, startX = 0, startLeft = 0, moved = 0;
 
-  var noun   = grid.getAttribute('data-noun') || 'post';
-  var plural = grid.getAttribute('data-noun-plural') || noun + 's';
-
-  function apply(filter) {
-    var shown = 0;
-    cards.forEach(function (c) {
-      var match = filter === 'all' || c.getAttribute('data-category') === filter;
-      c.hidden = !match;
-      if (match) shown++;
+    rail.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'touch') return;      /* let touch scroll natively */
+      dragging = true; moved = 0;
+      startX = e.clientX;
+      startLeft = rail.scrollLeft;
+      rail.setPointerCapture(e.pointerId);
     });
-    empty.hidden = shown > 0;
-    if (count) {
-      count.textContent = shown + ' ' + (shown === 1 ? noun : plural);
-    }
-    buttons.forEach(function (b) {
-      b.setAttribute('aria-pressed', b.getAttribute('data-filter') === filter ? 'true' : 'false');
+
+    rail.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - startX;
+      moved = Math.max(moved, Math.abs(dx));
+      rail.scrollLeft = startLeft - dx;
+    });
+
+    ['pointerup', 'pointercancel'].forEach(function (type) {
+      rail.addEventListener(type, function (e) {
+        if (!dragging) return;
+        dragging = false;
+        if (rail.hasPointerCapture(e.pointerId)) rail.releasePointerCapture(e.pointerId);
+      });
+    });
+
+    /* a drag that ended on a link should not also follow it */
+    rail.addEventListener('click', function (e) {
+      if (moved > 6) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
+
+    /* arrow keys once the rail has focus */
+    rail.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      rail.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * rail.clientWidth * 0.6,
+                      behavior: 'smooth' });
     });
   }
 
-  buttons.forEach(function (b) {
-    b.addEventListener('click', function () {
-      apply(b.getAttribute('data-filter'));
-    });
-  });
+  /* ------------------------------------------------------- collection nav */
 
-  apply('all');
+  var side = document.querySelector('[data-pg-side]');
+  if (!side) return;
+
+  var links = [].slice.call(side.querySelectorAll('a[href^="#"]'));
+  var sections = links
+    .map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); })
+    .filter(Boolean);
+
+  if (sections.length !== links.length) return;
+
+  function mark(id) {
+    links.forEach(function (a) {
+      a.setAttribute('aria-current', a.getAttribute('href') === '#' + id ? 'true' : 'false');
+    });
+  }
+
+  /* whichever collection has crossed the top of the reading area wins */
+  function onScroll() {
+    var line = window.innerHeight * 0.3;
+    var current = sections[0].id;
+    sections.forEach(function (s) {
+      if (s.getBoundingClientRect().top <= line) current = s.id;
+    });
+    mark(current);
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { onScroll(); ticking = false; });
+  }, { passive: true });
+
+  onScroll();
 }());

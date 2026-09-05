@@ -28,10 +28,11 @@
   ];
 
   /* The footer's Company column is fixed by the Figma design at four links,
-     so Case studies lives in the nav menu only. */
+     so Case studies lives in the nav menu only. Both collections sit on the
+     Media page, so that entry is an anchor into it rather than a page. */
   var COMPANY = [
     ['about',  'about.html',           'About',              'Why we are building the rewards layer.'],
-    ['blog',   'blog.html',            'Blogs',              'Perspectives, product notes and engineering.'],
+    ['blog',   'blog.html',            'Blogs',              'Writing, research and customer stories.'],
     ['trust',  'trust-security.html',  'Trust & Security',   'How we protect institutions and their customers.'],
     ['terms',  'terms.html',           'Terms & Conditions', 'The agreement that covers using Pagrin.']
   ];
@@ -39,7 +40,7 @@
   var COMPANY_NAV = [
     COMPANY[0],
     COMPANY[1],
-    ['case-studies', 'case-studies.html', 'Case studies', 'What changed once the agents went live.'],
+    ['blog', 'blog.html#case-studies', 'Case studies', 'What changed once the agents went live.'],
     COMPANY[2],
     COMPANY[3]
   ];
