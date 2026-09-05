@@ -90,18 +90,59 @@ local system font is used everywhere else.
 Every class name starts with `pg`, apart from the two older sections, which use
 `ao` and `ch`. Nothing clashes.
 
-## Two things that could not be downloaded
+## The module illustrations
 
-The network in the environment this was built in blocked two hosts.
+The eight cards in the module rows on the Agentic OS page are rebuilt from the
+symbols in the Figma file. Each one is real markup rather than a picture, so
+the copy inside it stays readable, selectable and translatable, and it stays
+sharp on any screen.
 
-The first is the Figma asset server, so the logo and the illustrations could not
-be exported. The brand mark is drawn as an SVG in `js/site.js` and matches the
-gradient and the diagonal strokes in the design, but it is a rebuild and not the
-real file. Swap it for the exported asset when you can.
+| Card | Figma node | Background in the design |
+| --- | --- | --- |
+| LLM and TFM | `12192:2` | soft gradient |
+| Agentic Harness | `12194:2` | soft gradient |
+| Data and Integrations | `12195:2` | photograph |
+| Context and Knowledge | `12195:82` | photograph |
+| Loyalty and Reward | `12196:2` | photograph |
+| Promotions Engine | `12196:66` | photograph |
+| Product and Interfaces | `12197:2` | photograph |
+| Security and Governance | `12197:48` | photograph |
 
-The second is intercom.com, which was the reference for the design language. The
-Figma file already follows that language closely, so the file itself was used as
-the source instead.
+Everything inside a panel is sized in `cqw`, which is a share of the panel's
+own width, so the mock keeps the exact proportions it has on the Figma canvas
+whatever width the column ends up being. The conversion from the design is the
+design pixel value divided by 5.3, because the panel is 530 wide in Figma.
+
+Six of the eight panels sit on a photograph, and a photograph cannot be
+rebuilt in CSS. Those six currently show a soft wash in the same tones, which
+reads as a deliberate background rather than a missing one. To put the real
+picture back, set `--shot` on the panel and nothing else needs to change:
+
+```html
+<div class="pg-mod__panel pg-mod--studio"
+     style="--shot:url(assets/figma/loyalty-reward.jpg)">
+```
+
+The wash is drawn on a pseudo element below the panel's own background layer,
+so a picture on the panel covers it automatically.
+
+## The two hosts that are blocked
+
+The network policy in the environment this was built in refuses two hosts, and
+that shaped two decisions.
+
+The first is `www.figma.com`. The Figma connection itself works, and it will
+hand over the address of any asset in the file. Downloading from that address
+is an ordinary web request, and the policy refuses it, so no export could be
+saved. This affects the six photographs above, the brand mark and the footer
+wordmark. The brand mark is drawn as an SVG in `js/site.js` and matches the
+gradient and the diagonal strokes in the design, but it is a rebuild and not
+the real file. To fix this, allow `www.figma.com` in the environment's network
+policy, or export the frames by hand and put them in `assets/figma/`.
+
+The second is `intercom.com`, which was the reference for the design language.
+The Figma file already follows that language closely, so the file itself was
+used as the source instead.
 
 ## Checking it still works
 
