@@ -6,6 +6,7 @@
 <title>Trust &amp; Security — Pagrin</title>
 <meta name="description" content="How Pagrin protects institutions and their customers: scoped access, consent on spend, full audit, data residency, and a platform architected for SOC 2 and PCI-DSS.">
 <link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/icons.css">
 <link rel="stylesheet" href="css/pages.css">
 <link rel="stylesheet" href="css/legal.css">
 </head>
@@ -62,8 +63,32 @@
           <span>customer records used to train a model that anyone else can reach.</span>
         </div>
       </div>
+
+      <div class="pg-strip" style="margin-top:32px">
+        <div class="pg-strip__cell">
+          <span class="pg-tile pg-tile--sm pg-tile--good"><svg class="pg-icon" aria-hidden="true"><use href="#i-lock"></use></svg></span>
+          <b>Encrypted throughout</b>
+          <p>TLS 1.2 or above in transit, AES-256 at rest, with keys held in your region.</p>
+        </div>
+        <div class="pg-strip__cell">
+          <span class="pg-tile pg-tile--sm pg-tile--sky"><svg class="pg-icon" aria-hidden="true"><use href="#i-eye"></use></svg></span>
+          <b>Least privilege inside</b>
+          <p>Nobody at Pagrin holds standing access to customer data.</p>
+        </div>
+        <div class="pg-strip__cell">
+          <span class="pg-tile pg-tile--sm pg-tile--warm"><svg class="pg-icon" aria-hidden="true"><use href="#i-alert"></use></svg></span>
+          <b>Told within 72 hours</b>
+          <p>If an incident touches your data we tell you as soon as we confirm it.</p>
+        </div>
+        <div class="pg-strip__cell">
+          <span class="pg-tile pg-tile--sm"><svg class="pg-icon" aria-hidden="true"><use href="#i-sparkle"></use></svg></span>
+          <b>No shared training</b>
+          <p>Your data never trains a model another customer can reach.</p>
+        </div>
+      </div>
     </div>
   </section>
+
 
   <!-- the six controls -->
   <section class="pg-section pg-section--tint" aria-labelledby="controls-title">
@@ -75,23 +100,23 @@
           the layer every agent action runs through, and they cannot be disabled per tenant.</p>
       </div>
       <div class="pg-grid pg-grid--3">
-        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Scoped access</h3>
+        <div class="pg-card pg-card--icon"><span class="pg-tile"><svg class="pg-icon pg-icon--lg" aria-hidden="true"><use href="#i-key"></use></svg></span><h3 class="pg-h5 pg-card__title">Scoped access</h3>
           <p class="pg-card__body">Each agent holds a narrow, explicit permission set, per service
             and per customer. A request outside that scope is refused before it reaches your
             systems.</p></div>
-        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Consent on spend</h3>
+        <div class="pg-card pg-card--icon"><span class="pg-tile"><svg class="pg-icon pg-icon--lg" aria-hidden="true"><use href="#i-handshake"></use></svg></span><h3 class="pg-h5 pg-card__title">Consent on spend</h3>
           <p class="pg-card__body">Points and funds move only on the customer’s explicit approval.
             There is no configuration in which a balance changes silently.</p></div>
-        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Guardrails</h3>
+        <div class="pg-card pg-card--icon"><span class="pg-tile"><svg class="pg-icon pg-icon--lg" aria-hidden="true"><use href="#i-shield"></use></svg></span><h3 class="pg-h5 pg-card__title">Guardrails</h3>
           <p class="pg-card__body">Eligibility rules, spend limits, discount ceilings and brand
             policy are evaluated before an action runs, not inferred by the model afterwards.</p></div>
-        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Full audit trail</h3>
+        <div class="pg-card pg-card--icon"><span class="pg-tile"><svg class="pg-icon pg-icon--lg" aria-hidden="true"><use href="#i-file-text"></use></svg></span><h3 class="pg-h5 pg-card__title">Full audit trail</h3>
           <p class="pg-card__body">Every decision, offer and redemption is written to an append
             only log with its reasoning, and can be exported for inspection at any time.</p></div>
-        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Human in the loop</h3>
+        <div class="pg-card pg-card--icon"><span class="pg-tile"><svg class="pg-icon pg-icon--lg" aria-hidden="true"><use href="#i-users"></use></svg></span><h3 class="pg-h5 pg-card__title">Human in the loop</h3>
           <p class="pg-card__body">You choose which actions require a person. High value spend,
             unusual patterns and sensitive changes are routed with the full context to decide.</p></div>
-        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Data residency</h3>
+        <div class="pg-card pg-card--icon"><span class="pg-tile"><svg class="pg-icon pg-icon--lg" aria-hidden="true"><use href="#i-globe"></use></svg></span><h3 class="pg-h5 pg-card__title">Data residency</h3>
           <p class="pg-card__body">Customer data stays in the region you nominate, encrypted with
             keys you control, with no copies taken outside it.</p></div>
       </div>
@@ -264,6 +289,34 @@
           <p>You can see this working, with a live audit log and the held and blocked counts, on
             the <a href="secure-layer.html">Secure Layer</a> page.</p>
 
+
+          <div class="pg-gates" style="margin:26px 0 8px">
+            <div class="pg-gate">
+              <span class="pg-tile pg-tile--sm"><svg class="pg-icon" aria-hidden="true"><use href="#i-key"></use></svg></span>
+              <span class="pg-gate__step">Check one</span>
+              <b>Scope</b>
+              <p>Is this agent allowed to touch this service, for this customer, at all?</p>
+            </div>
+            <div class="pg-gate">
+              <span class="pg-tile pg-tile--sm"><svg class="pg-icon" aria-hidden="true"><use href="#i-handshake"></use></svg></span>
+              <span class="pg-gate__step">Check two</span>
+              <b>Consent</b>
+              <p>Has the customer approved money or points moving on their behalf?</p>
+            </div>
+            <div class="pg-gate">
+              <span class="pg-tile pg-tile--sm"><svg class="pg-icon" aria-hidden="true"><use href="#i-shield"></use></svg></span>
+              <span class="pg-gate__step">Check three</span>
+              <b>Guardrail</b>
+              <p>Does the action sit inside the eligibility rules, limits and caps you set?</p>
+            </div>
+            <div class="pg-gate">
+              <span class="pg-tile pg-tile--sm"><svg class="pg-icon" aria-hidden="true"><use href="#i-file-text"></use></svg></span>
+              <span class="pg-gate__step">After</span>
+              <b>Audit</b>
+              <p>The action and the reasoning behind it are written to an append only log.</p>
+            </div>
+          </div>
+
           <h2 id="subprocessors">Subprocessors</h2>
           <p>We use a small number of providers to run the platform. The current list is below,
             and the full list with data categories is in the security pack.</p>
@@ -359,6 +412,7 @@
 </button>
 
 <div data-pg-footer></div>
+<script src="js/icons.js" defer></script>
 <script src="js/site.js" defer></script>
 <script src="js/legal.js" defer></script>
 </body>

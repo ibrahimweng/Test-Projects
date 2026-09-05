@@ -1,0 +1,198 @@
+/* ==========================================================================
+   Pagrin — icons and the small visual furniture that goes with them
+   The sprite itself is injected by js/icons.js. Draw one with:
+
+     <svg class="pg-icon" aria-hidden="true"><use href="#i-shield"></use></svg>
+
+   Depends on css/site.css for the tokens.
+   ========================================================================== */
+
+.pg-icon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  display: block;
+  color: inherit;
+}
+.pg-icon--sm { width: 16px; height: 16px; }
+.pg-icon--lg { width: 24px; height: 24px; }
+
+/* the tinted rounded tile an icon usually sits in */
+.pg-tile {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--pg-purple-050);
+  color: var(--pg-purple);
+}
+.pg-tile--sm   { width: 36px; height: 36px; border-radius: 10px; }
+.pg-tile--grey { background: var(--pg-surface);  color: var(--pg-ink); }
+.pg-tile--ink  { background: var(--pg-ink);      color: var(--pg-white); }
+.pg-tile--warm { background: #fff3e8;            color: #c2570c; }
+.pg-tile--good { background: #eaf7ef;            color: #1c7a44; }
+.pg-tile--sky  { background: #eaf1fd;            color: #2d5fb8; }
+.pg-why__card--dark .pg-tile { background: rgba(255,255,255,.09); color: var(--pg-white); }
+
+/* a card that leads with an icon tile */
+.pg-card--icon { display: grid; gap: 16px; align-content: start; }
+.pg-card--icon .pg-card__title { margin-bottom: 0; }
+
+/* inline icon + label, used in lists and meta rows */
+.pg-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+}
+
+/* ------------------------------------------------------ document sections */
+
+/* the marker sits inline with a long document's section heading. It was in
+   the left gutter first, but that column already holds the sticky contents. */
+.pg-prose--legal h2 {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.pg-prose--legal h2 > .pg-mark {
+  flex: none;
+  width: 36px; height: 36px;
+  margin-top: 1px;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: var(--pg-purple-050);
+  color: var(--pg-purple);
+}
+.pg-prose--legal h2 > .pg-anchor { margin-left: 0; align-self: center; }
+
+/* ------------------------------------------------------- contents card */
+
+.pg-contents {
+  padding: clamp(26px, 2.6vw, 36px);
+  border: 1px solid var(--pg-hairline-2);
+  border-radius: var(--pg-radius);
+  background: var(--pg-white);
+}
+.pg-contents__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.pg-contents__head b { color: var(--pg-ink); font-size: var(--pg-b2); font-weight: 600; }
+.pg-contents__head span { margin-left: auto; color: var(--pg-muted); font-size: var(--pg-b3); }
+
+.pg-contents__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px 28px;
+}
+@media (max-width: 600px) { .pg-contents__list { grid-template-columns: minmax(0, 1fr); } }
+
+.pg-contents__list a {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 4px;
+  padding: 8px 10px;
+  margin-left: -10px;
+  border-radius: 8px;
+  color: var(--pg-body);
+  font-size: var(--pg-b3);
+  line-height: 20px;
+}
+.pg-prose .pg-contents__list a,
+.pg-contents__list a { text-decoration: none; }
+.pg-contents__list a:hover { background: var(--pg-surface); color: var(--pg-ink); }
+.pg-contents__list i {
+  font-style: normal;
+  color: var(--pg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* -------------------------------------------------------- the checks rail */
+
+/* the four gates every agent action passes through, as a small diagram */
+.pg-gates {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+/* four across only where there is real room, such as a full-width section */
+.pg-gates--wide { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 900px) { .pg-gates--wide { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 460px) { .pg-gates, .pg-gates--wide { grid-template-columns: minmax(0, 1fr); } }
+
+.pg-gate {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding: 24px;
+  border: 1px solid var(--pg-hairline-2);
+  border-radius: 14px;
+  background: var(--pg-white);
+}
+/* the connector, drawn only where a gate has a neighbour on its right */
+.pg-gates > .pg-gate:nth-child(odd):not(:last-child)::after,
+.pg-gates--wide > .pg-gate:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 46px;
+  right: -16px;
+  width: 16px;
+  height: 1px;
+  background: var(--pg-hairline);
+}
+@media (max-width: 460px) { .pg-gate::after { display: none !important; } }
+
+.pg-gate__step {
+  color: var(--pg-muted);
+  font-size: var(--pg-b4);
+  font-weight: 600;
+  letter-spacing: .07em;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+.pg-gate b { color: var(--pg-ink); font-size: var(--pg-b2); font-weight: 500; line-height: 24px; }
+.pg-gate p { color: var(--pg-body); font-size: var(--pg-b3); line-height: 21px; }
+
+/* ------------------------------------------------------- feature strip */
+
+/* a quiet band of icon + label pairs, used to break up long text */
+.pg-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--pg-hairline-2);
+  border: 1px solid var(--pg-hairline-2);
+  border-radius: var(--pg-radius);
+  overflow: hidden;
+}
+@media (max-width: 900px) { .pg-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .pg-strip { grid-template-columns: minmax(0, 1fr); } }
+.pg-strip__cell {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 26px;
+  background: var(--pg-white);
+}
+.pg-strip__cell b { color: var(--pg-ink); font-size: var(--pg-b2); font-weight: 500; line-height: 24px; }
+.pg-strip__cell p { color: var(--pg-body); font-size: var(--pg-b3); line-height: 21px; }
+
+/* --------------------------------------------------------- person avatar */
+
+.pg-person__av { position: relative; overflow: hidden; }
+.pg-person__av::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 60% at 30% 25%, #d9c9fb 0%, transparent 60%),
+    radial-gradient(70% 70% at 80% 80%, #f8cfe2 0%, transparent 62%),
+    linear-gradient(150deg, #efe9fe, #fce7f1);
+}
+.pg-person__av > span { position: relative; }

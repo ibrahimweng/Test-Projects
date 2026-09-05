@@ -85,6 +85,7 @@ local system font is used everywhere else.
 | `css/site.css` | tokens, base styles, buttons, nav bar, hero, closing panel, footer |
 | `css/product.css` | the module cards on the Agentic OS page, and the why panels |
 | `css/pages.css` | dashboards, chat screens, the bento grid, articles, prose, forms |
+| `css/icons.css` | icon sizing, tinted tiles, the contents card, the gates diagram |
 | `css/media.css` | the blog and case study pages: gradient blocks, featured lead, filters |
 | `css/legal.css` | the long document pages: hero, summary card, sticky contents |
 | `css/agentic-os.css` | the layer explorer section |
@@ -128,6 +129,26 @@ picture back, set `--shot` on the panel and nothing else needs to change:
 
 The wash is drawn on a pseudo element below the panel's own background layer,
 so a picture on the panel covers it automatically.
+
+## Icons
+
+`js/icons.js` injects one inline SVG sprite at the top of the body, so any page
+can draw an icon without another request:
+
+```html
+<svg class="pg-icon" aria-hidden="true"><use href="#i-shield"></use></svg>
+```
+
+There are 32 icons, all 24 by 24, drawn with a 1.6 stroke and `currentColor`,
+so they take the colour of whatever they sit in. `css/icons.css` holds the
+sizes and the tinted tile they usually sit in, plus three pieces built on top
+of them: the contents card at the head of a long document, the marker beside
+each section heading, and the four gates diagram.
+
+Long pages use these to break up the text. The Terms page opens with a
+contents card listing all 21 sections and puts an icon beside every heading.
+The Trust page has a four cell strip under the posture figures, icons on the
+six control cards, and the four checks drawn as a row of gates.
 
 ## The media pages
 
