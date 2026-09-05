@@ -11,7 +11,7 @@ page and the Agentic OS page.
 
 The starting point was the footer in the Figma file. It links to nine places,
 and every one of them is reachable. Case studies is the exception: it is a
-section of the Media page rather than a page of its own.
+section of the Blogs page rather than a page of its own.
 
 | Page | File | Figma frame |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ section of the Media page rather than a page of its own.
 | Infinite Campaigns | `infinite-campaigns.html` | `11998:42096` |
 | Secure Layer | `secure-layer.html` | `11998:42258` |
 | About | `about.html` | `12331:3347` |
-| Media (blog and case studies) | `blog.html` | `13653:9` |
+| Blogs (posts and case studies) | `blog.html` | `13653:9` |
 | Trust and Security | `trust-security.html` | not in the file |
 | Terms and Conditions | `terms.html` | not in the file |
 | Contact | `contact.html` | not in the file |
@@ -32,7 +32,7 @@ The other four are not drawn in the original design. They were built in the
 same design language, using the type scale, the colours and the components
 taken from the frames that do exist, and then drawn back into Figma on a page
 called "From code — built site". Their words are new and need a review before
-the site goes live. The Terms page says so at the top, and the Media page says
+the site goes live. The Terms page says so at the top, and the Blogs page says
 so under each collection.
 
 There are two extra pages. `docs.html` exists because nothing in the footer
@@ -89,7 +89,7 @@ local system font is used everywhere else.
 | `css/product.css` | the module cards on the Agentic OS page, and the why panels |
 | `css/pages.css` | dashboards, chat screens, the bento grid, articles, prose, forms |
 | `css/icons.css` | icon sizing, tinted tiles, the contents card, the gates diagram |
-| `css/media.css` | the Media page: gradient blocks, the rail, the index, case studies |
+| `css/media.css` | the Blogs page: gradient blocks, the rail, the index, case studies |
 | `css/legal.css` | the long document pages: hero, summary card, sticky contents |
 | `css/agentic-os.css` | the layer explorer section |
 | `css/channels.css` | the customer channels section |
@@ -199,7 +199,7 @@ selector:
 A select always has a value, so its label is floated from the start. The select
 also draws its own chevron, since removing the border removed the native one.
 
-## The Media page
+## The Blogs page
 
 `blog.html` holds both collections. It opens with a centred title, then a rail
 of recent work that runs off both edges of the screen, then an index: a sticky

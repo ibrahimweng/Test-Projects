@@ -29,7 +29,7 @@
 
   /* The footer's Company column is fixed by the Figma design at four links,
      so Case studies lives in the nav menu only. Both collections sit on the
-     Media page, so that entry is an anchor into it rather than a page. */
+     Blogs page, so that entry is an anchor into it rather than a page. */
   var COMPANY = [
     ['about',  'about.html',           'About',              'Why we are building the rewards layer.'],
     ['blog',   'blog.html',            'Blogs',              'Writing, research and customer stories.'],

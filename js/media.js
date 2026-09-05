@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Pagrin — the Media page
+   Pagrin — the Blogs page
 
    Two small behaviours, both progressive:
 
