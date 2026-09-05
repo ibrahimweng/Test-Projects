@@ -35,9 +35,11 @@ called "From code — built site". Their words are new and need a review before
 the site goes live. The Terms page says so at the top, and the Media page says
 so under each collection.
 
-There is one extra page, `docs.html`. Nothing in the footer points to it, but
-the nav bar and the closing panel both have a link to the developer docs, and
-this keeps those links from going nowhere.
+There are two extra pages. `docs.html` exists because nothing in the footer
+points to the developer docs but the nav bar and the closing panel both link to
+them, and this keeps those links from going nowhere. `post.html` is the article
+template, currently holding the only real story the site has: the Pagrin and
+Zenith partnership announcement.
 
 ## The shared parts
 
@@ -227,6 +229,24 @@ block. Six colourways are defined in `css/media.css` and set per card with a
 `data-tone` attribute, which keeps the page looking like one designed set. To
 put a real picture in, place an `<img>` inside the `.pg-shot` element and the
 gradient is covered.
+
+## The post page
+
+`post.html` is what a story looks like when you open it: a back link, the
+headline at the top of an 880px column, the date, a rule, the artwork, then the
+body. `.pg-prose--article` sets the reading rhythm, `.pg-pull` is a quote inside
+the story, and `.pg-boiler` is the pair of about blocks a release ends with.
+
+The artwork is the Pagrin and Zenith lockup, rebuilt as markup rather than
+saved as a picture, so it stays sharp and the type stays selectable. The wash
+behind it is a `.pg-wash` class and also a card tone, `data-tone="partner"`,
+which is why the card on the index and the artwork on the post are the same
+image. The lockup sizes itself in `cqw`, so the same markup works at card size
+and at full width.
+
+Only the headline, the date and the first two paragraphs are supplied copy.
+The rest was written to complete the page and the names, titles and dates in
+square brackets are placeholders. The page says so in a banner above the body.
 
 The case studies are invented. The institutions, the quotes and the figures are
 made up to show the shape of the page, and the page says so in a banner. They

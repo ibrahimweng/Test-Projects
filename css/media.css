@@ -22,6 +22,7 @@
   border-radius: 14px;
   background: var(--pg-surface);
   isolation: isolate;
+  container-type: inline-size;
 }
 .pg-shot > img {
   width: 100%; height: 100%;
@@ -279,6 +280,29 @@
 .pg-post { display: grid; gap: 14px; align-content: start; }
 .pg-post .pg-shot { border-radius: 8px; transition: transform .28s var(--pg-ease); }
 .pg-post:hover .pg-shot { transform: translateY(-3px); }
+/* with only one post, the card becomes a lead: artwork beside the headline */
+.pg-posts--one { grid-template-columns: minmax(0, 1fr); }
+.pg-post--lead {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  grid-template-rows: auto auto;
+  column-gap: clamp(24px, 2.8vw, 40px);
+  row-gap: 12px;
+  align-content: center;
+}
+.pg-post--lead .pg-shot { grid-column: 1; grid-row: 1 / span 2; align-self: center; }
+.pg-post--lead .pg-post__title {
+  grid-column: 2; grid-row: 1; align-self: end;
+  font-size: var(--pg-h5);
+  line-height: 1.32;
+}
+.pg-post--lead .pg-post__date { grid-column: 2; grid-row: 2; align-self: start; }
+@media (max-width: 720px) {
+  .pg-post--lead { grid-template-columns: minmax(0, 1fr); row-gap: 14px; }
+  .pg-post--lead .pg-shot { grid-column: 1; grid-row: auto; }
+  .pg-post--lead .pg-post__title,
+  .pg-post--lead .pg-post__date { grid-column: 1; grid-row: auto; }
+}
+
 .pg-post__title {
   color: var(--pg-ink);
   font-size: var(--pg-b2);
@@ -379,3 +403,156 @@
   font-size: var(--pg-b4);
   line-height: 16px;
 }
+
+/* ------------------------------------------------------- the partner mark */
+
+/* The announcement artwork: the two wordmarks over a soft multi-hue wash.
+   Rebuilt as markup rather than a picture so it stays sharp and the type
+   stays selectable. Also available as a card tone, so the post card on the
+   index and the artwork on the post itself are the same image. */
+
+.pg-wash,
+.pg-shot[data-tone='partner']::before {
+  background:
+    radial-gradient(46% 54% at 7% 4%,   #e7e9fc 0%, transparent 62%),
+    radial-gradient(44% 50% at 93% 3%,  #d8f6dc 0%, transparent 60%),
+    radial-gradient(42% 48% at 100% 60%, #fde5cb 0%, transparent 62%),
+    radial-gradient(54% 48% at 45% 104%, #fdcde5 0%, transparent 66%),
+    #f8f8fb;
+}
+.pg-shot[data-tone='partner']::after { opacity: .18; }
+
+.pg-lockup {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+/* the same lockup dropped into a card, where the tone paints the ground */
+.pg-lockup--fill {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+
+.pg-lockup__row {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3.2cqw, 44px);
+}
+.pg-lockup__brand { display: flex; align-items: center; gap: 14px; }
+.pg-lockup__brand b {
+  color: var(--pg-ink);
+  font-size: clamp(26px, 5.7cqw, 64px);
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  line-height: 1;
+}
+.pg-lockup__brand--zenith b { color: #0b2e38; }
+.pg-lockup__brand svg { display: block; height: clamp(28px, 6cqw, 66px); width: auto; }
+.pg-lockup__bar {
+  width: 2px;
+  height: clamp(38px, 7.4cqw, 96px);
+  background: var(--pg-ink);
+}
+.pg-lockup__url {
+  position: absolute;
+  right: clamp(16px, 2.4cqw, 34px);
+  bottom: clamp(12px, 2cqw, 28px);
+  color: #4a4a72;
+  font-size: clamp(11px, 1.5cqw, 16px);
+  line-height: 1;
+}
+
+/* ----------------------------------------------------------- the article */
+
+.pg-article { padding-block: clamp(40px, 3.6vw, 72px) clamp(56px, 5vw, 96px); }
+.pg-read { width: min(100% - var(--pg-gutter) * 2, 880px); margin-inline: auto; container-type: inline-size; }
+
+.pg-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 34px;
+  color: var(--pg-muted);
+  font-size: var(--pg-b3);
+  line-height: 20px;
+  text-decoration: none;
+}
+.pg-back:hover { color: var(--pg-ink); }
+
+.pg-article__title {
+  margin: 0;
+  color: var(--pg-ink);
+  font-size: clamp(32px, 3.4vw, 54px);
+  font-weight: 500;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+.pg-article__meta {
+  margin: 46px 0 0;
+  color: var(--pg-muted);
+  font-size: var(--pg-b2);
+  line-height: 24px;
+}
+.pg-article__rule { height: 1px; margin: 34px 0 44px; background: var(--pg-hairline); border: 0; }
+.pg-article figure.pg-lockup { margin-bottom: 44px; }
+
+.pg-prose--article > *:first-child { margin-top: 0; }
+.pg-prose--article h2 {
+  margin: 46px 0 16px;
+  color: var(--pg-ink);
+  font-size: var(--pg-h5);
+  font-weight: 500;
+  letter-spacing: -.2px;
+  line-height: 1.3;
+}
+.pg-prose--article p,
+.pg-prose--article li { color: var(--pg-body); font-size: var(--pg-b1); line-height: 30px; }
+.pg-prose--article p + p { margin-top: 22px; }
+.pg-prose--article ul { margin: 22px 0; padding: 0; display: grid; gap: 12px; list-style: none; }
+.pg-prose--article li { position: relative; padding-left: 24px; }
+.pg-prose--article li::before {
+  content: '';
+  position: absolute;
+  left: 3px; top: 12px;
+  width: 6px; height: 6px;
+  border-radius: 2px;
+  background: var(--pg-purple);
+}
+.pg-prose--article a { color: var(--pg-purple); }
+
+/* a pulled quote inside the story */
+.pg-pull {
+  margin: 40px 0;
+  padding: 30px 32px;
+  border-radius: 14px;
+  background: var(--pg-surface);
+}
+.pg-pull blockquote {
+  margin: 0;
+  color: var(--pg-ink);
+  font-size: var(--pg-h5);
+  font-weight: 400;
+  line-height: 1.45;
+}
+.pg-pull figcaption { margin-top: 18px; color: var(--pg-muted); font-size: var(--pg-b3); line-height: 20px; }
+
+/* the two boilerplate blocks at the foot of a release */
+.pg-boiler {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 52px;
+  padding-top: 36px;
+  border-top: 1px solid var(--pg-hairline);
+}
+@media (max-width: 720px) { .pg-boiler { grid-template-columns: minmax(0, 1fr); } }
+.pg-boiler section { display: grid; gap: 10px; align-content: start; }
+.pg-boiler h2 { margin: 0; color: var(--pg-ink); font-size: var(--pg-b2); font-weight: 500; line-height: 24px; }
+.pg-boiler p { margin: 0; color: var(--pg-body); font-size: var(--pg-b3); line-height: 22px; }
