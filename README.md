@@ -20,6 +20,7 @@ and every one of them is now a page.
 | Secure Layer | `secure-layer.html` | `11998:42258` |
 | About | `about.html` | `12331:3347` |
 | Blogs | `blog.html` | not in the file |
+| Case studies | `case-studies.html` | not in the file |
 | Trust and Security | `trust-security.html` | not in the file |
 | Terms and Conditions | `terms.html` | not in the file |
 | Contact | `contact.html` | not in the file |
@@ -84,6 +85,8 @@ local system font is used everywhere else.
 | `css/site.css` | tokens, base styles, buttons, nav bar, hero, closing panel, footer |
 | `css/product.css` | the module cards on the Agentic OS page, and the why panels |
 | `css/pages.css` | dashboards, chat screens, the bento grid, articles, prose, forms |
+| `css/media.css` | the blog and case study pages: gradient blocks, featured lead, filters |
+| `css/legal.css` | the long document pages: hero, summary card, sticky contents |
 | `css/agentic-os.css` | the layer explorer section |
 | `css/channels.css` | the customer channels section |
 
@@ -125,6 +128,31 @@ picture back, set `--shot` on the panel and nothing else needs to change:
 
 The wash is drawn on a pseudo element below the panel's own background layer,
 so a picture on the panel covers it automatically.
+
+## The media pages
+
+`blog.html` and `case-studies.html` share one layout language. The blog opens
+with a featured story at full width, then a category filter row, then a grid of
+eight posts. Case studies live on their own page with the same filter row and a
+two column grid, and each card states three result figures before the story.
+
+Filtering is in `js/media.js`. It reads a `data-category` attribute from each
+card and a `data-filter` from each button, so adding a category needs no code
+change. With the script switched off every card is visible and the page still
+reads correctly.
+
+There is no photography in the project, so every image slot is a gradient
+block. Six colourways are defined in `css/media.css` and set per card with a
+`data-tone` attribute, which keeps the page looking like one designed set. To
+put a real picture in, place an `<img>` inside the `.pg-shot` element and the
+gradient is covered.
+
+The case studies are invented. The institutions and the figures are made up to
+show the shape of the page, and the page says so in a banner at the top. They
+need replacing with real, approved case studies before launch.
+
+Case studies appear in the nav under Company. They are not in the footer,
+because the footer's Company column is fixed at four links by the Figma design.
 
 ## The two hosts that are blocked
 

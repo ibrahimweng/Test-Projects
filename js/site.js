@@ -27,11 +27,21 @@
     ['secure-layer',      'secure-layer.html',      'Secure Layer',      'Scopes, consent and audit on every action.']
   ];
 
+  /* The footer's Company column is fixed by the Figma design at four links,
+     so Case studies lives in the nav menu only. */
   var COMPANY = [
     ['about',  'about.html',           'About',              'Why we are building the rewards layer.'],
     ['blog',   'blog.html',            'Blogs',              'Perspectives, product notes and engineering.'],
     ['trust',  'trust-security.html',  'Trust & Security',   'How we protect institutions and their customers.'],
     ['terms',  'terms.html',           'Terms & Conditions', 'The agreement that covers using Pagrin.']
+  ];
+
+  var COMPANY_NAV = [
+    COMPANY[0],
+    COMPANY[1],
+    ['case-studies', 'case-studies.html', 'Case studies', 'What changed once the agents went live.'],
+    COMPANY[2],
+    COMPANY[3]
   ];
 
   var CONNECT = [
@@ -116,7 +126,7 @@
                 'aria-controls="pg-navlinks" aria-label="Menu"><span></span></button>' +
         '<nav class="pg-nav__links" id="pg-navlinks" aria-label="Primary">' +
           menu('Platform', PLATFORM) +
-          menu('Company', COMPANY) +
+          menu('Company', COMPANY_NAV) +
           '<a class="pg-nav__link" href="docs.html">View docs</a>' +
         '</nav>' +
         '<div class="pg-nav__cta">' +

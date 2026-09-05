@@ -135,6 +135,7 @@ body.pg {
 
 .pg-section       { padding-block: var(--pg-section); }
 .pg-section--tight{ padding-block: clamp(48px, 4.2vw, 80px); }
+.pg-section--flush{ padding-top: 0; }
 .pg-section--tint { background: var(--pg-surface); }
 .pg-section--wash { background: var(--pg-purple-050); }
 .pg-section--dark { background: var(--pg-black); color: rgba(255,255,255,.72); }

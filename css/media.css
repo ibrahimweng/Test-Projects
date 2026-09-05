@@ -1,0 +1,284 @@
+/* ==========================================================================
+   Pagrin — media pages
+   Used by blog.html and case-studies.html.
+
+   The shape is a media index: one featured story at full width, a category
+   filter row, then a quieter grid. Case studies get the same language on
+   their own page, with the result stated before the story.
+
+   There is no photography in this project yet, so every image slot is a
+   gradient block. Six colourways are defined below and assigned per card, so
+   the page reads as one designed set rather than a random wall of colour.
+   Swap a block for a real picture by putting an <img> inside .pg-shot.
+
+   Depends on css/site.css for the tokens and css/pages.css for the cards.
+   ========================================================================== */
+
+/* --------------------------------------------------------- gradient block */
+
+.pg-shot {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--pg-surface);
+  isolation: isolate;
+}
+.pg-shot > img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.pg-shot--16x9 { aspect-ratio: 16 / 9; }
+.pg-shot--16x10 { aspect-ratio: 16 / 10; }
+.pg-shot--4x3  { aspect-ratio: 4 / 3; }
+
+/* soft blooms over a light ground, with a diagonal sweep across the top */
+.pg-shot[data-tone]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(58% 62% at 16% 22%, var(--t1) 0%, transparent 62%),
+    radial-gradient(52% 58% at 84% 18%, var(--t2) 0%, transparent 60%),
+    radial-gradient(66% 70% at 74% 92%, var(--t3) 0%, transparent 66%),
+    linear-gradient(146deg, var(--t4) 0%, var(--t0) 62%, var(--t3) 100%);
+}
+/* a fine grain so the large flat areas do not band */
+.pg-shot[data-tone]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .3;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E");
+}
+
+.pg-shot[data-tone='purple'] { --t0:#efe9fe; --t1:#c9b4fb; --t2:#e6dcfd; --t3:#a487f5; --t4:#f6f2ff; }
+.pg-shot[data-tone='warm']   { --t0:#ffeeda; --t1:#ffc79a; --t2:#ffdcc4; --t3:#ff9d5c; --t4:#fff7ef; }
+.pg-shot[data-tone='mint']   { --t0:#e4f5ec; --t1:#9edcbb; --t2:#d6f0e2; --t3:#5cc38c; --t4:#f2fbf6; }
+.pg-shot[data-tone='rose']   { --t0:#fce4ef; --t1:#f6accf; --t2:#fad3e3; --t3:#ef7fb2; --t4:#fef4f8; }
+.pg-shot[data-tone='sky']    { --t0:#e3edfc; --t1:#a9c6f7; --t2:#d3e2fa; --t3:#6f9eef; --t4:#f2f7fe; }
+.pg-shot[data-tone='sand']   { --t0:#f7efd9; --t1:#e6cf8d; --t2:#f0e2b8; --t3:#d4b158; --t4:#fbf7ec; }
+
+/* a small mark floating in the block, so it is not an empty rectangle */
+.pg-shot__mark {
+  position: absolute;
+  left: 22px; bottom: 20px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  border-radius: var(--pg-pill);
+  background: rgba(255, 255, 255, .82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--pg-ink);
+  font-size: var(--pg-b4);
+  font-weight: 500;
+  line-height: 16px;
+}
+.pg-shot__mark::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 2px;
+  background: var(--pg-purple);
+}
+
+/* ---------------------------------------------------------- featured lead */
+
+.pg-lead {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(28px, 3.4vw, 56px);
+  align-items: center;
+  padding-bottom: clamp(40px, 4vw, 64px);
+  border-bottom: 1px solid var(--pg-hairline);
+}
+@media (max-width: 900px) { .pg-lead { grid-template-columns: minmax(0, 1fr); } }
+
+.pg-lead__copy { display: grid; gap: 18px; justify-items: start; }
+.pg-lead__title { font-size: var(--pg-h3); line-height: 1.15; letter-spacing: -.4px; }
+.pg-lead__excerpt { color: var(--pg-body); font-size: var(--pg-b1); line-height: 28px; }
+
+.pg-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  color: var(--pg-muted);
+  font-size: var(--pg-b3);
+  line-height: 20px;
+}
+.pg-meta span + span::before { content: '·'; margin-right: 10px; }
+
+.pg-kicker {
+  display: inline-block;
+  padding: 4px 11px;
+  border-radius: var(--pg-pill);
+  background: var(--pg-purple-050);
+  color: var(--pg-purple);
+  font-size: var(--pg-b4);
+  font-weight: 500;
+  line-height: 16px;
+}
+.pg-kicker--dark { background: var(--pg-surface); color: var(--pg-body); }
+
+/* ------------------------------------------------------------- filter row */
+
+.pg-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-block: clamp(28px, 3vw, 44px);
+}
+.pg-filter {
+  padding: 9px 18px;
+  border: 1px solid var(--pg-hairline);
+  border-radius: var(--pg-pill);
+  background: none;
+  color: var(--pg-body);
+  font-family: inherit;
+  font-size: var(--pg-b3);
+  font-weight: 500;
+  line-height: 20px;
+  cursor: pointer;
+  transition: background-color .18s var(--pg-ease), border-color .18s var(--pg-ease),
+              color .18s var(--pg-ease);
+}
+.pg-filter:hover { border-color: var(--pg-ink); color: var(--pg-ink); }
+.pg-filter[aria-pressed='true'] {
+  background: var(--pg-ink);
+  border-color: var(--pg-ink);
+  color: var(--pg-white);
+}
+.pg-filters__count {
+  margin-left: auto;
+  align-self: center;
+  color: var(--pg-muted);
+  font-size: var(--pg-b3);
+}
+
+/* ------------------------------------------------------------ media grid */
+
+.pg-mediagrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 2.6vw, 40px) 24px;
+}
+@media (max-width: 980px) { .pg-mediagrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .pg-mediagrid { grid-template-columns: minmax(0, 1fr); } }
+
+.pg-mcard { display: grid; gap: 16px; align-content: start; }
+.pg-mcard[hidden] { display: none; }
+.pg-mcard__body { display: grid; gap: 10px; justify-items: start; }
+.pg-mcard__title {
+  color: var(--pg-ink);
+  font-size: var(--pg-b1);
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: -.2px;
+}
+.pg-mcard__excerpt { color: var(--pg-body); font-size: var(--pg-b3); line-height: 22px; }
+
+.pg-mcard .pg-shot { transition: transform .28s var(--pg-ease); }
+a.pg-mcard:hover .pg-shot { transform: translateY(-4px); }
+a.pg-mcard:hover .pg-mcard__title { color: var(--pg-purple); }
+
+.pg-empty {
+  grid-column: 1 / -1;
+  padding: 48px 0;
+  color: var(--pg-muted);
+  font-size: var(--pg-b2);
+  text-align: center;
+}
+
+/* ---------------------------------------------------------- case studies */
+
+.pg-cases {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 3vw, 44px) 32px;
+}
+@media (max-width: 860px) { .pg-cases { grid-template-columns: minmax(0, 1fr); } }
+
+.pg-case {
+  display: grid;
+  gap: 20px;
+  align-content: start;
+  padding: 24px;
+  border: 1px solid var(--pg-hairline-2);
+  border-radius: var(--pg-radius);
+  background: var(--pg-white);
+  transition: border-color .2s var(--pg-ease), box-shadow .2s var(--pg-ease),
+              transform .2s var(--pg-ease);
+}
+a.pg-case:hover {
+  border-color: var(--pg-purple-100);
+  box-shadow: 0 14px 36px rgba(14, 14, 14, .08);
+  transform: translateY(-2px);
+}
+.pg-case__body { display: grid; gap: 12px; justify-items: start; }
+.pg-case__client {
+  color: var(--pg-muted);
+  font-size: var(--pg-b4);
+  font-weight: 600;
+  letter-spacing: .07em;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+.pg-case__title {
+  color: var(--pg-ink);
+  font-size: var(--pg-h5);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.2px;
+}
+.pg-case__excerpt { color: var(--pg-body); font-size: var(--pg-b3); line-height: 22px; }
+
+/* the three result figures under each case study */
+.pg-results {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  padding-top: 18px;
+  border-top: 1px solid var(--pg-hairline-2);
+}
+/* the markup uses spans throughout because each card is an <a>, so the
+   figure and its label need an explicit grid to stack */
+.pg-results > span { display: grid; gap: 3px; align-content: start; }
+.pg-results b {
+  display: block;
+  color: var(--pg-ink);
+  font-size: var(--pg-h5);
+  font-weight: 500;
+  letter-spacing: -.3px;
+  line-height: 1.2;
+}
+.pg-results > span > span {
+  display: block;
+  color: var(--pg-muted);
+  font-size: var(--pg-b4);
+  line-height: 16px;
+}
+
+/* the pull quote band between the grid and the CTA */
+.pg-quote {
+  display: grid;
+  gap: 24px;
+  justify-items: center;
+  max-width: 900px;
+  margin-inline: auto;
+  text-align: center;
+}
+.pg-quote blockquote {
+  margin: 0;
+  color: var(--pg-ink);
+  font-size: var(--pg-h4);
+  font-weight: 500;
+  letter-spacing: -.2px;
+  line-height: 1.35;
+}
+.pg-quote figcaption { color: var(--pg-body); font-size: var(--pg-b3); line-height: 20px; }

@@ -7,6 +7,7 @@
 <meta name="description" content="Perspectives, product notes and engineering writing on rewards, commerce and agent-native finance.">
 <link rel="stylesheet" href="css/site.css">
 <link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/media.css">
 </head>
 <body class="pg" data-page="blog">
 
@@ -22,72 +23,145 @@
         <h1 class="pg-t1 pg-hero__title">Notes on an agent-native economy.</h1>
         <p class="pg-lede pg-hero__lede">
           What we are learning as institutions put autonomous agents in front of their
-          customers — the product decisions, the engineering, and the parts that are still
+          customers: the product decisions, the engineering, and the parts that are still
           genuinely unsolved.
         </p>
+        <div class="pg-btnrow">
+          <a class="pg-btn pg-btn--quiet" href="case-studies.html">Read case studies →</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="pg-section pg-section--tight">
+  <!-- featured -->
+  <section class="pg-section pg-section--tight pg-section--flush" aria-labelledby="lead-title">
     <div class="pg-shell">
-      <div class="pg-articles">
+      <a class="pg-lead" href="#">
+        <span class="pg-shot pg-shot--16x10" data-tone="purple" aria-hidden="true">
+          <span class="pg-shot__mark">Perspective</span>
+        </span>
+        <span class="pg-lead__copy">
+          <span class="pg-kicker">Featured</span>
+          <span class="pg-lead__title" id="lead-title">Why loyalty breaks when agents start paying</span>
+          <span class="pg-lead__excerpt">Every points programme running today assumes a person at
+            the checkout: a screen to show the offer on, a tap to accept it, and a human to read the
+            terms. Take the person out of that loop and most of the programme stops working, not
+            because the maths changes, but because the interface it depended on is gone.</span>
+          <span class="pg-meta"><span>Ada Whitfield</span><span>12 min read</span><span>August 2026</span></span>
+        </span>
+      </a>
+    </div>
+  </section>
 
-        <a class="pg-article pg-article--lead pg-card--lift" href="#">
-          <span class="pg-article__kicker">Perspective</span>
-          <h3>Why loyalty breaks when agents start paying</h3>
-          <p>Every points programme running today assumes a person at the checkout: a screen to
-            show the offer on, a tap to accept it, and a human to read the terms. Take the person
-            out of that loop and most of the programme stops working — not because the maths
-            changes, but because the interface it depended on is gone.</p>
-          <p class="pg-article__meta">Ada Whitfield · 12 min read · August 2026</p>
+  <!-- filter + grid -->
+  <section class="pg-section pg-section--tight pg-section--flush" aria-labelledby="all-title">
+    <div class="pg-shell">
+      <h2 class="pg-sr" id="all-title">All posts</h2>
+
+      <div class="pg-filters" data-pg-filters role="group" aria-label="Filter posts by category">
+        <button class="pg-filter" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="pg-filter" type="button" data-filter="Perspective" aria-pressed="false">Perspective</button>
+        <button class="pg-filter" type="button" data-filter="Product" aria-pressed="false">Product</button>
+        <button class="pg-filter" type="button" data-filter="Engineering" aria-pressed="false">Engineering</button>
+        <span class="pg-filters__count" data-pg-count aria-live="polite"></span>
+      </div>
+
+      <div class="pg-mediagrid" data-pg-grid data-noun="post">
+
+        <a class="pg-mcard" href="#" data-category="Engineering">
+          <span class="pg-shot pg-shot--16x9" data-tone="mint" aria-hidden="true"></span>
+          <span class="pg-mcard__body">
+            <span class="pg-kicker pg-kicker--dark">Engineering</span>
+            <span class="pg-mcard__title">The four checks behind every Pagrin action</span>
+            <span class="pg-mcard__excerpt">Scope, consent, guardrail, audit. What each one does,
+              where it runs in the request path, and why none of them is optional.</span>
+            <span class="pg-meta"><span>Marcus Lindqvist</span><span>9 min</span></span>
+          </span>
         </a>
 
-        <a class="pg-article pg-card--lift" href="#">
-          <span class="pg-article__kicker">Engineering</span>
-          <h3>The four checks behind every Pagrin action</h3>
-          <p>Scope, consent, guardrail, audit. What each one does, where it runs in the request
-            path, and why none of them is optional.</p>
-          <p class="pg-article__meta">Marcus Lindqvist · 9 min read · August 2026</p>
+        <a class="pg-mcard" href="#" data-category="Product">
+          <span class="pg-shot pg-shot--16x9" data-tone="warm" aria-hidden="true"></span>
+          <span class="pg-mcard__body">
+            <span class="pg-kicker pg-kicker--dark">Product</span>
+            <span class="pg-mcard__title">Designing rewards that autonomous agents can actually use</span>
+            <span class="pg-mcard__excerpt">Redemption flows built for humans quietly assume a screen,
+              a tap and someone to read the small print. Agent-native redemption needs none of those.</span>
+            <span class="pg-meta"><span>Priya Nair</span><span>7 min</span></span>
+          </span>
         </a>
 
-        <a class="pg-article pg-card--lift" href="#">
-          <span class="pg-article__kicker">Product</span>
-          <h3>Designing rewards that autonomous agents can actually use</h3>
-          <p>Redemption flows built for humans quietly assume a screen, a tap and someone to read
-            the small print. Agent-native redemption needs none of those.</p>
-          <p class="pg-article__meta">Priya Nair · 7 min read · July 2026</p>
+        <a class="pg-mcard" href="#" data-category="Perspective">
+          <span class="pg-shot pg-shot--16x9" data-tone="sky" aria-hidden="true"></span>
+          <span class="pg-mcard__body">
+            <span class="pg-kicker pg-kicker--dark">Perspective</span>
+            <span class="pg-mcard__title">The bank that becomes plumbing</span>
+            <span class="pg-mcard__excerpt">When an agent picks the merchant, the card and the reward,
+              the institution that held the relationship can end up settling the transaction and
+              nothing more.</span>
+            <span class="pg-meta"><span>Ada Whitfield</span><span>6 min</span></span>
+          </span>
         </a>
 
-        <a class="pg-article pg-card--lift" href="#">
-          <span class="pg-article__kicker">Perspective</span>
-          <h3>The bank that becomes plumbing</h3>
-          <p>When an agent picks the merchant, the card and the reward, the institution that held
-            the relationship can end up settling the transaction and nothing more.</p>
-          <p class="pg-article__meta">Ada Whitfield · 6 min read · July 2026</p>
+        <a class="pg-mcard" href="#" data-category="Engineering">
+          <span class="pg-shot pg-shot--16x9" data-tone="rose" aria-hidden="true"></span>
+          <span class="pg-mcard__body">
+            <span class="pg-kicker pg-kicker--dark">Engineering</span>
+            <span class="pg-mcard__title">Running one campaign for every customer</span>
+            <span class="pg-mcard__excerpt">How Infinite Campaigns evaluates an offer per interaction
+              instead of per batch, and what that costs at 48,000 decisions an hour.</span>
+            <span class="pg-meta"><span>Marcus Lindqvist</span><span>11 min</span></span>
+          </span>
         </a>
 
-        <a class="pg-article pg-card--lift" href="#">
-          <span class="pg-article__kicker">Engineering</span>
-          <h3>Running one campaign for every customer</h3>
-          <p>How Infinite Campaigns evaluates an offer per interaction instead of per batch, and
-            what that costs at 48,000 decisions an hour.</p>
-          <p class="pg-article__meta">Marcus Lindqvist · 11 min read · June 2026</p>
+        <a class="pg-mcard" href="#" data-category="Product">
+          <span class="pg-shot pg-shot--16x9" data-tone="sand" aria-hidden="true"></span>
+          <span class="pg-mcard__body">
+            <span class="pg-kicker pg-kicker--dark">Product</span>
+            <span class="pg-mcard__title">What a risk team actually asks about AI agents</span>
+            <span class="pg-mcard__excerpt">Six questions that come up in every institutional review,
+              and the answers we had to build the platform around.</span>
+            <span class="pg-meta"><span>Priya Nair</span><span>8 min</span></span>
+          </span>
         </a>
 
-        <a class="pg-article pg-card--lift" href="#">
-          <span class="pg-article__kicker">Product</span>
-          <h3>What a risk team actually asks about AI agents</h3>
-          <p>Six questions that come up in every institutional review, and the answers we had to
-            build the platform around.</p>
-          <p class="pg-article__meta">Priya Nair · 8 min read · June 2026</p>
+        <a class="pg-mcard" href="#" data-category="Product">
+          <span class="pg-shot pg-shot--16x9" data-tone="purple" aria-hidden="true"></span>
+          <span class="pg-mcard__body">
+            <span class="pg-kicker pg-kicker--dark">Product</span>
+            <span class="pg-mcard__title">Points as a currency an agent can actually spend</span>
+            <span class="pg-mcard__excerpt">A balance is easy. Making that balance spendable across
+              merchants that have never heard of your programme is the hard part.</span>
+            <span class="pg-meta"><span>Priya Nair</span><span>10 min</span></span>
+          </span>
+        </a>
+
+        <a class="pg-mcard" href="#" data-category="Engineering">
+          <span class="pg-shot pg-shot--16x9" data-tone="mint" aria-hidden="true"></span>
+          <span class="pg-mcard__body">
+            <span class="pg-kicker pg-kicker--dark">Engineering</span>
+            <span class="pg-mcard__title">Shipping into a core banking stack without a rebuild</span>
+            <span class="pg-mcard__excerpt">What it takes to read a ledger in place, at speed, without
+              asking anyone to migrate a single table.</span>
+            <span class="pg-meta"><span>Marcus Lindqvist</span><span>13 min</span></span>
+          </span>
+        </a>
+
+        <a class="pg-mcard" href="#" data-category="Perspective">
+          <span class="pg-shot pg-shot--16x9" data-tone="warm" aria-hidden="true"></span>
+          <span class="pg-mcard__body">
+            <span class="pg-kicker pg-kicker--dark">Perspective</span>
+            <span class="pg-mcard__title">Who owns the customer when the agent does the shopping</span>
+            <span class="pg-mcard__excerpt">The relationship does not disappear. It moves to whoever
+              the agent asks first, which is a position you can still choose to hold.</span>
+            <span class="pg-meta"><span>Ada Whitfield</span><span>7 min</span></span>
+          </span>
         </a>
 
       </div>
 
-      <div class="pg-note" style="margin-top:40px;max-width:70ch">
-        Article pages are not published yet. The cards above show the shape of the index; each
-        one will link to its own post.
+      <div class="pg-note" style="margin-top:44px;max-width:70ch">
+        Article pages are not published yet, so every card links back here for now. The images are
+        gradient blocks standing in for artwork.
       </div>
     </div>
   </section>
@@ -97,5 +171,6 @@
 
 <div data-pg-footer></div>
 <script src="js/site.js" defer></script>
+<script src="js/media.js" defer></script>
 </body>
 </html>
