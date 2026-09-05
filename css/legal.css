@@ -1,0 +1,267 @@
+/* ==========================================================================
+   Pagrin — long-form document pages
+   Used by terms.html and trust-security.html.
+
+   The pattern is the one Intercom uses for its legal and trust pages, fitted
+   to the Pagrin tokens: a quiet hero, a summary card that says the gist in
+   plain words, a sticky table of contents that tracks the reading position,
+   and a wide measure with generous leading so a long document stays readable.
+
+   Depends on css/site.css for the tokens and css/pages.css for .pg-prose.
+   ========================================================================== */
+
+/* ------------------------------------------------------------------ hero */
+
+.pg-lhero {
+  padding-block: clamp(48px, 4.4vw, 88px) clamp(32px, 3vw, 56px);
+  border-bottom: 1px solid var(--pg-hairline);
+}
+.pg-lhero__inner { display: grid; gap: 20px; max-width: 760px; }
+.pg-lhero__meta {
+  display: flex; flex-wrap: wrap; gap: 8px 20px;
+  color: var(--pg-muted); font-size: var(--pg-b3); line-height: 20px;
+}
+.pg-lhero__meta b { color: var(--pg-body); font-weight: 500; }
+
+/* the plain-words summary that sits above the document proper */
+.pg-summary {
+  display: grid; gap: 12px;
+  padding: clamp(22px, 2.2vw, 30px);
+  border-radius: var(--pg-radius);
+  background: var(--pg-purple-050);
+}
+.pg-summary h2 {
+  color: var(--pg-ink);
+  font-size: var(--pg-b2); font-weight: 600; line-height: 24px;
+}
+.pg-summary p, .pg-summary li { color: var(--pg-body); font-size: var(--pg-b3); line-height: 22px; }
+.pg-summary ul { display: grid; gap: 8px; }
+.pg-summary li { padding-left: 18px; position: relative; }
+.pg-summary li::before {
+  content: ''; position: absolute; left: 3px; top: 9px;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--pg-purple);
+}
+
+/* a caution band for anything still in draft */
+.pg-flag {
+  display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px;
+  padding: 16px 18px;
+  border: 1px solid #f2d9a8;
+  border-radius: 10px;
+  background: #fdf7ec;
+  color: #7a5314;
+  font-size: var(--pg-b3);
+  line-height: 21px;
+}
+.pg-flag::before {
+  content: '!';
+  width: 20px; height: 20px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: #eab868; color: #fff;
+  font-size: 12px; font-weight: 700;
+}
+.pg-flag strong { color: #5c3d0c; font-weight: 600; }
+
+/* --------------------------------------------------- table of contents */
+
+/* the terms page has 21 sections, which is taller than a short laptop
+   viewport, so the sticky column scrolls inside itself rather than
+   running off the bottom */
+.pg-prose--legal ~ * .pg-toc,
+.pg-doc > .pg-toc {
+  max-height: calc(100vh - var(--pg-nav-h) - 64px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 6px;
+  scrollbar-width: thin;
+}
+@media (max-width: 900px) {
+  .pg-doc > .pg-toc { max-height: none; overflow: visible; padding-right: 0; }
+}
+
+.pg-toc__list { display: grid; gap: 2px; }
+
+.pg-toc__link {
+  display: block;
+  padding: 7px 12px;
+  border-left: 2px solid transparent;
+  border-radius: 0 7px 7px 0;
+  color: var(--pg-body);
+  font-size: var(--pg-b3);
+  line-height: 20px;
+  transition: color .16s var(--pg-ease), background-color .16s var(--pg-ease),
+              border-color .16s var(--pg-ease);
+}
+.pg-toc__link:hover { background: var(--pg-surface); color: var(--pg-ink); }
+.pg-toc__link[aria-current='true'] {
+  border-left-color: var(--pg-purple);
+  background: var(--pg-purple-050);
+  color: var(--pg-purple);
+  font-weight: 500;
+}
+.pg-toc__num { color: var(--pg-muted); font-variant-numeric: tabular-nums; }
+.pg-toc__link[aria-current='true'] .pg-toc__num { color: var(--pg-purple); }
+
+.pg-toc__aside {
+  margin-top: 24px; padding-top: 20px;
+  border-top: 1px solid var(--pg-hairline);
+  display: grid; gap: 10px;
+}
+
+/* --------------------------------------------------------- the document */
+
+.pg-prose--legal { max-width: 74ch; }
+
+/* numbered top-level sections with a hover anchor */
+.pg-prose--legal h2 {
+  position: relative;
+  margin: 56px 0 16px;
+  padding-top: 28px;
+  border-top: 1px solid var(--pg-hairline);
+  font-size: var(--pg-h5);
+  letter-spacing: -.2px;
+  scroll-margin-top: 116px;
+}
+.pg-prose--legal h2:first-of-type { margin-top: 0; padding-top: 0; border-top: 0; }
+
+.pg-anchor {
+  margin-left: 8px;
+  color: var(--pg-muted);
+  font-size: var(--pg-b2);
+  font-weight: 400;
+  opacity: 0;
+  transition: opacity .16s var(--pg-ease);
+}
+.pg-prose--legal h2:hover .pg-anchor,
+.pg-anchor:focus-visible { opacity: 1; }
+.pg-anchor:hover { color: var(--pg-purple); }
+
+.pg-prose--legal h3 {
+  margin: 30px 0 10px;
+  font-size: var(--pg-b1);
+  font-weight: 500;
+  scroll-margin-top: 116px;
+}
+
+/* a definition list for the glossary section */
+.pg-defs { display: grid; gap: 14px; margin: 18px 0; }
+.pg-defs div {
+  display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--pg-hairline-2);
+}
+.pg-defs dt { color: var(--pg-ink); font-size: var(--pg-b2); font-weight: 500; line-height: 27px; }
+.pg-defs dd { margin: 0; color: var(--pg-body); font-size: var(--pg-b2); line-height: 27px; }
+.pg-defs div:last-child { border-bottom: 0; padding-bottom: 0; }
+
+@media (max-width: 700px) {
+  .pg-defs div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}
+
+/* ------------------------------------------------------- trust specifics */
+
+.pg-posture {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--pg-hairline-2);
+  border: 1px solid var(--pg-hairline-2);
+  border-radius: var(--pg-radius);
+  overflow: hidden;
+}
+@media (max-width: 860px) { .pg-posture { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .pg-posture { grid-template-columns: minmax(0, 1fr); } }
+.pg-posture__cell { display: grid; gap: 6px; padding: 26px; background: var(--pg-white); }
+.pg-posture__cell b {
+  color: var(--pg-ink);
+  font-size: var(--pg-h4); font-weight: 500; letter-spacing: -.4px; line-height: 1.15;
+}
+.pg-posture__cell span { color: var(--pg-body); font-size: var(--pg-b3); line-height: 20px; }
+
+/* compliance rows with a status pill */
+.pg-compliance { display: grid; gap: 12px; }
+.pg-comp {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center;
+  padding: 20px 24px;
+  border: 1px solid var(--pg-hairline-2);
+  border-radius: 12px;
+  background: var(--pg-white);
+}
+.pg-comp__name { color: var(--pg-ink); font-size: var(--pg-b2); font-weight: 500; line-height: 24px; }
+.pg-comp__note { color: var(--pg-body); font-size: var(--pg-b3); line-height: 20px; margin-top: 3px; }
+.pg-status {
+  padding: 5px 12px; border-radius: var(--pg-pill);
+  font-size: var(--pg-b4); font-weight: 500; white-space: nowrap;
+}
+.pg-status--live  { background: #eaf7ef; color: #1c7a44; }
+.pg-status--prog  { background: #fff3e8; color: #c2570c; }
+.pg-status--nda   { background: var(--pg-purple-050); color: var(--pg-purple); }
+.pg-status--arch  { background: var(--pg-surface); color: var(--pg-body); }
+
+/* subprocessor table */
+.pg-sub { width: 100%; border-collapse: collapse; font-size: var(--pg-b3); }
+.pg-sub th {
+  padding: 0 14px 10px 0;
+  color: var(--pg-muted);
+  font-size: var(--pg-b4); font-weight: 600; letter-spacing: .06em; text-align: left;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--pg-hairline);
+}
+.pg-sub td {
+  padding: 14px 14px 14px 0;
+  border-bottom: 1px solid var(--pg-hairline-2);
+  color: var(--pg-body);
+  line-height: 20px;
+  vertical-align: top;
+}
+.pg-sub td:first-child { color: var(--pg-ink); font-weight: 500; }
+.pg-sub tr:last-child td { border-bottom: 0; }
+
+/* the ask-us panel that closes both documents */
+.pg-ask {
+  display: grid; gap: 16px; justify-items: start;
+  margin-top: 48px;
+  padding: clamp(26px, 2.6vw, 36px);
+  border-radius: var(--pg-radius);
+  background: var(--pg-surface);
+}
+.pg-ask h2 { margin: 0; padding: 0; border: 0; font-size: var(--pg-h5); }
+.pg-ask p { color: var(--pg-body); font-size: var(--pg-b2); line-height: 26px; }
+
+/* ------------------------------------------------------- reading aids */
+
+.pg-progress {
+  position: fixed; inset: 0 0 auto 0;
+  height: 2px;
+  z-index: 120;
+  background: transparent;
+  pointer-events: none;
+}
+.pg-progress i {
+  display: block; height: 100%; width: 0;
+  background: var(--pg-purple);
+  transition: width .08s linear;
+}
+
+.pg-top {
+  position: fixed; right: 24px; bottom: 24px;
+  z-index: 110;
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border: 1px solid var(--pg-hairline);
+  border-radius: 50%;
+  background: var(--pg-white);
+  box-shadow: 0 6px 20px rgba(14, 14, 14, .12);
+  color: var(--pg-ink);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .2s var(--pg-ease), transform .2s var(--pg-ease), visibility .2s;
+}
+.pg-top[data-show='true'] { opacity: 1; visibility: visible; transform: none; }
+.pg-top:hover { border-color: var(--pg-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-progress i, .pg-top { transition: none; }
+}

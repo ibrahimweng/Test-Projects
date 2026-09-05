@@ -514,6 +514,9 @@ a.pg-card:hover,
   .pg-split--flip > :first-child { order: 0; }
 }
 
+/* the eyebrow, heading and lede that open most sections */
+.pg-why__head { display: grid; gap: 16px; max-width: 780px; margin-bottom: clamp(32px, 3.4vw, 56px); }
+
 .pg-stack   { display: grid; gap: 16px; }
 .pg-stack-8 { display: grid; gap: 8px; }
 .pg-stack-24{ display: grid; gap: 24px; }

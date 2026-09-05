@@ -230,7 +230,6 @@
 
 /* ------------------------------------------------------------ why pagrin */
 
-.pg-why__head { display: grid; gap: 16px; max-width: 780px; margin-bottom: clamp(32px, 3.4vw, 56px); }
 
 .pg-why__grid {
   display: grid;

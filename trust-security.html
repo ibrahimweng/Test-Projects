@@ -4,144 +4,345 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trust &amp; Security — Pagrin</title>
-<meta name="description" content="How Pagrin protects institutions and their customers: scoped access, consent on spend, full audit, data residency and a platform architected for SOC 2 and PCI-DSS.">
+<meta name="description" content="How Pagrin protects institutions and their customers: scoped access, consent on spend, full audit, data residency, and a platform architected for SOC 2 and PCI-DSS.">
 <link rel="stylesheet" href="css/site.css">
 <link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/legal.css">
 </head>
 <body class="pg" data-page="trust">
 
 <a class="pg-skip" href="#main">Skip to content</a>
+<div class="pg-progress" data-pg-progress aria-hidden="true"><i></i></div>
 <div data-pg-nav></div>
 
 <main id="main">
 
-  <section class="pg-hero pg-hero--left">
+  <section class="pg-lhero">
     <div class="pg-shell">
-      <div class="pg-hero__inner">
-        <p class="pg-eyebrow">Trust &amp; Security</p>
-        <h1 class="pg-t1 pg-hero__title">Held to the standards your bank is held to.</h1>
-        <p class="pg-lede pg-hero__lede">
-          Pagrin runs inside regulated institutions and acts on real money. Every control below
-          is enforced by the platform on every action — not a setting someone has to remember to
-          switch on.
+      <div class="pg-lhero__inner">
+        <p class="pg-eyebrow">Trust and Security</p>
+        <h1 class="pg-t1">Held to the standards your bank is held to.</h1>
+        <p class="pg-lede">
+          Pagrin runs inside regulated institutions and acts on real money. This page is the
+          reference your security, risk and compliance teams need in order to assess us, written
+          out in full rather than kept behind a form.
+        </p>
+        <p class="pg-lhero__meta">
+          <span>Last updated <b>5 September 2026</b></span>
+          <span>Review cycle <b>Quarterly</b></span>
+          <span>Owner <b>Security team</b></span>
         </p>
         <div class="pg-btnrow">
-          <a class="pg-btn pg-btn--primary" href="contact.html#demo">Request our security pack</a>
-          <a class="pg-btn pg-btn--quiet" href="secure-layer.html">How enforcement works</a>
+          <a class="pg-btn pg-btn--primary" href="contact.html#demo">Request the security pack</a>
+          <a class="pg-btn pg-btn--quiet" href="secure-layer.html">See enforcement in the product</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- posture at a glance -->
   <section class="pg-section pg-section--tight">
     <div class="pg-shell">
-      <div class="pg-facts">
-        <div class="pg-fact"><b>100%</b><span>of agent actions pass through the same gate — there is no side door and no exempt caller.</span></div>
-        <div class="pg-fact"><b>Your region</b><span>Data residency follows your requirement. Your keys, your region, your controls.</span></div>
-        <div class="pg-fact"><b>Every action</b><span>Logged, timestamped and exportable, with the reasoning attached.</span></div>
+      <div class="pg-posture">
+        <div class="pg-posture__cell">
+          <b>100%</b>
+          <span>of agent actions pass through the same gate. There is no side door and no caller
+            that is exempt.</span>
+        </div>
+        <div class="pg-posture__cell">
+          <b>Your region</b>
+          <span>Data residency follows your requirement. Your keys, your region, your controls.</span>
+        </div>
+        <div class="pg-posture__cell">
+          <b>Every action</b>
+          <span>Logged, timestamped and exportable, with the reasoning that produced it attached.</span>
+        </div>
+        <div class="pg-posture__cell">
+          <b>Zero</b>
+          <span>customer records used to train a model that anyone else can reach.</span>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- the six controls -->
   <section class="pg-section pg-section--tint" aria-labelledby="controls-title">
     <div class="pg-shell">
       <div class="pg-why__head">
         <p class="pg-eyebrow">The controls</p>
         <h2 class="pg-h2" id="controls-title">Six controls, on by default.</h2>
-        <p class="pg-lede">The same six that make up the Secure Layer. They are described here in the
-          terms a risk or security team will want to assess.</p>
+        <p class="pg-lede">These are not settings someone has to remember to switch on. They are
+          the layer every agent action runs through, and they cannot be disabled per tenant.</p>
       </div>
       <div class="pg-grid pg-grid--3">
         <div class="pg-card"><h3 class="pg-h5 pg-card__title">Scoped access</h3>
-          <p class="pg-card__body">Each agent holds a narrow, explicit permission set — per service and per
-            customer. A request outside that scope is refused before it reaches your systems.</p></div>
+          <p class="pg-card__body">Each agent holds a narrow, explicit permission set, per service
+            and per customer. A request outside that scope is refused before it reaches your
+            systems.</p></div>
         <div class="pg-card"><h3 class="pg-h5 pg-card__title">Consent on spend</h3>
-          <p class="pg-card__body">Points and funds move only on the customer's explicit approval. There is
-            no configuration in which a balance changes silently.</p></div>
+          <p class="pg-card__body">Points and funds move only on the customer’s explicit approval.
+            There is no configuration in which a balance changes silently.</p></div>
         <div class="pg-card"><h3 class="pg-h5 pg-card__title">Guardrails</h3>
-          <p class="pg-card__body">Eligibility rules, spend limits, discount ceilings and brand policy are
-            evaluated before an action runs, not inferred by the model afterwards.</p></div>
+          <p class="pg-card__body">Eligibility rules, spend limits, discount ceilings and brand
+            policy are evaluated before an action runs, not inferred by the model afterwards.</p></div>
         <div class="pg-card"><h3 class="pg-h5 pg-card__title">Full audit trail</h3>
-          <p class="pg-card__body">Every decision, offer and redemption is written to an append-only log with
-            its reasoning, and can be exported for inspection at any time.</p></div>
-        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Human-in-the-loop</h3>
-          <p class="pg-card__body">You choose which actions require a person: high-value spend, unusual
-            patterns, sensitive changes. Those are routed with full context.</p></div>
+          <p class="pg-card__body">Every decision, offer and redemption is written to an append
+            only log with its reasoning, and can be exported for inspection at any time.</p></div>
+        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Human in the loop</h3>
+          <p class="pg-card__body">You choose which actions require a person. High value spend,
+            unusual patterns and sensitive changes are routed with the full context to decide.</p></div>
         <div class="pg-card"><h3 class="pg-h5 pg-card__title">Data residency</h3>
-          <p class="pg-card__body">Customer data stays in the region you nominate, encrypted with keys you
-            control, with no copies taken outside it.</p></div>
+          <p class="pg-card__body">Customer data stays in the region you nominate, encrypted with
+            keys you control, with no copies taken outside it.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="pg-section" aria-labelledby="doc-title">
+  <!-- the reference document -->
+  <section class="pg-section pg-section--tight">
     <div class="pg-shell">
-      <h2 class="pg-sr" id="doc-title">Security detail</h2>
       <div class="pg-doc">
-        <nav class="pg-toc" aria-label="On this page">
+
+        <nav class="pg-toc" aria-label="Sections of this document">
           <b>On this page</b>
-          <a href="#compliance">Compliance</a>
-          <a href="#data">Data handling</a>
-          <a href="#infra">Infrastructure</a>
-          <a href="#access">Access &amp; identity</a>
-          <a href="#subprocessors">Subprocessors</a>
-          <a href="#report">Reporting a vulnerability</a>
+          <div data-pg-toc></div>
+          <div class="pg-toc__aside">
+            <a class="pg-textlink" href="terms.html">Terms and Conditions</a>
+            <a class="pg-textlink" href="contact.html">Ask a question</a>
+          </div>
         </nav>
 
-        <div class="pg-prose">
-          <h2 id="compliance">Compliance</h2>
-          <p>Pagrin is architected around the frameworks institutional buyers already assess
-            against: <strong>SOC 2</strong>, <strong>PCI-DSS</strong> and regional data-residency
-            requirements. These are designed into the platform rather than layered on top of it,
-            which is why the controls above cannot be disabled per tenant.</p>
-          <p>Security posture is described here from the platform's architecture and controls.
-            Certification status is shared under NDA during evaluation — ask for the security
-            pack and we will send the current position along with the evidence behind it.</p>
+        <div class="pg-prose pg-prose--legal" data-pg-prose>
 
-          <h2 id="data">Data handling</h2>
-          <p>Institutions keep ownership of their customer data. Pagrin reads it in place through
-            the integrations you configure; it does not take a second copy into a separate
-            warehouse, which is what removes both the pipeline lag and a whole class of
-            governance problems.</p>
+          <div class="pg-flag" style="margin-bottom:28px">
+            <span><strong>Draft for security and legal review.</strong> This page was written
+            alongside the site design. Please have your security and legal teams confirm every
+            claim on it before the site goes live.</span>
+          </div>
+
+          <div class="pg-summary" style="margin-bottom:44px">
+            <h2 style="margin:0;padding:0;border:0">The short version</h2>
+            <ul>
+              <li>Your organisation owns its data. We read it in place and do not take a copy into a warehouse of our own.</li>
+              <li>Every agent action is checked for scope, consent and guardrails before it runs, and logged after.</li>
+              <li>We do not train shared models on customer data.</li>
+              <li>The platform is architected for SOC 2 and PCI-DSS. Current certification status is shared under NDA.</li>
+              <li>If you find a vulnerability, write to us and we will answer within one working day.</li>
+            </ul>
+          </div>
+
+          <h2 id="posture">Our security posture</h2>
+          <p>Pagrin sits inside the apps that regulated institutions already run, and it acts on
+            money on behalf of their customers. That is a higher bar than most software has to
+            clear, and it shaped the architecture rather than being added to it later.</p>
+          <p>The practical consequence is that the controls on this page are properties of the
+            platform, not options. A tenant cannot turn off the audit log. An agent cannot ask for
+            a permission it was not granted. There is one code path for acting on money, and it
+            runs the same four checks every time.</p>
+          <p>We describe our posture from the architecture and the controls that are in place
+            today. Where a certification is still in progress we say so plainly rather than
+            implying otherwise.</p>
+
+          <h2 id="compliance">Compliance and certifications</h2>
+          <p>Certification status is shared under NDA during evaluation, along with the evidence
+            behind it. The table below is the current position.</p>
+          <div class="pg-compliance" style="margin:24px 0">
+            <div class="pg-comp">
+              <div><div class="pg-comp__name">SOC 2 Type II</div>
+                <div class="pg-comp__note">Trust services criteria for security, availability and confidentiality.</div></div>
+              <span class="pg-status pg-status--prog">Audit in progress</span>
+            </div>
+            <div class="pg-comp">
+              <div><div class="pg-comp__name">PCI-DSS</div>
+                <div class="pg-comp__note">Card data is handled by our payment partners. Pagrin is architected so that primary account numbers never reach our systems.</div></div>
+              <span class="pg-status pg-status--arch">Architected for</span>
+            </div>
+            <div class="pg-comp">
+              <div><div class="pg-comp__name">ISO/IEC 27001</div>
+                <div class="pg-comp__note">Information security management system.</div></div>
+              <span class="pg-status pg-status--prog">Audit in progress</span>
+            </div>
+            <div class="pg-comp">
+              <div><div class="pg-comp__name">UK GDPR and EU GDPR</div>
+                <div class="pg-comp__note">We act as a processor for customer data, under a data processing agreement.</div></div>
+              <span class="pg-status pg-status--live">Compliant</span>
+            </div>
+            <div class="pg-comp">
+              <div><div class="pg-comp__name">Data residency</div>
+                <div class="pg-comp__note">UK, EU and US regions available today. Other regions on request.</div></div>
+              <span class="pg-status pg-status--live">Available</span>
+            </div>
+            <div class="pg-comp">
+              <div><div class="pg-comp__name">Penetration test report</div>
+                <div class="pg-comp__note">Annual third party test, plus a retest after remediation.</div></div>
+              <span class="pg-status pg-status--nda">Shared under NDA</span>
+            </div>
+          </div>
+          <p>Regulated customers usually also want our completed security questionnaire, our
+            architecture diagram and our list of subprocessors. All three are in the security
+            pack. <a href="contact.html#demo">Ask for it</a> and we will send it the same week.</p>
+
+          <h2 id="data-handling">Data handling</h2>
+          <p>Your organisation keeps ownership of its data. We read it in place through the
+            integrations you configure. We do not take a second copy into a separate warehouse,
+            which is what removes both the pipeline lag and a whole class of governance problems
+            that come with copies.</p>
+          <h3>What we hold</h3>
           <ul>
-            <li>Data is encrypted in transit with TLS 1.2 or above, and at rest with keys held in the region you nominate.</li>
-            <li>Retention windows are set per institution and enforced automatically.</li>
-            <li>Customer data is never used to train shared models. Fine-tuning happens on your data, for you, inside your boundary.</li>
-            <li>Deletion requests propagate through the platform, the audit log excepted, where records are retained for the period your regulator requires.</li>
+            <li>Configuration you create, such as guardrails, offers, tiers and agent scopes.</li>
+            <li>The audit log of what each agent did, which includes references to customers and amounts.</li>
+            <li>Operational telemetry such as latency, error rates and request volumes.</li>
+          </ul>
+          <h3>What we do not hold</h3>
+          <ul>
+            <li>Full card numbers. Card data is tokenised by our payment partners and never reaches our systems.</li>
+            <li>Credentials for your core systems beyond the scoped tokens you issue us.</li>
+            <li>Copies of your customer records outside the region you nominate.</li>
+          </ul>
+          <h3>Retention and deletion</h3>
+          <p>Retention windows are set per institution and enforced automatically. Deletion
+            requests propagate through the platform. The audit log is the one exception, because
+            records there are retained for the period your regulator requires, and we will
+            document that period in your agreement.</p>
+
+          <h2 id="residency">Data residency and encryption</h2>
+          <p>You nominate the region your data is held in and it stays there. Processing happens
+            in the same region, so data does not cross a boundary in order to be acted on.</p>
+          <p>Data is encrypted in transit with TLS 1.2 or above, using modern cipher suites only.
+            Data at rest is encrypted with AES-256. Keys are held in a managed key service in
+            your region, and we support customer managed keys where your policy requires them.</p>
+          <p>Secrets used by the platform itself are held in a secrets manager, rotated on a
+            schedule, and never written to logs or source control.</p>
+
+          <h2 id="infrastructure">Infrastructure and resilience</h2>
+          <p>The platform runs on hardened cloud infrastructure with strict separation between
+            production, staging and development. There is no path from a development environment
+            to production data.</p>
+          <p>Production is deployed across multiple availability zones. Traffic is load balanced,
+            and services are designed to fail closed. If a check cannot be evaluated, the action
+            does not run.</p>
+          <p>Changes to production go through code review, automated testing and staged rollout.
+            Every deployment is attributable to a person and a change record, and can be rolled
+            back.</p>
+
+          <h2 id="access">Access and identity</h2>
+          <p>Internal access follows least privilege. Access to production is time bound,
+            approved by a second person, logged, and requires multi factor authentication. Nobody
+            has standing access to customer data.</p>
+          <p>Administrative actions taken inside your console are recorded in the same audit trail
+            as agent actions, so a change to a guardrail is as visible as a redemption.</p>
+          <p>On your side we support single sign on through your identity provider, with SCIM
+            provisioning and role based permissions, so that the people who can change a guardrail
+            are exactly the people you decided should be able to.</p>
+
+          <h2 id="appsec">Application security</h2>
+          <p>Security is part of the development process rather than a gate at the end of it.</p>
+          <ul>
+            <li>Every change is reviewed by someone other than its author before it merges.</li>
+            <li>Dependencies are scanned continuously, and known vulnerable versions block a build.</li>
+            <li>Static analysis and secret scanning run on every commit.</li>
+            <li>We threat model any feature that touches money, consent or customer data before it is built.</li>
+            <li>An independent penetration test is run annually and after any significant architectural change, with a retest after remediation.</li>
           </ul>
 
-          <h2 id="infra">Infrastructure</h2>
-          <p>The platform runs on hardened cloud infrastructure with environment separation
-            between production, staging and development. Production changes go through review,
-            automated testing and staged rollout, and every deployment is attributable to a
-            person and a change record.</p>
-          <p>Backups are taken continuously and restore procedures are exercised on a schedule,
-            not assumed to work.</p>
+          <h2 id="ai">AI and model governance</h2>
+          <p>The platform uses machine learning models, so the way those models are governed is a
+            security question and not only a product one.</p>
+          <ul>
+            <li>Customer data is never used to train models that are shared with other customers. Where we fine tune, we do it on your data, for you, inside your boundary.</li>
+            <li>Model outputs are treated as proposals. Nothing an agent decides becomes an action until the four checks have passed.</li>
+            <li>Prompts, retrieved context and outputs are logged with the action they produced, so a decision can be reconstructed after the fact.</li>
+            <li>We evaluate models against a fixed set of safety and accuracy tests before a version is promoted, and we keep the results.</li>
+            <li>Prompt injection is treated as an untrusted input problem. Content retrieved from a merchant, a document or a customer message cannot widen an agent’s scope.</li>
+          </ul>
 
-          <h2 id="access">Access &amp; identity</h2>
-          <p>Internal access follows least privilege. Access to production is time-bound,
-            approved, logged, and requires multi-factor authentication. Administrative actions
-            inside your console are recorded in the same audit trail your agent actions are.</p>
-          <p>On your side, Pagrin supports SSO through your identity provider and role-based
-            permissions so that the people who can change a guardrail are the people you decided
-            should be able to.</p>
+          <h2 id="agent-controls">Agent controls in the product</h2>
+          <p>The six controls described at the top of this page are enforced by the platform on
+            every action. The four checks that run before anything happens are scope, consent,
+            guardrail and audit, in that order. If any of the first three fails, the action is
+            refused or held for a person, and the attempt is still logged.</p>
+          <p>You can see this working, with a live audit log and the held and blocked counts, on
+            the <a href="secure-layer.html">Secure Layer</a> page.</p>
 
           <h2 id="subprocessors">Subprocessors</h2>
-          <p>We maintain a current list of subprocessors, what each one processes and where. The
-            list is provided with the security pack, and material changes are notified in advance
-            so you have time to object.</p>
+          <p>We use a small number of providers to run the platform. The current list is below,
+            and the full list with data categories is in the security pack.</p>
+          <div class="pg-scroll" style="margin:24px 0">
+            <table class="pg-sub">
+              <thead>
+                <tr><th>Provider</th><th>Purpose</th><th>Data</th><th>Region</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Cloud infrastructure</td><td>Hosting and managed databases</td><td>All platform data</td><td>Your nominated region</td></tr>
+                <tr><td>Model provider</td><td>Inference for agent reasoning</td><td>Prompt and context, no training use</td><td>Same region, zero retention</td></tr>
+                <tr><td>Payment partner</td><td>Card processing and settlement</td><td>Tokenised payment data</td><td>UK and EU</td></tr>
+                <tr><td>Observability</td><td>Logs, metrics and alerting</td><td>Operational telemetry only</td><td>Same region</td></tr>
+                <tr><td>Email delivery</td><td>Transactional notifications</td><td>Name and email address</td><td>EU</td></tr>
+                <tr><td>Support desk</td><td>Handling your enquiries</td><td>Contact details and ticket content</td><td>EU</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>We give at least thirty days notice before adding or changing a subprocessor, so that
+            you have time to object.</p>
 
-          <h2 id="report">Reporting a vulnerability</h2>
-          <p>If you believe you have found a security issue, please tell us before you tell
-            anyone else. Write to <a href="mailto:Hello@pagrin.com">Hello@pagrin.com</a> with the
-            steps to reproduce it. We acknowledge reports within one working day, keep you
-            updated while we investigate, and will not pursue researchers who act in good faith
-            and give us reasonable time to fix the issue.</p>
+          <h2 id="incident">Incident response</h2>
+          <p>We maintain a documented incident response plan with named roles, and we rehearse it.
+            The plan covers detection, containment, eradication, recovery and the review
+            afterwards.</p>
+          <p>If an incident affects your data, we will tell you without undue delay and within
+            seventy two hours of confirming it, whichever is sooner. We will tell you what
+            happened, what data was involved, what we have done, and what we recommend you do. A
+            written post incident review follows once the immediate work is finished.</p>
+          <p>Alerting runs continuously and is monitored around the clock. Security events are
+            triaged against a documented severity scale.</p>
 
-          <p class="pg-note" style="margin-top:32px">This page describes how the platform is built and
-            operated. It is not a contract. The binding terms are in the
-            <a href="terms.html">Terms &amp; Conditions</a> and in your institution's agreement
-            with us.</p>
+          <h2 id="continuity">Business continuity and backups</h2>
+          <p>Backups are taken continuously and stored encrypted in the same region as the primary
+            data. Restore procedures are exercised on a schedule rather than assumed to work, and
+            the results of each exercise are recorded.</p>
+          <p>Our recovery point objective is fifteen minutes and our recovery time objective is
+            four hours. Where your agreement sets tighter figures, those apply instead.</p>
+
+          <h2 id="people">Personnel and training</h2>
+          <p>Everyone at Pagrin goes through background screening appropriate to their role before
+            they start, and signs a confidentiality agreement.</p>
+          <p>Security training happens at induction and annually after that, with additional
+            training for engineers on secure development and on the specific risks of agent
+            systems. Access is removed on the day someone leaves.</p>
+
+          <h2 id="disclosure">Reporting a vulnerability</h2>
+          <p>If you believe you have found a security issue, please tell us before you tell anyone
+            else. Write to <a href="mailto:Hello@pagrin.com">Hello@pagrin.com</a> with the steps to
+            reproduce it and any supporting detail.</p>
+          <p>Here is what we commit to.</p>
+          <ul>
+            <li>We acknowledge your report within one working day.</li>
+            <li>We give you an assessment and a target fix date within five working days.</li>
+            <li>We keep you updated while we work on it, and tell you when it is fixed.</li>
+            <li>We will credit you publicly if you would like us to.</li>
+            <li>We will not pursue researchers who act in good faith, avoid privacy violations and service disruption, and give us reasonable time to fix the issue before disclosing it.</li>
+          </ul>
+          <p>Please do not test against production tenants, access data that is not yours, or run
+            denial of service tests. If you need an environment to test in, ask us and we will
+            set one up.</p>
+
+          <h2 id="pack">Asking for the security pack</h2>
+          <p>The security pack contains the completed questionnaire, the architecture diagram, the
+            current certification status with its evidence, the full subprocessor list, the
+            penetration test summary and our standard data processing agreement.</p>
+          <p>It is shared under NDA. Most security teams tell us it answers their review in one
+            pass.</p>
+
+          <div class="pg-ask">
+            <h2>Ask us anything your review needs</h2>
+            <p>If your questionnaire has something this page does not cover, send it over. We
+              answer questionnaires directly rather than pointing you back at a marketing page.</p>
+            <div class="pg-btnrow">
+              <a class="pg-btn pg-btn--primary" href="contact.html#demo">Request the security pack</a>
+              <a class="pg-btn pg-btn--quiet" href="mailto:Hello@pagrin.com">Email the security team</a>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -150,7 +351,15 @@
   <div data-pg-cta></div>
 </main>
 
+<button class="pg-top" type="button" data-pg-top aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
 <div data-pg-footer></div>
 <script src="js/site.js" defer></script>
+<script src="js/legal.js" defer></script>
 </body>
 </html>
