@@ -1,0 +1,264 @@
+/* ==========================================================================
+   Pagrin — product page furniture
+   Design: Figma "Pagrin – Designs from Weng"
+     Products rows   12044:356424 · 12180:361343 · 12180:361511 · 12180:361679
+     Why Pagrin      11998:40904
+
+   The module cards pair a soft gradient-mesh panel with a floating white UI
+   mockup. The panel is drawn with layered radial gradients rather than a
+   bitmap so it stays crisp at any width, and the mockups are real markup so
+   the copy inside them is readable and translatable.
+   ========================================================================== */
+
+/* ------------------------------------------------------------- module row */
+
+.pg-modules { background: #fafafe; overflow-x: clip; }
+
+.pg-modules__row {
+  display: grid;
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  gap: clamp(32px, 4.2vw, 88px);
+  align-items: start;
+}
+.pg-modules__row + .pg-modules__row { margin-top: clamp(56px, 5.2vw, 96px); }
+
+/* every other row puts the copy on the right, as the design does */
+.pg-modules__row--flip { grid-template-columns: minmax(0, 1fr) minmax(0, 340px); }
+.pg-modules__row--flip .pg-modules__intro { order: 2; }
+
+@media (max-width: 980px) {
+  .pg-modules__row,
+  .pg-modules__row--flip { grid-template-columns: minmax(0, 1fr); }
+  .pg-modules__row--flip .pg-modules__intro { order: 0; }
+}
+
+.pg-modules__intro { position: sticky; top: calc(var(--pg-nav-h) + 32px); display: grid; gap: 16px; justify-items: start; }
+@media (max-width: 980px) { .pg-modules__intro { position: static; } }
+
+.pg-modules__cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+@media (max-width: 700px) { .pg-modules__cards { grid-template-columns: minmax(0, 1fr); } }
+
+/* ----------------------------------------------------------- module card */
+
+.pg-mod { display: grid; gap: 18px; }
+
+.pg-mod__panel {
+  position: relative;
+  aspect-ratio: 530 / 600;
+  min-height: 320px;
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  padding: 26px;
+  isolation: isolate;
+}
+
+/* the mesh — four soft blooms over a near-white ground */
+.pg-mod__panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 4px;
+  background:
+    radial-gradient(46% 38% at 18% 14%, var(--m1) 0%, transparent 62%),
+    radial-gradient(50% 42% at 86% 26%, var(--m2) 0%, transparent 64%),
+    radial-gradient(58% 48% at 74% 88%, var(--m3) 0%, transparent 66%),
+    radial-gradient(52% 44% at 10% 82%, var(--m4) 0%, transparent 64%),
+    var(--m0, #f4f2f7);
+}
+/* a faint grain so the gradient does not band */
+.pg-mod__panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 4px;
+  opacity: .5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+}
+
+/* palettes, taken off the panels in the design */
+.pg-mod--warm  { --m0:#f7f2ee; --m1:#ffd9c2; --m2:#f6c9d8; --m3:#ffc79a; --m4:#e4d8f2; }
+.pg-mod--cool  { --m0:#f1f4f4; --m1:#d8ece6; --m2:#e6dcf4; --m3:#cfe6e2; --m4:#f2dfe8; }
+.pg-mod--lilac { --m0:#f3f1f9; --m1:#ded5f7; --m2:#f3d5e8; --m3:#cdd7f5; --m4:#efe2d6; }
+.pg-mod--sand  { --m0:#f7f4ee; --m1:#f2e0c2; --m2:#e8d9f0; --m3:#f7d3c0; --m4:#d9e5ee; }
+.pg-mod--mint  { --m0:#eef5f2; --m1:#cfe9db; --m2:#e0e4f6; --m3:#f5dcc9; --m4:#d7ecec; }
+.pg-mod--rose  { --m0:#f8f1f2; --m1:#f7d2d6; --m2:#e5d9f5; --m3:#fbdcc4; --m4:#dee9f3; }
+.pg-mod--sky   { --m0:#eff3f8; --m1:#d2e2f5; --m2:#e7dbf3; --m3:#d5eee6; --m4:#f6dedd; }
+.pg-mod--dusk  { --m0:#f2f1f6; --m1:#d9d6f0; --m2:#efd6e6; --m3:#d3e4ee; --m4:#f4e3cf; }
+
+.pg-mod__title {
+  color: var(--pg-ink);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+}
+.pg-mod__body { color: var(--pg-body); font-size: var(--pg-b3); line-height: 20px; }
+
+/* ------------------------------------------------- floating UI mockups */
+
+.pg-ui {
+  width: 100%;
+  max-width: 340px;
+  padding: 14px;
+  background: var(--pg-white);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(14, 14, 14, .06), 0 12px 32px rgba(14, 14, 14, .10);
+  display: grid;
+  gap: 10px;
+  font-size: 10.5px;
+  line-height: 14px;
+  color: var(--pg-body);
+}
+
+.pg-ui__head { display: flex; align-items: center; gap: 9px; }
+.pg-ui__ico {
+  width: 26px; height: 26px;
+  flex: none;
+  display: grid; place-items: center;
+  border-radius: 7px;
+  background: var(--pg-surface);
+  color: var(--pg-ink);
+}
+.pg-ui__ico svg { width: 13px; height: 13px; }
+.pg-ui__head > span:nth-child(2) { min-width: 0; }
+.pg-ui__name { display: block; color: var(--pg-ink); font-size: 11.5px; font-weight: 600; line-height: 15px; }
+.pg-ui__sub  { display: block; color: var(--pg-muted); font-size: 9.5px; line-height: 13px; }
+.pg-ui__tag {
+  margin-left: auto;
+  padding: 2px 7px;
+  border-radius: var(--pg-pill);
+  background: var(--pg-surface);
+  color: var(--pg-body);
+  font-size: 9px;
+  line-height: 13px;
+  white-space: nowrap;
+}
+.pg-ui__tag--live { background: #fff3e8; color: #c2570c; }
+.pg-ui__tag--ok   { background: #eaf7ef; color: #1c7a44; }
+
+.pg-ui__strip {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 9px;
+  border-radius: 8px;
+  background: var(--pg-surface);
+  color: var(--pg-body);
+  font-size: 10px;
+}
+.pg-ui__strip svg { width: 12px; height: 12px; flex: none; color: var(--pg-muted); }
+
+.pg-ui__label {
+  color: var(--pg-muted);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  line-height: 12px;
+  text-transform: uppercase;
+}
+
+.pg-ui__rows { display: grid; gap: 7px; }
+.pg-ui__row  { display: grid; grid-template-columns: minmax(0, 1fr) 92px auto; gap: 8px; align-items: center; }
+.pg-ui__row > span:first-child { color: var(--pg-body); }
+.pg-ui__row > b { color: var(--pg-ink); font-weight: 600; justify-self: end; }
+
+.pg-meter { height: 4px; border-radius: 3px; background: #ececef; overflow: hidden; }
+.pg-meter i { display: block; height: 100%; border-radius: 3px; background: var(--pg-ink); }
+.pg-meter--purple i { background: var(--pg-purple); }
+.pg-meter--green  i { background: #2f9e5e; }
+
+.pg-ui__list { display: grid; gap: 8px; }
+.pg-ui__item { display: flex; align-items: center; gap: 8px; }
+.pg-ui__item > span:last-child { margin-left: auto; font-size: 9.5px; }
+.pg-dot {
+  width: 13px; height: 13px;
+  flex: none;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: #eaf7ef;
+  color: #1c7a44;
+}
+.pg-dot svg { width: 8px; height: 8px; }
+.pg-dot--run  { background: #fff1e3; color: #d1730a; }
+.pg-dot--wait { background: #f0f0f2; color: #9a9aa1; }
+.pg-ui__item b { color: var(--pg-ink); font-size: 10px; font-weight: 500; }
+.pg-ui__done { color: #1c7a44; }
+.pg-ui__run  { color: #d1730a; }
+.pg-ui__wait { color: var(--pg-muted); }
+
+.pg-ui__foot {
+  display: flex; align-items: center; gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--pg-hairline-2);
+  color: var(--pg-muted);
+  font-size: 9.5px;
+}
+
+/* small cards that float off the main mockup */
+.pg-chip {
+  position: absolute;
+  z-index: 2;
+  padding: 8px 11px;
+  background: var(--pg-white);
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(14, 14, 14, .06), 0 10px 26px rgba(14, 14, 14, .12);
+  font-size: 10px;
+  line-height: 13px;
+  color: var(--pg-ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.pg-chip small { display: block; color: var(--pg-muted); font-size: 8.5px; letter-spacing: .06em; text-transform: uppercase; }
+.pg-chip b { display: block; font-size: 10.5px; font-weight: 600; }
+.pg-chip--tl { top: 11%;  left: -10px; }
+.pg-chip--tr { top: 9%;   right: -10px; }
+.pg-chip--bl { bottom: 15%; left: -10px; }
+.pg-chip--br { bottom: 17%; right: -10px; }
+.pg-chip__stat b { font-size: 14px; letter-spacing: -.2px; }
+.pg-chip svg { width: 14px; height: 14px; color: var(--pg-purple); flex: none; }
+
+@media (max-width: 460px) {
+  .pg-chip--tl, .pg-chip--bl { left: 4px; }
+  .pg-chip--tr, .pg-chip--br { right: 4px; }
+}
+
+/* ------------------------------------------------------------ why pagrin */
+
+.pg-why__head { display: grid; gap: 16px; max-width: 780px; margin-bottom: clamp(32px, 3.4vw, 56px); }
+
+.pg-why__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 2.6vw, 40px);
+}
+@media (max-width: 900px) { .pg-why__grid { grid-template-columns: minmax(0, 1fr); } }
+
+.pg-why__card {
+  display: grid;
+  gap: 20px;
+  align-content: start;
+  padding: clamp(28px, 2.6vw, 40px);
+  border-radius: var(--pg-radius);
+  background: var(--pg-surface);
+}
+.pg-why__card--dark { background: var(--pg-black); }
+.pg-why__card--dark .pg-why__kicker { color: rgba(255,255,255,.6); }
+.pg-why__card--dark h3 { color: var(--pg-white); }
+.pg-why__card--dark .pg-ticks li { color: rgba(255,255,255,.72); }
+.pg-why__card--dark .pg-ticks li strong { color: var(--pg-white); }
+.pg-why__card--dark .pg-ticks li::before { background-color: rgba(255,255,255,.08); }
+
+.pg-why__kicker {
+  color: var(--pg-muted);
+  font-size: var(--pg-b4);
+  font-weight: 600;
+  letter-spacing: .06em;
+  line-height: 16px;
+  text-transform: uppercase;
+}

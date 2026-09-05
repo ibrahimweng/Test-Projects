@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trust &amp; Security — Pagrin</title>
+<meta name="description" content="How Pagrin protects institutions and their customers: scoped access, consent on spend, full audit, data residency and a platform architected for SOC 2 and PCI-DSS.">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="pg" data-page="trust">
+
+<a class="pg-skip" href="#main">Skip to content</a>
+<div data-pg-nav></div>
+
+<main id="main">
+
+  <section class="pg-hero pg-hero--left">
+    <div class="pg-shell">
+      <div class="pg-hero__inner">
+        <p class="pg-eyebrow">Trust &amp; Security</p>
+        <h1 class="pg-t1 pg-hero__title">Held to the standards your bank is held to.</h1>
+        <p class="pg-lede pg-hero__lede">
+          Pagrin runs inside regulated institutions and acts on real money. Every control below
+          is enforced by the platform on every action — not a setting someone has to remember to
+          switch on.
+        </p>
+        <div class="pg-btnrow">
+          <a class="pg-btn pg-btn--primary" href="contact.html#demo">Request our security pack</a>
+          <a class="pg-btn pg-btn--quiet" href="secure-layer.html">How enforcement works</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg-section pg-section--tight">
+    <div class="pg-shell">
+      <div class="pg-facts">
+        <div class="pg-fact"><b>100%</b><span>of agent actions pass through the same gate — there is no side door and no exempt caller.</span></div>
+        <div class="pg-fact"><b>Your region</b><span>Data residency follows your requirement. Your keys, your region, your controls.</span></div>
+        <div class="pg-fact"><b>Every action</b><span>Logged, timestamped and exportable, with the reasoning attached.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg-section pg-section--tint" aria-labelledby="controls-title">
+    <div class="pg-shell">
+      <div class="pg-why__head">
+        <p class="pg-eyebrow">The controls</p>
+        <h2 class="pg-h2" id="controls-title">Six controls, on by default.</h2>
+        <p class="pg-lede">The same six that make up the Secure Layer. They are described here in the
+          terms a risk or security team will want to assess.</p>
+      </div>
+      <div class="pg-grid pg-grid--3">
+        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Scoped access</h3>
+          <p class="pg-card__body">Each agent holds a narrow, explicit permission set — per service and per
+            customer. A request outside that scope is refused before it reaches your systems.</p></div>
+        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Consent on spend</h3>
+          <p class="pg-card__body">Points and funds move only on the customer's explicit approval. There is
+            no configuration in which a balance changes silently.</p></div>
+        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Guardrails</h3>
+          <p class="pg-card__body">Eligibility rules, spend limits, discount ceilings and brand policy are
+            evaluated before an action runs, not inferred by the model afterwards.</p></div>
+        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Full audit trail</h3>
+          <p class="pg-card__body">Every decision, offer and redemption is written to an append-only log with
+            its reasoning, and can be exported for inspection at any time.</p></div>
+        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Human-in-the-loop</h3>
+          <p class="pg-card__body">You choose which actions require a person: high-value spend, unusual
+            patterns, sensitive changes. Those are routed with full context.</p></div>
+        <div class="pg-card"><h3 class="pg-h5 pg-card__title">Data residency</h3>
+          <p class="pg-card__body">Customer data stays in the region you nominate, encrypted with keys you
+            control, with no copies taken outside it.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg-section" aria-labelledby="doc-title">
+    <div class="pg-shell">
+      <h2 class="pg-sr" id="doc-title">Security detail</h2>
+      <div class="pg-doc">
+        <nav class="pg-toc" aria-label="On this page">
+          <b>On this page</b>
+          <a href="#compliance">Compliance</a>
+          <a href="#data">Data handling</a>
+          <a href="#infra">Infrastructure</a>
+          <a href="#access">Access &amp; identity</a>
+          <a href="#subprocessors">Subprocessors</a>
+          <a href="#report">Reporting a vulnerability</a>
+        </nav>
+
+        <div class="pg-prose">
+          <h2 id="compliance">Compliance</h2>
+          <p>Pagrin is architected around the frameworks institutional buyers already assess
+            against: <strong>SOC 2</strong>, <strong>PCI-DSS</strong> and regional data-residency
+            requirements. These are designed into the platform rather than layered on top of it,
+            which is why the controls above cannot be disabled per tenant.</p>
+          <p>Security posture is described here from the platform's architecture and controls.
+            Certification status is shared under NDA during evaluation — ask for the security
+            pack and we will send the current position along with the evidence behind it.</p>
+
+          <h2 id="data">Data handling</h2>
+          <p>Institutions keep ownership of their customer data. Pagrin reads it in place through
+            the integrations you configure; it does not take a second copy into a separate
+            warehouse, which is what removes both the pipeline lag and a whole class of
+            governance problems.</p>
+          <ul>
+            <li>Data is encrypted in transit with TLS 1.2 or above, and at rest with keys held in the region you nominate.</li>
+            <li>Retention windows are set per institution and enforced automatically.</li>
+            <li>Customer data is never used to train shared models. Fine-tuning happens on your data, for you, inside your boundary.</li>
+            <li>Deletion requests propagate through the platform, the audit log excepted, where records are retained for the period your regulator requires.</li>
+          </ul>
+
+          <h2 id="infra">Infrastructure</h2>
+          <p>The platform runs on hardened cloud infrastructure with environment separation
+            between production, staging and development. Production changes go through review,
+            automated testing and staged rollout, and every deployment is attributable to a
+            person and a change record.</p>
+          <p>Backups are taken continuously and restore procedures are exercised on a schedule,
+            not assumed to work.</p>
+
+          <h2 id="access">Access &amp; identity</h2>
+          <p>Internal access follows least privilege. Access to production is time-bound,
+            approved, logged, and requires multi-factor authentication. Administrative actions
+            inside your console are recorded in the same audit trail your agent actions are.</p>
+          <p>On your side, Pagrin supports SSO through your identity provider and role-based
+            permissions so that the people who can change a guardrail are the people you decided
+            should be able to.</p>
+
+          <h2 id="subprocessors">Subprocessors</h2>
+          <p>We maintain a current list of subprocessors, what each one processes and where. The
+            list is provided with the security pack, and material changes are notified in advance
+            so you have time to object.</p>
+
+          <h2 id="report">Reporting a vulnerability</h2>
+          <p>If you believe you have found a security issue, please tell us before you tell
+            anyone else. Write to <a href="mailto:Hello@pagrin.com">Hello@pagrin.com</a> with the
+            steps to reproduce it. We acknowledge reports within one working day, keep you
+            updated while we investigate, and will not pursue researchers who act in good faith
+            and give us reasonable time to fix the issue.</p>
+
+          <p class="pg-note" style="margin-top:32px">This page describes how the platform is built and
+            operated. It is not a contract. The binding terms are in the
+            <a href="terms.html">Terms &amp; Conditions</a> and in your institution's agreement
+            with us.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div data-pg-cta></div>
+</main>
+
+<div data-pg-footer></div>
+<script src="js/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Pagrin</title>
+<meta name="description" content="Book a demo, talk to our team, or reach security and press. We reply to institutional enquiries within one working day.">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="pg" data-page="contact">
+
+<a class="pg-skip" href="#main">Skip to content</a>
+<div data-pg-nav></div>
+
+<main id="main">
+
+  <section class="pg-hero pg-hero--left">
+    <div class="pg-shell">
+      <div class="pg-hero__inner">
+        <p class="pg-eyebrow">Contact</p>
+        <h1 class="pg-t1 pg-hero__title">See it live on your brand.</h1>
+        <p class="pg-lede pg-hero__lede">
+          Tell us what you run today and we will show you the same flows inside your own app —
+          points, checkout and campaigns, governed from one place. Institutional enquiries get a
+          reply within one working day.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg-section pg-section--tight" id="demo" aria-labelledby="demo-title">
+    <div class="pg-shell">
+      <div class="pg-contactgrid">
+
+        <div class="pg-card" style="padding:clamp(28px,3vw,44px)">
+          <h2 class="pg-h4" id="demo-title" style="margin-bottom:8px">Book a demo</h2>
+          <p class="pg-small" style="margin-bottom:28px">Thirty minutes, walked through by someone who
+            built it. No slideware.</p>
+
+          <form class="pg-form" data-pg-form novalidate>
+            <div class="pg-form__row">
+              <div class="pg-field">
+                <label for="c-name">Full name</label>
+                <input id="c-name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="pg-field">
+                <label for="c-email">Work email</label>
+                <input id="c-email" name="email" type="email" autocomplete="email" required>
+              </div>
+            </div>
+
+            <div class="pg-form__row">
+              <div class="pg-field">
+                <label for="c-org">Institution</label>
+                <input id="c-org" name="organisation" type="text" autocomplete="organization" required>
+              </div>
+              <div class="pg-field">
+                <label for="c-role">Role</label>
+                <input id="c-role" name="role" type="text" autocomplete="organization-title">
+              </div>
+            </div>
+
+            <div class="pg-field">
+              <label for="c-interest">What are you looking at first?</label>
+              <select id="c-interest" name="interest">
+                <option>The whole platform</option>
+                <option>Agentic OS</option>
+                <option>Agentic Commerce</option>
+                <option>Infinite Campaigns</option>
+                <option>Secure Layer</option>
+              </select>
+            </div>
+
+            <div class="pg-field">
+              <label for="c-msg">Anything we should know?</label>
+              <textarea id="c-msg" name="message" placeholder="Your current stack, timelines, or the question you actually want answered."></textarea>
+            </div>
+
+            <div class="pg-btnrow">
+              <button class="pg-btn pg-btn--primary pg-btn--lg" type="submit">Request a demo</button>
+            </div>
+
+            <p class="pg-caption">By sending this you agree to our
+              <a href="terms.html" style="color:var(--pg-purple)">Terms &amp; Conditions</a>.
+              We use your details to answer your enquiry and nothing else.</p>
+
+            <p class="pg-note" data-pg-formnote hidden></p>
+          </form>
+        </div>
+
+        <div class="pg-stack-32">
+          <div class="pg-stack-8">
+            <h2 class="pg-h5">Other ways to reach us</h2>
+            <p class="pg-small">Straight to an inbox a person reads.</p>
+          </div>
+
+          <div class="pg-stack">
+            <div class="pg-card pg-card--tint">
+              <h3 class="pg-h5 pg-card__title">General &amp; sales</h3>
+              <p class="pg-card__body"><a href="mailto:Hello@pagrin.com" style="color:var(--pg-purple)">Hello@pagrin.com</a></p>
+            </div>
+            <div class="pg-card pg-card--tint">
+              <h3 class="pg-h5 pg-card__title">Security</h3>
+              <p class="pg-card__body">Report a vulnerability or request our posture documentation.
+                <a href="trust-security.html" style="color:var(--pg-purple)">Trust &amp; Security →</a></p>
+            </div>
+            <div class="pg-card pg-card--tint">
+              <h3 class="pg-h5 pg-card__title">Press</h3>
+              <p class="pg-card__body">Media enquiries and company background.
+                <a href="about.html" style="color:var(--pg-purple)">About Pagrin →</a></p>
+            </div>
+          </div>
+
+          <div class="pg-stack-8">
+            <h3 class="pg-h5">Follow along</h3>
+            <div class="pg-btnrow">
+              <a class="pg-btn pg-btn--quiet" href="https://www.linkedin.com/company/pagrin" target="_blank" rel="noopener">LinkedIn</a>
+              <a class="pg-btn pg-btn--quiet" href="https://x.com/pagrin" target="_blank" rel="noopener">X / Twitter</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div data-pg-cta></div>
+</main>
+
+<div data-pg-footer></div>
+<script src="js/site.js" defer></script>
+<script>
+/* The form has no backend yet, so it validates in the browser and explains
+   what would happen instead of silently doing nothing. */
+(function () {
+  var form = document.querySelector('[data-pg-form]');
+  var note = document.querySelector('[data-pg-formnote]');
+  if (!form || !note) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var missing = Array.prototype.filter.call(
+      form.querySelectorAll('[required]'), function (f) { return !f.value.trim(); });
+    var email = form.querySelector('#c-email');
+    if (missing.length) {
+      note.textContent = 'Please fill in your name, work email and institution.';
+      missing[0].focus();
+    } else if (!/^[^@\s]+@[^@\s.]+\.[^@\s]+$/.test(email.value)) {
+      note.textContent = 'That email address does not look right.';
+      email.focus();
+    } else {
+      note.textContent = 'Thanks — this form is not wired to a backend yet. ' +
+        'Email Hello@pagrin.com and we will pick it up from there.';
+    }
+    note.hidden = false;
+  });
+}());
+</script>
+</body>
+</html>

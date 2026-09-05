@@ -3,31 +3,41 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pagrin — An AI workforce, inside your own app</title>
+<title>Agentic OS — Pagrin</title>
+<meta name="description" content="Deploy a workforce of specialised AI agents on your own brand — marketing, data science, fulfilment and support — without standing up the infrastructure yourself.">
 <link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/product.css">
 <link rel="stylesheet" href="css/agentic-os.css">
-<link rel="stylesheet" href="css/channels.css">
-<style>
-  /* Demo page chrome only — not part of the section. */
-  html, body { margin: 0; padding: 0; background: #fff; }
-</style>
 </head>
-<body class="pg" data-page="home">
+<body class="pg" data-page="agentic-os">
 
 <a class="pg-skip" href="#main">Skip to content</a>
 <div data-pg-nav></div>
 
 <main id="main">
 
-  <h1 class="pg-sr">Pagrin — an AI workforce, inside your own app</h1>
+  <!-- hero — Figma 11998:40379 -->
+  <section class="pg-hero">
+    <div class="pg-shell">
+      <div class="pg-hero__inner">
+        <p class="pg-eyebrow">Agentic OS</p>
+        <h1 class="pg-t1 pg-hero__title">The Pagrin AOS</h1>
+        <p class="pg-lede pg-hero__lede">
+          Deploy a workforce of specialised AI agents on your own brand — marketing, data
+          science, fulfilment and support — without standing up the infrastructure yourself.
+          You own the customer, the data and the experience; Pagrin runs the operations
+          underneath.
+        </p>
+        <div class="pg-btnrow pg-btnrow--center">
+          <a class="pg-btn pg-btn--primary pg-btn--sq" href="contact.html#demo">Book a demo ↗</a>
+          <a class="pg-btn pg-btn--quiet pg-btn--sq" href="#architecture">See the architecture</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- ==========================================================================
-     Agentic OS — drop-in section
-     Requires: css/agentic-os.css, js/agentic-os.js, GSAP 3 (optional but
-     recommended; the section degrades to CSS transitions without it).
-     Tab copy lives in CONFIG.layers inside js/agentic-os.js.
-     ========================================================================== -->
-
+  <!-- the layer explorer, reused from the landing page section -->
+  <div id="architecture">
 <section class="agentic-os" aria-labelledby="ao-title">
   <div class="ao__inner">
 
@@ -95,37 +105,325 @@
     </div>
   </div>
 </section>
-
-<!-- ==========================================================================
-     Customer channels — drop-in section
-     Requires: css/channels.css, js/channels.js, GSAP 3 (optional).
-     The five assets and all card copy live in CHANNELS in js/channels.js.
-     ========================================================================== -->
-
-<section class="channels" aria-labelledby="ch-title">
-  <div class="ch__inner">
-
-    <div class="ch__head">
-      <h2 class="ch__title" id="ch-title">Deploy your rewards programme on every customer channel</h2>
-      <p class="ch__sub">Meet customers where they are, by deploying across iMessage, WhatsApp, Email, and professional collaboration platforms.</p>
-    </div>
-
-    <!-- Desktop collage. The stage sets the coordinate space but does not
-         clip, so assets hanging below its box stay whole. Filled from
-         CHANNELS in js/channels.js. -->
-    <div class="ch__collage">
-      <div class="ch-stage"></div>
-      <div class="ch-card" hidden></div>
-    </div>
-
-    <!-- Below 900px the collage is replaced by this rail, per the mobile
-         design: one card per channel, already open, scrolled sideways. -->
-    <div class="ch__rail"></div>
-
-    <p class="ch__caption">Meet customers where they are, by deploying across iMessage, WhatsApp, Email, and professional collaboration platforms.</p>
-
   </div>
-</section>
+
+  <!-- twelve modules, four categories — Figma 12044:356424 and siblings -->
+  <section class="pg-section pg-modules" aria-labelledby="mod-title">
+    <div class="pg-shell">
+      <h2 class="pg-sr" id="mod-title">The modules</h2>
+
+      <!-- 1 · Intelligence -->
+      <div class="pg-modules__row">
+        <div class="pg-modules__intro">
+          <h3 class="pg-h2">Intelligence</h3>
+          <p class="pg-body pg-measure-sm">The reasoning core that turns every signal into the next best action.</p>
+          <a class="pg-textlink" href="docs.html">Learn more</a>
+        </div>
+        <div class="pg-modules__cards">
+
+          <article class="pg-mod">
+            <div class="pg-mod__panel pg-mod--warm">
+              <div class="pg-chip pg-chip--bl">
+                <span><small>Next best action</small><b>Send 2× points offer</b></span>
+              </div>
+              <div class="pg-chip pg-chip--br pg-chip__stat">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="#2f9e5e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><b>98.6%</b><small>accuracy</small></span>
+              </div>
+              <div class="pg-ui">
+                <div class="pg-ui__head">
+                  <span class="pg-ui__ico"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/></svg></span>
+                  <span><span class="pg-ui__name">Fine-tuned model</span><span class="pg-ui__sub">loyalty · fraud · recommendations</span></span>
+                  <span class="pg-ui__tag">v4</span>
+                </div>
+                <div class="pg-ui__strip">
+                  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="4" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M2 7h12" stroke="currentColor" stroke-width="1.2"/></svg>
+                  Txn · $240 · Coffee Co · 09:41
+                </div>
+                <span class="pg-ui__label">Predictions</span>
+                <div class="pg-ui__rows">
+                  <div class="pg-ui__row"><span>Fraud risk</span><span class="pg-meter"><i style="width:8%"></i></span><b>2%</b></div>
+                  <div class="pg-ui__row"><span>Recommend</span><span class="pg-meter pg-meter--purple"><i style="width:74%"></i></span><b>Travel</b></div>
+                  <div class="pg-ui__row"><span>Loyalty tier</span><span class="pg-meter"><i style="width:88%"></i></span><b>Gold</b></div>
+                </div>
+                <p class="pg-ui__foot">Scored in 42ms · on-device</p>
+              </div>
+            </div>
+            <h4 class="pg-mod__title">LLM &amp; TFM</h4>
+            <p class="pg-mod__body">Foundation models fine-tuned for loyalty, fraud detection, and personalised recommendations.</p>
+          </article>
+
+          <article class="pg-mod">
+            <div class="pg-mod__panel pg-mod--cool">
+              <div class="pg-chip pg-chip--tr">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8.5 1.5L3 9h4l-.5 5.5L13 7H9l-.5-5.5z" fill="currentColor"/></svg>
+                <span><small>Orchestrated</small><b>4 agents</b></span>
+              </div>
+              <div class="pg-chip pg-chip--bl">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="#2f9e5e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><small>Last step</small><b>Reward issued</b></span>
+              </div>
+              <div class="pg-ui">
+                <div class="pg-ui__head">
+                  <span class="pg-ui__ico"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="4" cy="4" r="1.8" stroke="currentColor" stroke-width="1.2"/><circle cx="4" cy="12" r="1.8" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="8" r="1.8" stroke="currentColor" stroke-width="1.2"/><path d="M5.8 4.8L10.3 7.2M5.8 11.2L10.3 8.8" stroke="currentColor" stroke-width="1.2"/></svg></span>
+                  <span><span class="pg-ui__name">Reward workflow</span><span class="pg-ui__sub">Run #1428 · triggered</span></span>
+                  <span class="pg-ui__tag pg-ui__tag--live">● Running</span>
+                </div>
+                <span class="pg-ui__label">Pipeline</span>
+                <div class="pg-ui__list">
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Detect signal</b><span class="pg-ui__done">Done</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Decide offer</b><span class="pg-ui__done">Done</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot pg-dot--run"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="4" fill="currentColor"/></svg></span><b>Issue reward</b><span class="pg-ui__run">Running</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot pg-dot--wait"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="3" fill="currentColor"/></svg></span><b>Log &amp; audit</b><span class="pg-ui__wait">Queued</span></div>
+                </div>
+                <p class="pg-ui__foot">3 of 4 complete · end-to-end</p>
+              </div>
+            </div>
+            <h4 class="pg-mod__title">Agentic Harness</h4>
+            <p class="pg-mod__body">Orchestrates autonomous agents to automate complex reward workflows end-to-end.</p>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- 2 · Data & Knowledge -->
+      <div class="pg-modules__row pg-modules__row--flip">
+        <div class="pg-modules__intro">
+          <h3 class="pg-h2">Data &amp; Knowledge</h3>
+          <p class="pg-body pg-measure-sm">The live foundation of data and context every agent reasons on.</p>
+          <a class="pg-textlink" href="docs.html">Learn more</a>
+        </div>
+        <div class="pg-modules__cards">
+
+          <article class="pg-mod">
+            <div class="pg-mod__panel pg-mod--lilac">
+              <div class="pg-chip pg-chip--tl">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8a6 6 0 0110-4.4M14 8a6 6 0 01-10 4.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span><small>Sync</small><b>Live · 40ms</b></span>
+              </div>
+              <div class="pg-ui">
+                <div class="pg-ui__head">
+                  <span class="pg-ui__ico"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><ellipse cx="8" cy="4" rx="5" ry="2.2" stroke="currentColor" stroke-width="1.2"/><path d="M3 4v8c0 1.2 2.2 2.2 5 2.2s5-1 5-2.2V4" stroke="currentColor" stroke-width="1.2"/><path d="M3 8c0 1.2 2.2 2.2 5 2.2s5-1 5-2.2" stroke="currentColor" stroke-width="1.2"/></svg></span>
+                  <span><span class="pg-ui__name">Connected systems</span><span class="pg-ui__sub">6 sources · one foundation</span></span>
+                  <span class="pg-ui__tag pg-ui__tag--ok">Healthy</span>
+                </div>
+                <div class="pg-ui__list">
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Core banking</b><span class="pg-ui__done">Streaming</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Points ledger</b><span class="pg-ui__done">Streaming</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Card transactions</b><span class="pg-ui__done">Streaming</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot pg-dot--run"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="4" fill="currentColor"/></svg></span><b>CRM</b><span class="pg-ui__run">Backfilling</span></div>
+                </div>
+                <span class="pg-ui__label">Throughput</span>
+                <div class="pg-ui__rows">
+                  <div class="pg-ui__row"><span>Events / sec</span><span class="pg-meter pg-meter--purple"><i style="width:66%"></i></span><b>12.4k</b></div>
+                </div>
+                <p class="pg-ui__foot">No copies · no pipeline lag</p>
+              </div>
+            </div>
+            <h4 class="pg-mod__title">Data &amp; Integrations</h4>
+            <p class="pg-mod__body">Connects your transaction data, points ledger and core systems into one live foundation.</p>
+          </article>
+
+          <article class="pg-mod">
+            <div class="pg-mod__panel pg-mod--sand">
+              <div class="pg-chip pg-chip--br">
+                <span><small>Grounded in</small><b>1,284 documents</b></span>
+              </div>
+              <div class="pg-ui">
+                <div class="pg-ui__head">
+                  <span class="pg-ui__ico"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3.5h4a2 2 0 012 2v7a1.6 1.6 0 00-1.6-1.6H3v-7.4z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M13 3.5H9a2 2 0 00-2 2v7a1.6 1.6 0 011.6-1.6H13V3.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></span>
+                  <span><span class="pg-ui__name">Customer context</span><span class="pg-ui__sub">Jordan Lee · Gold</span></span>
+                  <span class="pg-ui__tag">Live</span>
+                </div>
+                <div class="pg-ui__strip">
+                  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v3.4l2.2 1.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                  Booked a flight 20 minutes ago
+                </div>
+                <span class="pg-ui__label">What the agent knows</span>
+                <div class="pg-ui__list">
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>5,250 points</b><span>balance</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Prefers email</b><span>channel</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Travel policy v3</b><span>knowledge</span></div>
+                </div>
+                <p class="pg-ui__foot">Every answer cites its source</p>
+              </div>
+            </div>
+            <h4 class="pg-mod__title">Context &amp; Knowledge</h4>
+            <p class="pg-mod__body">Gives every agent the customer context and institutional knowledge to act accurately.</p>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- 3 · Core Business Capabilities -->
+      <div class="pg-modules__row">
+        <div class="pg-modules__intro">
+          <h3 class="pg-h2">Core Business Capabilities</h3>
+          <p class="pg-body pg-measure-sm">The loyalty and promotions engines that run your rewards, natively.</p>
+          <a class="pg-textlink" href="docs.html">Learn more</a>
+        </div>
+        <div class="pg-modules__cards">
+
+          <article class="pg-mod">
+            <div class="pg-mod__panel pg-mod--mint">
+              <div class="pg-chip pg-chip--tr pg-chip__stat">
+                <span><small>Redeemable now</small><b>24,300</b></span>
+              </div>
+              <div class="pg-ui">
+                <div class="pg-ui__head">
+                  <span class="pg-ui__ico"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.5" y="6" width="11" height="7.5" rx="1.6" stroke="currentColor" stroke-width="1.2"/><path d="M2.5 9h11M8 6v7.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 6S6.5 2.5 5 3.6 6.6 6 8 6zm0 0s1.5-3.5 3-2.4S9.4 6 8 6z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></span>
+                  <span><span class="pg-ui__name">Loyalty engine</span><span class="pg-ui__sub">Tiers · accrual · redemption</span></span>
+                  <span class="pg-ui__tag pg-ui__tag--ok">Gold</span>
+                </div>
+                <span class="pg-ui__label">Progress to Platinum</span>
+                <div class="pg-ui__rows">
+                  <div class="pg-ui__row"><span>Qualifying spend</span><span class="pg-meter pg-meter--green"><i style="width:72%"></i></span><b>72%</b></div>
+                </div>
+                <div class="pg-ui__list">
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Accrued</b><span>+1,240 pts</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Redeemed</b><span>−2,500 pts</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot pg-dot--run"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="4" fill="currentColor"/></svg></span><b>Tier review</b><span>1 Sep</span></div>
+                </div>
+                <p class="pg-ui__foot">Run natively · one ledger</p>
+              </div>
+            </div>
+            <h4 class="pg-mod__title">Loyalty &amp; Reward Management</h4>
+            <p class="pg-mod__body">Points, tiers, accrual and redemption — the full loyalty engine, run natively.</p>
+          </article>
+
+          <article class="pg-mod">
+            <div class="pg-mod__panel pg-mod--rose">
+              <div class="pg-chip pg-chip--tl">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8.5 1.5L3 9h4l-.5 5.5L13 7H9l-.5-5.5z" fill="currentColor"/></svg>
+                <span><small>Generated</small><b>In 300ms</b></span>
+              </div>
+              <div class="pg-ui">
+                <div class="pg-ui__head">
+                  <span class="pg-ui__ico"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2l1.8 3.7 4 .6-2.9 2.8.7 4L8 11.2 4.4 13.1l.7-4L2.2 6.3l4-.6L8 2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></span>
+                  <span><span class="pg-ui__name">Offer generated</span><span class="pg-ui__sub">Triggered by: weekend spend</span></span>
+                  <span class="pg-ui__tag pg-ui__tag--live">● Live</span>
+                </div>
+                <div class="pg-ui__strip">
+                  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Weekend boost · 2× points, automatically
+                </div>
+                <span class="pg-ui__label">Inside your guardrails</span>
+                <div class="pg-ui__list">
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Eligibility</b><span class="pg-ui__done">Gold+</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Spend cap</b><span class="pg-ui__done">under $5,000</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Discount cap</b><span class="pg-ui__done">within 40%</span></div>
+                </div>
+                <p class="pg-ui__foot">Always on · never scheduled</p>
+              </div>
+            </div>
+            <h4 class="pg-mod__title">Infinite Promotions Engine</h4>
+            <p class="pg-mod__body">Always-on, agent-driven offers generated the moment a customer engages, inside your guardrails.</p>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- 4 · Platform & Operations -->
+      <div class="pg-modules__row pg-modules__row--flip">
+        <div class="pg-modules__intro">
+          <h3 class="pg-h2">Platform &amp; Operations</h3>
+          <p class="pg-body pg-measure-sm">The branded surfaces customers touch — and the governance that holds every action.</p>
+          <a class="pg-textlink" href="docs.html">Learn more</a>
+        </div>
+        <div class="pg-modules__cards">
+
+          <article class="pg-mod">
+            <div class="pg-mod__panel pg-mod--sky">
+              <div class="pg-chip pg-chip--br">
+                <span><small>White-labelled</small><b>Your brand</b></span>
+              </div>
+              <div class="pg-ui">
+                <div class="pg-ui__head">
+                  <span class="pg-ui__ico"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 14h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></span>
+                  <span><span class="pg-ui__name">Northwind Assistant</span><span class="pg-ui__sub">In-app · chat · phone</span></span>
+                  <span class="pg-ui__tag pg-ui__tag--ok">Online</span>
+                </div>
+                <div class="pg-ui__strip">Book me a weekend in Lisbon with my points.</div>
+                <div class="pg-ui__strip" style="background:#f2eefe;color:#3f2a7d">
+                  Here's one under budget — 10,000 pts + $5,000.
+                </div>
+                <span class="pg-ui__label">Surfaces</span>
+                <div class="pg-ui__list">
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Mobile app</b><span class="pg-ui__done">Embedded</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>WhatsApp · iMessage</b><span class="pg-ui__done">Live</span></div>
+                </div>
+                <p class="pg-ui__foot">Your brand, end to end</p>
+              </div>
+            </div>
+            <h4 class="pg-mod__title">Product &amp; Interfaces</h4>
+            <p class="pg-mod__body">White-labelled surfaces — chat, app and channels — where your customers meet your brand.</p>
+          </article>
+
+          <article class="pg-mod">
+            <div class="pg-mod__panel pg-mod--dusk">
+              <div class="pg-chip pg-chip--tr">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.8l5 2v4.1c0 3-2.1 5.6-5 6.3-2.9-.7-5-3.3-5-6.3V3.8l5-2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                <span><small>Enforced</small><b>Every action</b></span>
+              </div>
+              <div class="pg-ui">
+                <div class="pg-ui__head">
+                  <span class="pg-ui__ico"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.2"/><path d="M5.8 7V5.2a2.2 2.2 0 014.4 0V7" stroke="currentColor" stroke-width="1.2"/></svg></span>
+                  <span><span class="pg-ui__name">Policy check</span><span class="pg-ui__sub">Before the action runs</span></span>
+                  <span class="pg-ui__tag pg-ui__tag--ok">99.4% pass</span>
+                </div>
+                <span class="pg-ui__label">Checks</span>
+                <div class="pg-ui__list">
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Scope</b><span class="pg-ui__done">Passed</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Consent</b><span class="pg-ui__done">Passed</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Spend limit</b><span class="pg-ui__done">Passed</span></div>
+                  <div class="pg-ui__item"><span class="pg-dot pg-dot--wait"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="3" fill="currentColor"/></svg></span><b>Audit write</b><span class="pg-ui__wait">Queued</span></div>
+                </div>
+                <p class="pg-ui__foot">Logged, timestamped, exportable</p>
+              </div>
+            </div>
+            <h4 class="pg-mod__title">Security &amp; Governance</h4>
+            <p class="pg-mod__body">Scopes, consent, audit and compliance — enforced on every action across the stack.</p>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- why pagrin — Figma 11998:40904 -->
+  <section class="pg-section" aria-labelledby="why-title">
+    <div class="pg-shell">
+      <div class="pg-why__head">
+        <p class="pg-eyebrow">Why Pagrin</p>
+        <h2 class="pg-h2" id="why-title">Built for institutions and their customers.</h2>
+        <p class="pg-lede">Everything your team needs to ship faster, and everything your customers need to stay engaged.</p>
+      </div>
+
+      <div class="pg-why__grid">
+        <div class="pg-why__card">
+          <p class="pg-why__kicker">For institutions</p>
+          <h3 class="pg-h4">Ship AI operations in weeks, not years.</h3>
+          <ul class="pg-ticks">
+            <li><span><strong>Own the brand and the relationship.</strong> White-labelled and native — it runs inside your app.</span></li>
+            <li><span><strong>One environment.</strong> No data copies, no pipeline lag, no integration sprawl.</span></li>
+            <li><span><strong>Governed by default.</strong> Every agent acts within the scopes and guardrails you set.</span></li>
+            <li><span><strong>Scale the workforce.</strong> Add skills without adding headcount or vendors.</span></li>
+          </ul>
+        </div>
+
+        <div class="pg-why__card pg-why__card--dark">
+          <p class="pg-why__kicker">For your customers</p>
+          <h3 class="pg-h4">Help that feels human, instantly.</h3>
+          <ul class="pg-ticks">
+            <li><span><strong>Reachable like a person</strong> — chat, a phone number, an inbox.</span></li>
+            <li><span><strong>A specialist for every need</strong> — booking, support, redemption, disputes.</span></li>
+            <li><span><strong>Always on</strong> — 24/7, across every channel, with an instant first response.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <div data-pg-cta></div>
 </main>
@@ -134,7 +432,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="js/site.js" defer></script>
-<script src="js/agentic-os.js"></script>
-<script src="js/channels.js"></script>
+<script src="js/agentic-os.js" defer></script>
 </body>
 </html>
