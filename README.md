@@ -130,6 +130,30 @@ picture back, set `--shot` on the panel and nothing else needs to change:
 The wash is drawn on a pseudo element below the panel's own background layer,
 so a picture on the panel covers it automatically.
 
+## Spacing
+
+The vertical rhythm is set by two things: the padding a section carries, and
+what happens where two sections meet. Measured at a 1440 wide window:
+
+| Boundary | Gap | Where |
+| --- | --- | --- |
+| Between standard sections | 180px | 90 bottom plus 90 top |
+| Hero to first section | 148px | pages whose first section is standard |
+| Hero to first section | 118px | pages whose first section is tight |
+| Between tight sections | 120px | the document and media pages |
+| Last section to the closing panel | 165px | every page |
+
+Inside a long document the rhythm is: 56px above a section heading, then its
+rule, then 28px, then the heading, then 16px to the first paragraph. Paragraphs
+sit 20px apart, lists 20px from the text around them, and a sub heading takes
+34px above and 12px below.
+
+`audit.js` in the scratchpad measures all of this. It walks the direct children
+of `main` on every page, reports each block's height and padding, and flags any
+boundary wider than 190px or narrower than 60px. One flag it raises is a false
+positive: the Agentic OS page wraps a reused section in a bare div, so the
+padding sits one level down and the real gap is 148px.
+
 ## Icons
 
 `js/icons.js` injects one inline SVG sprite at the top of the body, so any page

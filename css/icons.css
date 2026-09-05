@@ -71,6 +71,8 @@
 /* ------------------------------------------------------- contents card */
 
 .pg-contents {
+  /* the first h2 has no top margin, so the card has to supply the gap */
+  margin-bottom: 44px;
   padding: clamp(26px, 2.6vw, 36px);
   border: 1px solid var(--pg-hairline-2);
   border-radius: var(--pg-radius);

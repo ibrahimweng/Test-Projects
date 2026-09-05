@@ -338,10 +338,12 @@
 .pg-prose { max-width: 72ch; }
 .pg-prose h2 { margin: 48px 0 14px; font-size: var(--pg-h5); letter-spacing: -.2px; scroll-margin-top: 110px; }
 .pg-prose h2:first-child { margin-top: 0; }
-.pg-prose h3 { margin: 28px 0 10px; font-size: var(--pg-b1); }
+.pg-prose h3 { margin: 34px 0 12px; font-size: var(--pg-b1); }
 .pg-prose p, .pg-prose li { color: var(--pg-body); font-size: var(--pg-b2); line-height: 27px; }
-.pg-prose p + p { margin-top: 14px; }
-.pg-prose ul { margin: 14px 0; display: grid; gap: 10px; }
+/* 14px read as cramped against 27px leading; 20 gives the paragraphs air
+   without loosening the tie between a heading and the text under it */
+.pg-prose p + p { margin-top: 20px; }
+.pg-prose ul { margin: 20px 0; display: grid; gap: 11px; }
 .pg-prose ul li { padding-left: 20px; position: relative; }
 .pg-prose ul li::before {
   content: ''; position: absolute; left: 4px; top: 11px;

@@ -13,7 +13,7 @@
 /* ------------------------------------------------------------------ hero */
 
 .pg-lhero {
-  padding-block: clamp(48px, 4.4vw, 88px) clamp(32px, 3vw, 56px);
+  padding-block: clamp(48px, 4.4vw, 88px) clamp(40px, 4.1vw, 72px);
   border-bottom: 1px solid var(--pg-hairline);
 }
 .pg-lhero__inner { display: grid; gap: 20px; max-width: 760px; }
@@ -138,14 +138,14 @@
 .pg-anchor:hover { color: var(--pg-purple); }
 
 .pg-prose--legal h3 {
-  margin: 30px 0 10px;
+  margin: 34px 0 12px;
   font-size: var(--pg-b1);
   font-weight: 500;
   scroll-margin-top: 116px;
 }
 
 /* a definition list for the glossary section */
-.pg-defs { display: grid; gap: 14px; margin: 18px 0; }
+.pg-defs { display: grid; gap: 14px; margin: 20px 0; }
 .pg-defs div {
   display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 16px;
   padding-bottom: 14px;
